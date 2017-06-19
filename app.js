@@ -80,8 +80,9 @@ app.post('/delete',function(req,res){
 	res.send("delete!");
 });
 app.post('/update',function(req,res){
-	res.send("recieved your request!");
-	//res.send("update!");
+	var query = "UPDATE Items Set Description='"+req.body.description+"',Price="+req.body.price+"WHERE Name='"+req.body.name+"'";
+	executeQuery(query,res);
+	res.send("update!");
 });
 
 // catch 404 and forward to error handler
