@@ -16,17 +16,21 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#') Nuffield Health
+          a.navbar-brand(href='#') Project name
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
+            li.active
+              a(href='#') Home
             li
-              a(href='/views') View
+              a(href='#about') About
+            li
+              a(href='#contact') Contact
         // /.nav-collapse
     .container
       .starter-template
         h3 Insert
         div
-          form(method='POST', action='/insert')
+          form(method='POST', action='')
             .form-group
               label(for='name') Name:
               br
@@ -42,7 +46,7 @@ html
             button.btn.btn-primary(type='submit') Submit
           h3 Delete
           div
-            form(method='POST', action='/delete')
+            form(method='POST', action='')
               .form-group
                 label(for='name') Name:
                 br
@@ -50,7 +54,7 @@ html
               button.btn.btn-primary(type='submit') Submit
           h3 Update
           div
-            form(method='POST', action='/update')
+            form(method='POST', action='')
               .form-group
                 label(for='name') Name:
                 br
@@ -64,5 +68,8 @@ html
                 br
                 input#price(type='number', name='price', value='')
               button.btn.btn-primary(type='submit') Submit
-        // /.nav-collapse
+          h3 View
+          div
+            form(methos='GET', action='/views')
+              button.btn.btn-primary(type='submit') View
     block content
