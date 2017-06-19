@@ -55,7 +55,7 @@ var executeQuery=function(query,res){
 			return res.send(err);
 		}else{
 			console.log(result);
-			sql.close();
+			//sql.close();
 			res.send(result);
 		}
 	});
