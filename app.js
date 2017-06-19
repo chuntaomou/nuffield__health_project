@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));// for parsing application/x-
 app.use(upload.array());// for parsing multipart/ form-data
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-/*
+
 //sql server
 var dbConfig = {
     user:  'ucabcm2',
@@ -64,7 +64,7 @@ var executeQuery=function(query,res){
 app.use('/', index);
 app.use('/users', users);
 //app.use('/insertform',insertform);
-
+/*
 app.post('/insert',function(req,res){
 	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
 	executeQuery(query,res);
