@@ -56,7 +56,7 @@ var executeQuery=function(query,res){
 		}else{
 			console.log(result);
 			sql.close();
-			res.send(result);
+			//res.send("insert!");
 		}
 	});
 }
@@ -68,14 +68,16 @@ app.use('/users', users);
 app.post('/insert',function(req,res){
 	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
 	executeQuery(query,res);
+	res.send("insert!");
 });
 app.post('/delete',function(req,res){
-	res.send("recieved your request!");
-	console.log(req.body.name);
+	var query = "DELETE FROM Items WHERE Name='"+req.body.name+"'";
+	executeQuery(query,res);
+	res.send("delete!");
 });
 app.post('/update',function(req,res){
 	res.send("recieved your request!");
-	console.log(req.body.name);
+	res.send("update!");
 });
 
 // catch 404 and forward to error handler
