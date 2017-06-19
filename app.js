@@ -38,7 +38,6 @@ var dbConfig = {
 };
 
 //get connect to sql server and execute query
-
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
   console.log("connected");
@@ -63,8 +62,7 @@ var executeQuery=function(query,res){
 
 app.use('/', index);
 app.use('/users', users);
-//app.use('/insertform',insertform);
-/*
+
 app.post('/insert',function(req,res){
 	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
 	executeQuery(query,res);
@@ -95,5 +93,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-*/
+
 module.exports = app;
