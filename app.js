@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));// for parsing application/x-
 app.use(upload.array());// for parsing multipart/ form-data
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+/*
 //sql server
 var dbConfig = {
     user:  'ucabcm2',
@@ -38,6 +38,7 @@ var dbConfig = {
 };
 
 //get connect to sql server and execute query
+
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
   console.log("connected");
@@ -94,5 +95,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+*/
 module.exports = app;
