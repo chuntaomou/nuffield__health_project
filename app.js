@@ -72,16 +72,19 @@ app.get('/views',function(req,res){
 app.post('/insert',function(req,res){
 	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
 	executeQuery(query,res);
+	res.redirect('/');
 	//res.send("insert!");
 });
 app.post('/delete',function(req,res){
 	var query = "DELETE FROM Items WHERE Name='"+req.body.name+"'";
 	executeQuery(query,res);
+	res.redirect('/');
 	//res.send("delete!");
 });
 app.post('/update',function(req,res){
 	var query = "UPDATE Items Set Description='"+req.body.description+"',Price="+req.body.price+"WHERE Name='"+req.body.name+"'";
 	executeQuery(query,res);
+	res.redirect('/');
 	//res.send("update!");
 });
 
