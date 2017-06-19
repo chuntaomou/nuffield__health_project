@@ -56,7 +56,7 @@ var executeQuery=function(query,res){
 		}else{
 			console.log(result);
 			sql.close();
-			//res.send("insert!");
+			res.send(result);
 		}
 	});
 }
@@ -65,6 +65,10 @@ app.use('/', index);
 app.use('/users', users);
 //app.use('/insertform',insertform);
 
+app.get('/views',function(req,res){
+	var query="SELECT * FROM Items";
+	executeQuery(query,res);
+});
 app.post('/insert',function(req,res){
 	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
 	executeQuery(query,res);
@@ -77,7 +81,7 @@ app.post('/delete',function(req,res){
 });
 app.post('/update',function(req,res){
 	res.send("recieved your request!");
-	res.send("update!");
+	//res.send("update!");
 });
 
 // catch 404 and forward to error handler
