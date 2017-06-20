@@ -9,6 +9,7 @@ var sql = require('mssql');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var list = require('./routes/list');
 //var insertform = require('./routes/insertform');
 
 var upload = multer();
@@ -56,18 +57,26 @@ var executeQuery=function(query,res){
 		}else{
 			console.log(result);
 			//sql.close();
-			res.send(result);
+			//res.send(result);
 		}
 	});
 }
 
 app.use('/', index);
 app.use('/users', users);
+//app.use('/views',list);
 //app.use('/insertform',insertform);
 
 app.get('/views',function(req,res){
 	var query="SELECT * FROM Items";
-	executeQuery(query,res);
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			res.render('item_list', { data: result });
+		}
+	});
 });
 app.post('/insert',function(req,res){
 	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
