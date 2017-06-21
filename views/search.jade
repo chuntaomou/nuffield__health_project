@@ -39,13 +39,17 @@ html
           tbody
             script(language='javascript', type='text/javascript').
               var data=!{JSON.stringify(data)};
+              var count=0;
               if(data.length>0){
               for (var i=0; i<data.length; i++) {
-              document.write("<tr><th scope='row'>"+(i+1)+"</th>");
+              if(data[i].Ifdelete!=1){
+              count++;
+              document.write("<tr><th scope='row'>"+count+"</th>");
               document.write("<td>"+data[i].Name+"</td>");
               document.write("<td>"+data[i].Description+"</td>");
               document.write("<td>"+data[i].Price+"</td>");
               document.write("</th>");
+              }
               }
               }else{
               document.write("<h4>no searching result</h4>");
