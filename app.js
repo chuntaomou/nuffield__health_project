@@ -43,12 +43,14 @@ var dbConfig = {
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
   console.log("connected");
+  //var query="SELECT * FROM Items ORDER BY Updatetime ASC";
+  //display(query,res);
 }).catch(function(err){
   console.log(err);
 });
 
 //functions to execute queries
-var executeQuery=function(query,res){
+var display=function(query,res){
 	var request=new sql.Request(connection);
 	request.query(query,function(err,result){
 		if (err){
@@ -57,43 +59,100 @@ var executeQuery=function(query,res){
 		}else{
 			console.log(result);
 			//sql.close();
-			//res.send(result);
+			res.render('layout', { data: result });
+		}
+	});
+}
+var executeQuery=function(query,res){
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if (err){
+			console.log("Error while querying database :- " + err);
+			return res.send(err);
+		}else{
+			//console.log(result);
+			//sql.close();
+			res.redirect('/');
 		}
 	});
 }
 
-app.use('/', index);
-app.use('/users', users);
+//app.use('/', index);
+//app.use('/users', users);
 //app.use('/views',list);
 //app.use('/insertform',insertform);
 
-app.get('/views',function(req,res){
-	var query="SELECT * FROM Items";
+
+app.get('/',function(req,res){
+	var query="SELECT * FROM Items ORDER BY Updatetime DESC";
 	var request=new sql.Request(connection);
 	request.query(query,function(err,result){
 		if(err){
 			console.log("Error while querying database :- " + err);
 		}else{
+			//console.log(result);
+			res.render('layout', { data: result });
+		}
+	});
+});
+
+app.get('/views',function(req,res){
+	var query="SELECT * FROM Items ORDER BY Updatetime DESC";
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			//console.log(result);
 			res.render('item_list', { data: result });
 		}
 	});
 });
 app.post('/insert',function(req,res){
-	var query = "INSERT INTO Items (Name, Description, Price) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+")";
+	var date=new Date();
+	var hour=date.getHours();
+	//hour=(hour<10?"0":"")+hour;
+	var min=date.getMinutes();
+	//min=(min<10?"0":"")+min;
+	var sec=date.getSeconds();
+	//sec=(sec<10?"0":"")+sec;
+	var year=date.getFullYear();
+	var month=date.getMonth()+1;
+	//month=(month<10?"0":"")+month;
+	var day=date.getDate();
+	//day=(day<10?"0":"")+day;
+	var time=year+"-"+month+"-"+day+" "+hour+":"+min+":"+sec;
+	var ifdelete=0;
+	var query = "INSERT INTO Items (Name, Description, Price, CreateTime, UpdateTime, Ifdelete) VALUES ('"+req.body.name+"','"+req.body.description+"',"+req.body.price+",'"+time+"','"+time+"',"+ifdelete+")";
+	console.log(time);
 	executeQuery(query,res);
-	res.redirect('/');
+	//res.redirect('/');
 	//res.send("insert!");
 });
 app.post('/delete',function(req,res){
-	var query = "DELETE FROM Items WHERE Name='"+req.body.name+"'";
+	var ifdelete=1;
+	var query = "UPDATE Items Set Ifdelete="+ifdelete+"WHERE Name='"+req.body.name+"'";
 	executeQuery(query,res);
-	res.redirect('/');
+	//res.redirect('/');
 	//res.send("delete!");
 });
 app.post('/update',function(req,res){
-	var query = "UPDATE Items Set Description='"+req.body.description+"',Price="+req.body.price+"WHERE Name='"+req.body.name+"'";
+	var date=new Date();
+	var hour=date.getHours();
+	//hour=(hour<10?"0":"")+hour;
+	var min=date.getMinutes();
+	//min=(min<10?"0":"")+min;
+	var sec=date.getSeconds();
+	//sec=(sec<10?"0":"")+sec;
+	var year=date.getFullYear();
+	var month=date.getMonth()+1;
+	//month=(month<10?"0":"")+month;
+	var day=date.getDate();
+	//day=(day<10?"0":"")+day;
+	var time=year+"-"+month+"-"+day+" "+hour+":"+min+":"+sec;
+	var query = "UPDATE Items Set Description='"+req.body.description+"',Price="+req.body.price+",Updatetime='"+time+"' WHERE Name='"+req.body.name+"'";
 	executeQuery(query,res);
-	res.redirect('/');
+	//res.redirect('/');
 	//res.send("update!");
 });
 app.post('/search',function(req,res){
@@ -107,7 +166,7 @@ app.post('/search',function(req,res){
 			res.render('search', { data: result});
 		}
 	});
-	console.log(query);
+	//console.log(query);
 });
 
 // catch 404 and forward to error handler

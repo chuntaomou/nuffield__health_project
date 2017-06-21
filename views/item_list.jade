@@ -16,7 +16,7 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#') Project name
+          a.navbar-brand(href='#') Go Back
         #navbar.collapse.navbar-collapse
           ul.nav.navbar-nav
             li.active
@@ -36,6 +36,9 @@ html
               th Name
               th Description
               th Price
+              th Create Time
+              th Last Update
+              th If Delete
           tbody
             script(language='javascript', type='text/javascript').
               var data=!{JSON.stringify(data)};
@@ -44,6 +47,9 @@ html
               document.write("<td>"+data[i].Name+"</td>");
               document.write("<td>"+data[i].Description+"</td>");
               document.write("<td>"+data[i].Price+"</td>");
+              document.write("<td>"+data[i].Createtime+"</td>");
+              document.write("<td>"+data[i].Updatetime+"</td>");
+              document.write("<td>"+data[i].Ifdelete+"</td>");
               document.write("</th>");
               }
     block content

@@ -36,44 +36,78 @@ html
               span.input-group-btn
                 button.btn.btn-info.btn-lg(type='submit')
                   i.glyphicon.glyphicon-search
-        h3 Insert
-        form(method='POST', action='/insert')
-          .form-group
-            label(for='name') Name:
-            br
-            input#name(type='text', name='name', value='')
-            br
-            label(for='description') Description:
-            br
-            input#description(type='text', name='description', value='')
-            br
-            label(for='price') Price:
-            br
-            input#price(type='number', name='price', value='')
-          button.btn.btn-primary(type='submit') Submit
-        h3 Delete
-        form(method='POST', action='/delete')
-          .form-group
-            label(for='name') Name:
-            br
-            input#name(type='text', name='name', value='')
-          button.btn.btn-primary(type='submit') Submit
-        h3 Update
-        form(method='POST', action='/update')
-          .form-group
-            label(for='name') Name:
-            br
-            input#name(type='text', name='name', value='')
-            br
-            label(for='description') Description:
-            br
-            input#description(type='text', name='description', value='')
-            br
-            label(for='price') Price:
-            br
-            input#price(type='number', name='price', value='')
-          button.btn.btn-primary(type='submit') Submit
-        h3 View
-        form(methos='GET', action='/views')
-          button.btn.btn-primary(type='submit') View
+    .container
+      .starter-template
+        .row
+          .col-md-4
+            h3 Insert
+            form(method='POST', action='/insert')
+              .form-group
+                label(for='name') Name:
+                br
+                input#name(type='text', name='name', value='')
+                br
+                label(for='description') Description:
+                br
+                input#description(type='text', name='description', value='')
+                br
+                label(for='price') Price:
+                br
+                input#price(type='number', name='price', value='')
+              button.btn.btn-primary(type='submit') Submit
+            h3 Delete
+            form(method='POST', action='/delete')
+              .form-group
+                label(for='name') Name:
+                br
+                input#name(type='text', name='name', value='')
+              button.btn.btn-primary(type='submit') Submit
+            h3 Update
+            form(method='POST', action='/update')
+              .form-group
+                label(for='name') Name:
+                br
+                input#name(type='text', name='name', value='')
+                br
+                label(for='description') Description:
+                br
+                input#description(type='text', name='description', value='')
+                br
+                label(for='price') Price:
+                br
+                input#price(type='number', name='price', value='')
+              button.btn.btn-primary(type='submit') Submit
+            h3 View
+            form(methos='GET', action='/views')
+              button.btn.btn-primary(type='submit') View
+          .col-md-8
+            h1 five lastest updated items
+            table.table
+              thead.thead-inverse
+                tr
+                  th #
+                  th Name
+                  th Description
+                  th Price
+                  th Create Time
+                  th Last Update
+              tbody
+                script(language='javascript', type='text/javascript').
+                  var data=!{JSON.stringify(data)};
+                  var i=0;
+                  var count=0;
+                  var length=data.length;
+                  while(i<length&&count<5){
+                  if (data[i].Ifdelete==0){
+                  count++;
+                  document.write("<tr><th scope='row'>"+count+"</th>");
+                  document.write("<td>"+data[i].Name+"</td>");
+                  document.write("<td>"+data[i].Description+"</td>");
+                  document.write("<td>"+data[i].Price+"</td>");
+                  document.write("<td>"+data[i].Createtime+"</td>");
+                  document.write("<td>"+data[i].Updatetime+"</td>");
+                  document.write("</th>");
+                  }
+                  i++;
+                  }
     block content
