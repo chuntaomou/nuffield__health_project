@@ -96,6 +96,19 @@ app.post('/update',function(req,res){
 	res.redirect('/');
 	//res.send("update!");
 });
+app.post('/search',function(req,res){
+	var keyword = req.body.search;
+	var query = "SELECT * FROM Items WHERE Name LIKE '%"+keyword+"%' OR Description LIKE '%"+keyword+"%'";
+	var request = new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			res.render('search', { data: result});
+		}
+	});
+	console.log(query);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

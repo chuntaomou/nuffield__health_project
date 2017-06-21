@@ -28,48 +28,52 @@ html
         // /.nav-collapse
     .container
       .starter-template
+        h3 Custom search field
+        form(method='POST', action='/search')
+          #custom-search-input
+            .input-group.col-md-12
+              input#search.form-control.input-lg(type='text', name='search', value='')
+              span.input-group-btn
+                button.btn.btn-info.btn-lg(type='submit')
+                  i.glyphicon.glyphicon-search
         h3 Insert
-        div
-          form(method='POST', action='/insert')
-            .form-group
-              label(for='name') Name:
-              br
-              input#name(type='text', name='name', value='')
-              br
-              label(for='description') Description:
-              br
-              input#description(type='text', name='description', value='')
-              br
-              label(for='price') Price:
-              br
-              input#price(type='number', name='price', value='')
-            button.btn.btn-primary(type='submit') Submit
-          h3 Delete
-          div
-            form(method='POST', action='/delete')
-              .form-group
-                label(for='name') Name:
-                br
-                input#name(type='text', name='name', value='')
-              button.btn.btn-primary(type='submit') Submit
-          h3 Update
-          div
-            form(method='POST', action='/update')
-              .form-group
-                label(for='name') Name:
-                br
-                input#name(type='text', name='name', value='')
-                br
-                label(for='description') Description:
-                br
-                input#description(type='text', name='description', value='')
-                br
-                label(for='price') Price:
-                br
-                input#price(type='number', name='price', value='')
-              button.btn.btn-primary(type='submit') Submit
-          h3 View
-          div
-            form(methos='GET', action='/views')
-              button.btn.btn-primary(type='submit') View
+        form(method='POST', action='/insert')
+          .form-group
+            label(for='name') Name:
+            br
+            input#name(type='text', name='name', value='')
+            br
+            label(for='description') Description:
+            br
+            input#description(type='text', name='description', value='')
+            br
+            label(for='price') Price:
+            br
+            input#price(type='number', name='price', value='')
+          button.btn.btn-primary(type='submit') Submit
+        h3 Delete
+        form(method='POST', action='/delete')
+          .form-group
+            label(for='name') Name:
+            br
+            input#name(type='text', name='name', value='')
+          button.btn.btn-primary(type='submit') Submit
+        h3 Update
+        form(method='POST', action='/update')
+          .form-group
+            label(for='name') Name:
+            br
+            input#name(type='text', name='name', value='')
+            br
+            label(for='description') Description:
+            br
+            input#description(type='text', name='description', value='')
+            br
+            label(for='price') Price:
+            br
+            input#price(type='number', name='price', value='')
+          button.btn.btn-primary(type='submit') Submit
+        h3 View
+        form(methos='GET', action='/views')
+          button.btn.btn-primary(type='submit') View
     block content
