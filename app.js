@@ -10,6 +10,7 @@ var sql = require('mssql');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var list = require('./routes/list');
+var products = require('./routes/products');
 //var insertform = require('./routes/insertform');
 
 var upload = multer();
@@ -38,7 +39,7 @@ var dbConfig = {
       database: 'nuffieldhealth_db'
     }
 };
-
+/*
 //get connect to sql server and execute query
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
@@ -50,19 +51,6 @@ connection.connect().then(function(){
 });
 
 //functions to execute queries
-var display=function(query,res){
-	var request=new sql.Request(connection);
-	request.query(query,function(err,result){
-		if (err){
-			console.log("Error while querying database :- " + err);
-			return res.send(err);
-		}else{
-			console.log(result);
-			//sql.close();
-			res.render('layout', { data: result });
-		}
-	});
-}
 var executeQuery=function(query,res){
 	var request=new sql.Request(connection);
 	request.query(query,function(err,result){
@@ -76,13 +64,14 @@ var executeQuery=function(query,res){
 		}
 	});
 }
-
-//app.use('/', index);
+*/
+app.use('/', index);
+app.use('/', products);
 //app.use('/users', users);
 //app.use('/views',list);
 //app.use('/insertform',insertform);
 
-
+/*
 app.get('/',function(req,res){
 	var query="SELECT * FROM Items ORDER BY Updatetime DESC";
 	var request=new sql.Request(connection);
@@ -104,6 +93,7 @@ app.get('/views',function(req,res){
 			console.log("Error while querying database :- " + err);
 		}else{
 			//console.log(result);
+			//res.send("sdfasdf");
 			res.render('item_list', { data: result });
 		}
 	});
@@ -168,6 +158,13 @@ app.post('/search',function(req,res){
 	});
 	//console.log(query);
 });
+
+app.post('/tabledelete', function(req,res){
+	//var obj={};
+	console.log(JSON.stringify(req.body.Name));
+	//res.render('endpoint', { });
+});
+*/
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

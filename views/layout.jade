@@ -91,7 +91,9 @@ html
                   th Price
                   th Create Time
                   th Last Update
+                  th Delete Button
               tbody
+                script(src='http://code.jquery.com/jquery-1.6.2.min.js')
                 script(language='javascript', type='text/javascript').
                   var data=!{JSON.stringify(data)};
                   var i=0;
@@ -106,8 +108,24 @@ html
                   document.write("<td>"+data[i].Price+"</td>");
                   document.write("<td>"+data[i].Createtime+"</td>");
                   document.write("<td>"+data[i].Updatetime+"</td>");
+                  document.write("<td><button id='"+i+"' class='tabledeletebutton'>delete</button></td>");
                   document.write("</th>");
                   }
                   i++;
                   }
+                  $(function(){
+                  $(".tabledeletebutton").click(function(e){
+                  var deleteitem=data[e.target.id];
+                  $.ajax({
+                  type: "POST",
+                  data: JSON.stringify(deleteitem),
+                  contentType: 'application/json',
+                  url: 'http://localhost:3000/tabledelete',
+                  success: function(data){
+                  console.log('success');
+                  console.log(JSON.stringify(data));
+                  }
+                  });
+                  });
+                  });
     block content

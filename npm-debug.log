@@ -21,7 +21,7 @@
 10 error There is likely additional logging output above.
 11 error System Windows_NT 10.0.14393
 12 error command "C:\\Program Files\\nodejs\\node.exe" "C:\\ProgramData\\chocolatey\\lib\\npm\\tools\\node_modules\\npm\\bin\\npm-cli.js" "start"
-13 error cwd C:\Users\USER\Desktop\summer_project
+13 error cwd C:\Users\USER\Desktop\summer_project\nuffield__health_project
 14 error node -v v8.0.0
 15 error npm -v 1.4.9
 16 error code ELIFECYCLE
