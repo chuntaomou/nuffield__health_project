@@ -11,7 +11,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var list = require('./routes/list');
 var products = require('./routes/products');
-//var insertform = require('./routes/insertform');
+var endpoint = require('./routes/endpoint');
 
 var upload = multer();
 var app = express();
@@ -21,7 +21,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());// for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }));// for parsing application/x-www-form-urlencoded
@@ -36,16 +35,14 @@ var dbConfig = {
     server: 'nuffieldhealth20170610.database.windows.net',
     options: {
       encrypt: true,
-      database: 'nuffieldhealth_db'
+      database: 'db'
     }
 };
-/*
+
 //get connect to sql server and execute query
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
   console.log("connected");
-  //var query="SELECT * FROM Items ORDER BY Updatetime ASC";
-  //display(query,res);
 }).catch(function(err){
   console.log(err);
 });
@@ -58,18 +55,36 @@ var executeQuery=function(query,res){
 			console.log("Error while querying database :- " + err);
 			return res.send(err);
 		}else{
-			//console.log(result);
-			//sql.close();
 			res.redirect('/');
 		}
 	});
 }
-*/
+
+//app.use('/',connection);
 app.use('/', index);
 app.use('/', products);
+app.use('/', endpoint);
+
 //app.use('/users', users);
 //app.use('/views',list);
 //app.use('/insertform',insertform);
+
+app.post('/endpoint', function(req, res){
+	console.log('body: ' + JSON.stringify(req.body));
+	//res.send(req.body);
+	var ID=req.body.title;
+	var query="SELECT * FROM product.Product WHERE [Product Type ID]="+ID;
+	var request = new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log(result);
+			res.send(result);
+		}
+	});
+});
+
 
 /*
 app.get('/',function(req,res){

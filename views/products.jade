@@ -13,13 +13,15 @@ html(lang='en')
     link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
     link(href='stylesheets/bootstrap.css', rel='stylesheet')
     link(href='stylesheets/style.css', rel='stylesheet')
+    link(href='stylesheets/simplePagination.css', rel='stylesheet')
     script.
       window.dataLayer = window.dataLayer || []; window.dataLayer.push({'event':'pageDataLoaded','userId':'','loginStatus':'NO'});
       document.documentElement.className = document.documentElement.className.replace('no-js', '');
     link(rel='stylesheet', type='text/css', href='stylesheets/application.css')
     link(rel='stylesheet', type='text/css', href='stylesheets/search_products.css')
     script(src='//maps.googleapis.com/maps/api/js?client=gme-nuffieldhealthltd1&hl=en&libraries=places')
-    script(src='/assets/dist/javascript/application.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(type='text/javascript', src='javascripts/jquery.simplePagination.js')
     style(type='text/css').
       #background-image { background-image: url(http://www.autonomouschild.co.uk/wp-content/uploads/2016/07/product_0.png); }
       @media (max-width: 1200px) {
@@ -98,7 +100,7 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     span.nav__logo
                       img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
                     // <![endif]
@@ -191,11 +193,126 @@ html(lang='en')
                 .listing-filters.listing-filters--inverse.location-finder__filters
                   ul.filter-list.js-location-finder-region-nav-link-container
                     li.filter-list__item
-                      button.btn.btn-secondary(style='margin-left: 30px; color: white;') Tier 1
+                      button#1.btn.btn-secondary.more-item(style='margin-left: 30px; width: 184.56px;') Product
                     li.filter-list__item
-                      button.btn.btn-secondary(style='margin-left: 90px;') Tier 2
+                      button#2.btn.btn-secondary.more-item(style='margin-left: 60px; width: 184.56px;') Product Group
                     li.filter-list__item
-                      button.btn.btn-secondary(style='margin-left: 90px;') Tier 3
+                      button#3.btn.btn-secondary.more-item(style='margin-left: 60px; width: 184.56px;') Product Class
                     li.filter-list__item
-                      button.btn.btn-secondary(style='margin-left: 90px;') Tier 4
+                      button#4.btn.btn-secondary.less-item(style='margin-left: 60px; width: 184.56px;') Product Family
+                  ul.filter-list.js-location-finder-region-nav-link-container
+                    li.filter-list__item
+                      button#5.btn.btn-secondary.less-item(style='margin-left: 30px; width: 184.56px;') VAT Code
+                    li.filter-list__item
+                      button#6.btn.btn-secondary.less-item(style='margin-left: 60px; width: 184.56px;') Product Brand
+                    li.filter-list__item
+                      button#7.btn.btn-secondary.less-item(style='margin-left: 60px; width: 184.56px;') Product Sub Brand
+                    li.filter-list__item
+                      button#8.btn.btn-secondary.more-item(style='margin-left: 60px; width: 184.56px;') Product Price Tier
+                script.
+                  $('.btn.btn-secondary').click(function(e) {
+                  $(".item-info").remove();
+                  var data = {};
+                  data.title = e.target.id;
+                  data.message = "message";
+                  $.ajax({
+                  type: 'POST',
+                  data: JSON.stringify(data),
+                  contentType: 'application/json',
+                  url: 'http://localhost:3000/endpoint',
+                  success: function(data) {
+                  console.log("success");
+                  //result=JSON.stringify(data);
+                  var left=data.length%20;
+                  var totalpage=(data.length-left)/20+1;
+                  var length=0;
+                  if((totalpage==1)&&(left>0)){
+                  length=left;
+                  console.log(length);
+                  }else{
+                  length=20;
+                  console.log(length);
+                  }
+                  for(var i=0;i<length;i++){
+                  var item=data[i];
+                  $("#items-in-type").append("<tr>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Code"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span></button></td>");
+                  $("#items-in-type").append("</tr>");
+                  }
+                  $(function(){
+                  $("#pagination").pagination({
+                  items: data.length,
+                  itemsOnPage: 20,
+                  cssStyle: 'light-theme'
+                  });
+                  });
+                  $(document).ready(function(){
+                  $(window).bind('hashchange',function(e){
+                  var anchor=JSON.stringify(document.location.hash);
+                  var temp1=anchor.replace('"','');
+                  var temp2=temp1.replace('"','');
+                  var pagenumberstring=temp2.replace('#page-','');
+                  var pagenumber=parseInt(pagenumberstring);
+                  if((pagenumber==totalpage)&&(left>0)){
+                  $(".item-info").remove();
+                  var bottom=(pagenumber-1)*20;
+                  var top=left+bottom;
+                  for(var i=bottom;i<top;i++){
+                  var item=data[i];
+                  $("#items-in-type").append("<tr>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Code"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span></button></td>");
+                  $("#items-in-type").append("</tr>");
+                  }
+                  }else{
+                  $(".item-info").remove();
+                  var bottom=(pagenumber-1)*20;
+                  var top=pagenumber*20;
+                  for(var i=bottom;i<top;i++){
+                  var item=data[i];
+                  $("#items-in-type").append("<tr>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Code"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
+                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span></button></td>");
+                  $("#items-in-type").append("</tr>");
+                  }
+                  }
+                  });
+                  });
+                  $("#products-list").show();
+                  }
+                  });
+                  });
+                  /*
+                  //function for clicking page number
+                  $(document).ready(function(){
+                  $(window).bind('hashchange',function(e){
+                  var anchor=JSON.stringify(document.location.hash);
+                  console.log(anchor);
+                  });
+                  });
+                  */
+              #products-list.container(style='display: none; width: 1000px;')
+                .row
+                  .col-md-12(style='width: 1000px;')
+                    h4 Items
+                    table#mytable.table.table-bordred.table-striped
+                      thead
+                        th Product Code
+                        th Product Name
+                        th Product Valid From
+                        th Product Valid To
+                        th Edit
+                      tbody#items-in-type
+                    .clearfix
+                    #pagination
 block content

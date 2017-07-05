@@ -114,11 +114,11 @@ html
                   i++;
                   }
                   $(function(){
-                  $(".tabledeletebutton").click(function(e){
-                  var deleteitem=data[e.target.id];
+                  $(".btn.btn-secondary").click(function(e){
+                  var type=e.target.id;
                   $.ajax({
                   type: "POST",
-                  data: JSON.stringify(deleteitem),
+                  data: JSON.stringify(type),
                   contentType: 'application/json',
                   url: 'http://localhost:3000/tabledelete',
                   success: function(data){
