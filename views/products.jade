@@ -14,6 +14,7 @@ html(lang='en')
     link(href='stylesheets/bootstrap.css', rel='stylesheet')
     link(href='stylesheets/style.css', rel='stylesheet')
     link(href='stylesheets/simplePagination.css', rel='stylesheet')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     script.
       window.dataLayer = window.dataLayer || []; window.dataLayer.push({'event':'pageDataLoaded','userId':'','loginStatus':'NO'});
       document.documentElement.className = document.documentElement.className.replace('no-js', '');
@@ -22,16 +23,17 @@ html(lang='en')
     script(src='//maps.googleapis.com/maps/api/js?client=gme-nuffieldhealthltd1&hl=en&libraries=places')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(type='text/javascript', src='javascripts/jquery.simplePagination.js')
+    script(type='text/javascript', src='javascripts/search_products.js')
     style(type='text/css').
-      #background-image { background-image: url(http://www.autonomouschild.co.uk/wp-content/uploads/2016/07/product_0.png); }
+      #background-image { background-image: url(https://www.nuffieldhealth.com/local/c8/a0/5cc8fc1541d7a7626ae2c2ebedb6/battle-ropes-largest.jpg); }
       @media (max-width: 1200px) {
-      #background-image { background-image: url(http://www.autonomouschild.co.uk/wp-content/uploads/2016/07/product_0.png); }
+      #background-image { background-image: url(https://www.nuffieldhealth.com/local/4c/2f/9461239a488f9b729126d897f4be/battle-ropes-large.jpg); }
       }
       @media (max-width: 900px) {
-      #background-image { background-image: url(http://www.autonomouschild.co.uk/wp-content/uploads/2016/07/product_0.png); }
+      #background-image { background-image: url(https://www.nuffieldhealth.com/local/dd/d0/0d3183df40fb869a33dd72ed9eda/battle-ropes-medium.jpg); }
       }
       @media (max-width: 480px) {
-      #background-image { background-image: url(http://www.autonomouschild.co.uk/wp-content/uploads/2016/07/product_0.png); }
+      #background-image { background-image: url(https://www.nuffieldhealth.com/local/15/7d/43882e0b4eeb8571b45ef5e2f35d/battle-ropes-small.jpg); }
       }
     script(src='https://cdn.optimizely.com/js/6076240549.js')
     meta(name='google-site-verification', content='vURViD3WNilgTwx98cc2xL-phgxOhD4saZBPRIY70IM')
@@ -100,7 +102,7 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     span.nav__logo
                       img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
                     // <![endif]
@@ -131,64 +133,47 @@ html(lang='en')
           .layout-container
             .summary-list.summary-list--boxed
               h2.summary-list__heading four latest updated products
-              ul.layout.layout--3-3-3-3.summary-list__list
-                li.layout__column.layout__column--1.summary-list__item
-                  a.summary-list__inner.summary-list__inner--linked(href='/products')
-                    .summary-list__upper(style='height: 122px;')
-                      span.summary-list__lead-in 01/
-                      span.summary-list__item__heading Item 01
-                    .summary-list__lower(style='height: 124px;')
-                      .summary-list__body
-                        p
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                li.layout__column.layout__column--2.summary-list__item
-                  a.summary-list__inner.summary-list__inner--linked(href='/products')
-                    .summary-list__upper(style='height: 122px;')
-                      span.summary-list__lead-in 02/
-                      span.summary-list__item__heading Item 02
-                    .summary-list__lower(style='height: 124px;')
-                      .summary-list__body
-                        p
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                li.layout__column.layout__column--3.summary-list__item
-                  a.summary-list__inner.summary-list__inner--linked(href='/products')
-                    .summary-list__upper(style='height: 122px;')
-                      span.summary-list__lead-in 03/
-                      span.summary-list__item__heading Item 03
-                    .summary-list__lower(style='height: 124px;')
-                      .summary-list__body
-                        p
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                li.layout__column.layout__column--4.summary-list__item
-                  a.summary-list__inner.summary-list__inner--linked(href='/products')
-                    .summary-list__upper(style='height: 122px;')
-                      span.summary-list__lead-in 04/
-                      span.summary-list__item__heading Item 04
-                    .summary-list__lower(style='height: 124px;')
-                      .summary-list__body
-                        p
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
-                          | blablablabla
+              ul#fourlatestupdateproduct.layout.layout--3-3-3-3.summary-list__list
+                script.
+                  var fourlatestupdate=!{JSON.stringify(fourlatestupdate)};
+                  console.log(fourlatestupdate);
+                  for(var i=0;i<4;i++){
+                  $("#fourlatestupdateproduct").append("<li class='layout__column layout__column--1 summary-list__item'><a href='/product-info#product-id:"+(fourlatestupdate[i])['Product Id']+"' class='summary-list__inner summary-list__inner--linked'><div style='height: 122px;' class='summary-list__upper'><span class='summary-list__lead-in'>"+(i+1)+"/</span><span class='summary-list__item__heading'>"+(fourlatestupdate[i])['Product Name']+"</span></div><div style='height: 124px;' class='summary-list__lower'><div class='summary-list__body'><p>"+(fourlatestupdate[i])['Record Creation Datetime']+"</p></div></div></a></li>");
+                  }
           #products.layout-container.layout-container--no-top-margin
             .location-finder.js-location-finder
               .location-finder__header
                 span.location-finder__heading Search for products
-                form.search-form(action='')
-                  .form-group.has-feedback
-                    label.sr-only(for='search') Search
-                    input#search.form-control(type='text', name='search', placeholder='search')
-                    span.glyphicon.glyphicon-search.form-control-feedback
+                .input-group
+                  .input-group-btn.search-panel
+                    button.btn.btn-default.dropdown-toggle(type='button') Advanced
+                  input#search_param(type='hidden', name='search_param', value='all')
+                  input#search_input.form-control(type='text', name='search_input', placeholder='Search product name...')
+                  span.input-group-btn
+                    button#search_button.btn.btn-default(type='button')
+                      span.glyphicon.glyphicon-search
+                label.radio-inline(style='color: white;')
+                  input#search_name(type='radio', name='optradio', checked='checked')
+                  | Search By Name
+                label.radio-inline(style='color: white;')
+                  input#search_code(type='radio', name='optradio')
+                  | Search By Product Code
+              .panel.panel-default
+                #search-result-panel.panel-body(style='display: none;')
+                  #results-list.container(style='width: 1000px;')
+                    .row
+                      #type-button-col.col-sm-3
+                      .col-sm-9
+                        table#resultstable.table.table-bordred.table-striped
+                          thead
+                            th Product Code
+                            th Product Name
+                            th Product Valid From
+                            th Product Valid To
+                            th Edit
+                          tbody#items-after-search
+                        .clearfix
+                        #results-pagination
               .location-finder__regions.js-location-finder-region-nav.location-finder__regions--visible
                 .listing-filters.listing-filters--inverse.location-finder__filters
                   ul.filter-list.js-location-finder-region-nav-link-container
@@ -240,7 +225,7 @@ html(lang='en')
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span></button></td>");
+                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span>Edit</button></td>");
                   $("#items-in-type").append("</tr>");
                   }
                   $(function(){
@@ -268,7 +253,7 @@ html(lang='en')
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span></button></td>");
+                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span>Edit</button></td>");
                   $("#items-in-type").append("</tr>");
                   }
                   }else{
@@ -282,7 +267,7 @@ html(lang='en')
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
                   $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span></button></td>");
+                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span>Edit</button></td>");
                   $("#items-in-type").append("</tr>");
                   }
                   }
@@ -292,15 +277,6 @@ html(lang='en')
                   }
                   });
                   });
-                  /*
-                  //function for clicking page number
-                  $(document).ready(function(){
-                  $(window).bind('hashchange',function(e){
-                  var anchor=JSON.stringify(document.location.hash);
-                  console.log(anchor);
-                  });
-                  });
-                  */
               #products-list.container(style='display: none; width: 1000px;')
                 .row
                   .col-md-12(style='width: 1000px;')
@@ -315,4 +291,7 @@ html(lang='en')
                       tbody#items-in-type
                     .clearfix
                     #pagination
+
+
+
 block content

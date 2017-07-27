@@ -106,3 +106,8 @@ p
 .btn-update
 {
     margin-left:15px;
+}
+
+.clicked{
+	background-color: red;
+}

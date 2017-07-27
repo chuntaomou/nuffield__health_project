@@ -1,0 +1,82 @@
+/*°º¤ø,¸I¸,ø¤º°`°º¤ø,B¸,ø¤°º¤ø,¸M¸,ø¤º°`°º¤ø,¸
+
+
+  Licensed Materials - Property of IBM5725-N92© Copyright IBM Corp.
+  2014, 2017.US Government Users Restricted Rights- Use,
+  duplication or disclosure restricted by GSA ADP Schedule Contract  with IBM Corp.
+  
+
+°º¤ø,¸I¸,ø¤º°`°º¤ø,B¸,ø¤°º¤ø,¸M¸,ø¤º°`°º¤ø,¸*/
+
+
+input:focus {
+    outline: dotted 1px #aeaeae;
+}
+
+
+
+#leftcol 
+{ 
+	  text-align:right;float:left; width:20%;
+
+      border-right:1px solid #fff;
+
+      border-bottom:1px solid #fff;
+
+      font-family:Verdana; 
+
+      font-size: 12px; 
+
+      color: #000000; 
+
+      font-weight :bold;
+      
+      vertical-align : top;
+}
+
+#rightcol 
+{ 
+      margin-left:22%;
+
+      text-align:left;font-family:Verdana;
+
+      font-size: 11px; 
+
+      border-bottom:1px solid #fff; 
+      
+      vertical-align : top;     
+
+}
+
+#leftcol_1 
+{ 
+	  text-align:right;float:left; width:50%;
+
+      border-right:1px solid #fff;
+
+      border-bottom:1px solid #fff;
+
+      font-family:Verdana; 
+
+      font-size: 10px; 
+
+      color: #000000; 
+
+      font-weight :bold;
+      
+      vertical-align : top;
+}
+
+#rightcol_1
+{ 
+      margin-left:22%;
+
+      text-align:left;font-family:Verdana;
+
+      font-size: 11px; 
+
+      border-bottom:1px solid #fff; 
+      
+      vertical-align : top;     
+
+}

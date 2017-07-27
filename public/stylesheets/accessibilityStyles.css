@@ -1,0 +1,55 @@
+/*°º¤ø,¸I¸,ø¤º°`°º¤ø,B¸,ø¤°º¤ø,¸M¸,ø¤º°`°º¤ø,¸
+
+
+  Licensed Materials - Property of IBM5725-N92© Copyright IBM Corp.
+  2014, 2017.US Government Users Restricted Rights- Use,
+  duplication or disclosure restricted by GSA ADP Schedule Contract  with IBM Corp.
+  
+
+°º¤ø,¸I¸,ø¤º°`°º¤ø,B¸,ø¤°º¤ø,¸M¸,ø¤º°`°º¤ø,¸*/
+
+        
+#skip a
+{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+ 
+#skip a:focus
+{
+    position:static;
+    width:auto;
+    height:auto;
+    border:dashed 1px;
+} 
+
+.skipDiv a
+{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+}
+ 
+.skipDiv a:focus
+{
+    position:static;
+    width:auto;
+    height:auto;
+    border:dashed 1px;
+} 
+
+.screenReaderText {
+    clip: rect(1px, 1px, 1px, 1px);
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+

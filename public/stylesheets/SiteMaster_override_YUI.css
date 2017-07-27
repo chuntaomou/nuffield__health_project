@@ -1,0 +1,37 @@
+/*°º¤ø,¸I¸,ø¤º°`°º¤ø,B¸,ø¤°º¤ø,¸M¸,ø¤º°`°º¤ø,¸
+
+
+  Licensed Materials - Property of IBM5725-N92© Copyright IBM Corp.
+  2014, 2017.US Government Users Restricted Rights- Use,
+  duplication or disclosure restricted by GSA ADP Schedule Contract  with IBM Corp.
+  
+
+°º¤ø,¸I¸,ø¤º°`°º¤ø,B¸,ø¤°º¤ø,¸M¸,ø¤º°`°º¤ø,¸*/
+
+    /* .BRANDINGdom2dark	{ background-color: #776B59; font-weight: bold; font-size: 80%;} */
+    .yui-skin-sam .yui-dt th .yui-dt-liner { text-align:center; }
+    .yui-skin-sam .yui-dt th {font-size:80%;font-weight:normal;vertical-align:bottom;color:#FFFFFF;}
+    .yui-skin-sam .yui-dt th a { font-weight:normal;vertical-align:bottom;text-decoration:underline; color:#FFFFFF;}
+
+
+
+.PBnbspSize {  font-size: 15px;}
+.PBdashSize {  font-size: 16px; }
+.PBwingdingsSize1 {   font-size: 18px; }
+.PBwingdingsSize3 {   font-size: 24px; }
+.PBSectionImgSize {    }
+.PBSeparatorImgSize {   height: 10px; width: 100%; }
+
+
+._portalMainPageContents {
+    margin-top: 5px;
+     margin-bottom: 10px;
+  }
+.FORMlabel
+{
+    margin-right:6px;
+}
+input[type="checkbox"] {
+	-webkit-appearance: checkbox;
+}
+
