@@ -1,29 +1,13 @@
-doctype html
 html(lang='en')
   head
-    title Private Hospitals, Gyms, Corporate Fitness | Nuffield Health
-    meta(name='description', content='Nuffield Health offers 31 private hospitals, 112 Fitness & Wellbeing gyms and many corporate locations and medical centres.')
-    meta(name='keywords', content='fitness,nuffield health,gyms,gym,medical centre,healthcare,hospitals,private')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Our Locations - About Us - Nuffield Health Careers 
     link(rel='shortcut icon', href='/favicon.ico')
-    meta(property='og:image', content='/open-graph.png')
     link(rel='icon', type='image/png', sizes='192x192', href='/android-chrome-192x192.png')
     link(rel='apple-touch-icon', sizes='180x180', href='/apple-touch-icon-180x180.png')
     link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
     link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
-    link(href='stylesheets/bootstrap.css', rel='stylesheet')
-    link(href='stylesheets/style.css', rel='stylesheet')
-    link(href='stylesheets/simplePagination.css', rel='stylesheet')
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-    script.
-      window.dataLayer = window.dataLayer || []; window.dataLayer.push({'event':'pageDataLoaded','userId':'','loginStatus':'NO'});
-      document.documentElement.className = document.documentElement.className.replace('no-js', '');
-    link(rel='stylesheet', type='text/css', href='stylesheets/application.css')
-    link(rel='stylesheet', type='text/css', href='stylesheets/search_products.css')
-    script(src='//maps.googleapis.com/maps/api/js?client=gme-nuffieldhealthltd1&hl=en&libraries=places')
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-    script(type='text/javascript', src='javascripts/jquery.simplePagination.js')
-    script(type='text/javascript', src='javascripts/search_products.js')
+    link(href='stylesheets/style.css', type='text/css', rel='stylesheet')
+    link(href='stylesheets/products.css', type='text/css', rel='stylesheet')
     style(type='text/css').
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/c8/a0/5cc8fc1541d7a7626ae2c2ebedb6/battle-ropes-largest.jpg); }
       @media (max-width: 1200px) {
@@ -35,63 +19,18 @@ html(lang='en')
       @media (max-width: 480px) {
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/15/7d/43882e0b4eeb8571b45ef5e2f35d/battle-ropes-small.jpg); }
       }
-    script(src='https://cdn.optimizely.com/js/6076240549.js')
-    meta(name='google-site-verification', content='vURViD3WNilgTwx98cc2xL-phgxOhD4saZBPRIY70IM')
-  body(data-page-id='0000014d-7c48-d677-a1cf-fcdd90db0000')
-    div
-      // Google Tag Manager
-      script.
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-T63L6W');
-      // End Google Tag Manager
-      // Google Tag Manager (noscript)
-      noscript
-        iframe(src='https://www.googletagmanager.com/ns.html?id=GTM-T63L6W', height='0', width='0', style='display:none;visibility:hidden')
-      // End Google Tag Manager (noscript)
-      style(type='text/css').
-        span.event-meta__cta { display: none; }
-      style(type='text/css').
-        .bb-timetable__added[ng-show="!event.bookable"] {
-        display: none
-        }
-        @media screen and (max-width: 480px) {
-        .account-links--4 .account-links__item {
-        -webkit-box-flex: 100%;
-        -webkit-flex: 100%;
-        -moz-box-flex: 100%;
-        -ms-flex: 100%;
-        flex: 100%
-        }
-        }
-        @media screen and (max-width: 480px) {
-        .account-links--5 .account-links__item:nth-child(-n+2), .account-links--6 .account-links__item:nth-child(-n+2) {
-        -webkit-box-flex: 100%;
-        -webkit-flex: 100%;
-        -moz-box-flex: 100%;
-        -ms-flex: 100%;
-        flex: 100%
-        }
-        }
-        .layout--0-12-0 .layout__column {
-        width: 100%;
-        }
-      .global-nav
-        .row.row--green.row--inverse.row--no-padding.row--overflow
-          .layout-container
-            .layout.layout--6-6
-              .layout__column.layout__column--1
-                ul.global-nav__list.global-nav__list--audience
-                  li.global-nav__item
-                    a.global-nav__link.js-default(href='https://www.nuffieldhealth.com/') Personal
-                  li.global-nav__item
-                    a.global-nav__link(href='https://www.nuffieldhealth.com/corporate-wellbeing') Corporate
-                  li.global-nav__item
-                    a.global-nav__link(href='https://www.nuffieldhealth.com/healthcare-professionals') Professionals
-              .layout__column.layout__column--2
-      // #cache key:primaryNavigation status:cached expires:3257s
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='javascripts/products.js')
+  body.page-our-locations.navlevel-3.doctype-locationslandingpage
+    // Skip links - Accessibility
+    ul.skip-links.visuallyhidden
+      li
+        a(href='#main') Skip to content
+      li
+        a(href='#navigation-primary') Main site navigation
+      li
+        a(href='#footer') Share links and site information
+    #top.container
       #nav.nav(role='navigation')
         .row.row--green.row--inverse.row--no-padding.row--overflow
           .layout-container.nav__layout-container
@@ -102,7 +41,7 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     span.nav__logo
                       img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
                     // <![endif]
@@ -111,187 +50,66 @@ html(lang='en')
                       a#0000015a-4134-d80d-a55e-55fe90040000.nav__link(href='https://www.nuffieldhealth.com/services') Products
                     li.nav__item
                       a#0000014c-bd40-d7d2-a1ff-ff71639f0000.nav__link(href='https://www.nuffieldhealth.com/health-topics') Locations
-                    li.nav__item
-                      a#0000014c-e658-dfca-ab5d-eedfa2090000.nav__link(href='https://www.nuffieldhealth.com/hospitals') Payment records
-                    li.nav__item
-                      a#0000014c-faaa-d922-a7ed-fbef5a7f0000.nav__link(href='https://www.nuffieldhealth.com/gyms') sample
-                    li.nav__item
-                      a#0000014c-faaa-d922-a7ed-fbef9a1b0000.nav__link(href='https://www.nuffieldhealth.com/physiotherapy') sample
-                    li.nav__item
-                      a#0000014c-faab-d922-a7ed-fbef138c0000.nav__link(href='https://www.nuffieldhealth.com/health-assessments') sample
-                    li.nav__item
-                      a#0000014c-faab-d922-a7ed-fbef6f910000.nav__link(href='http://www.nuffieldhealthcareers.com') Quick links
-      #main(role='main', tabindex='0')
-        #background-image.row.row--background-image
-          .layout-container
-            .layout.layout--8-4
-              .layout_column.layout_column--1
-                .page-header.page-header--bold
-                  h1(itemprop='name') Products
-                  .page-header__lead(itemprop='description')
-                    p Here can you find details of products.
-          .layout-container
-            .summary-list.summary-list--boxed
-              h2.summary-list__heading four latest updated products
-              ul#fourlatestupdateproduct.layout.layout--3-3-3-3.summary-list__list
-                script.
-                  var fourlatestupdate=!{JSON.stringify(fourlatestupdate)};
-                  console.log(fourlatestupdate);
-                  for(var i=0;i<4;i++){
-                  $("#fourlatestupdateproduct").append("<li class='layout__column layout__column--1 summary-list__item'><a href='/product-info#product-id:"+(fourlatestupdate[i])['Product Id']+"' class='summary-list__inner summary-list__inner--linked'><div style='height: 122px;' class='summary-list__upper'><span class='summary-list__lead-in'>"+(i+1)+"/</span><span class='summary-list__item__heading'>"+(fourlatestupdate[i])['Product Name']+"</span></div><div style='height: 124px;' class='summary-list__lower'><div class='summary-list__body'><p>"+(fourlatestupdate[i])['Record Creation Datetime']+"</p></div></div></a></li>");
-                  }
-          #products.layout-container.layout-container--no-top-margin
-            .location-finder.js-location-finder
-              .location-finder__header
-                span.location-finder__heading Search for products
-                .input-group
-                  .input-group-btn.search-panel
-                    button.btn.btn-default.dropdown-toggle(type='button') Advanced
-                  input#search_param(type='hidden', name='search_param', value='all')
-                  input#search_input.form-control(type='text', name='search_input', placeholder='Search product name...')
-                  span.input-group-btn
-                    button#search_button.btn.btn-default(type='button')
-                      span.glyphicon.glyphicon-search
-                label.radio-inline(style='color: white;')
-                  input#search_name(type='radio', name='optradio', checked='checked')
-                  | Search By Name
-                label.radio-inline(style='color: white;')
-                  input#search_code(type='radio', name='optradio')
-                  | Search By Product Code
-              .panel.panel-default
-                #search-result-panel.panel-body(style='display: none;')
-                  #results-list.container(style='width: 1000px;')
-                    .row
-                      #type-button-col.col-sm-3
-                      .col-sm-9
-                        table#resultstable.table.table-bordred.table-striped
-                          thead
-                            th Product Code
-                            th Product Name
-                            th Product Valid From
-                            th Product Valid To
-                            th Edit
-                          tbody#items-after-search
-                        .clearfix
-                        #results-pagination
-              .location-finder__regions.js-location-finder-region-nav.location-finder__regions--visible
-                .listing-filters.listing-filters--inverse.location-finder__filters
-                  ul.filter-list.js-location-finder-region-nav-link-container
-                    li.filter-list__item
-                      button#1.btn.btn-secondary.more-item(style='margin-left: 30px; width: 184.56px;') Product
-                    li.filter-list__item
-                      button#2.btn.btn-secondary.more-item(style='margin-left: 60px; width: 184.56px;') Product Group
-                    li.filter-list__item
-                      button#3.btn.btn-secondary.more-item(style='margin-left: 60px; width: 184.56px;') Product Class
-                    li.filter-list__item
-                      button#4.btn.btn-secondary.less-item(style='margin-left: 60px; width: 184.56px;') Product Family
-                  ul.filter-list.js-location-finder-region-nav-link-container
-                    li.filter-list__item
-                      button#5.btn.btn-secondary.less-item(style='margin-left: 30px; width: 184.56px;') VAT Code
-                    li.filter-list__item
-                      button#6.btn.btn-secondary.less-item(style='margin-left: 60px; width: 184.56px;') Product Brand
-                    li.filter-list__item
-                      button#7.btn.btn-secondary.less-item(style='margin-left: 60px; width: 184.56px;') Product Sub Brand
-                    li.filter-list__item
-                      button#8.btn.btn-secondary.more-item(style='margin-left: 60px; width: 184.56px;') Product Price Tier
-                script.
-                  $('.btn.btn-secondary').click(function(e) {
-                  $(".item-info").remove();
-                  var data = {};
-                  data.title = e.target.id;
-                  data.message = "message";
-                  $.ajax({
-                  type: 'POST',
-                  data: JSON.stringify(data),
-                  contentType: 'application/json',
-                  url: 'http://localhost:3000/endpoint',
-                  success: function(data) {
-                  console.log("success");
-                  //result=JSON.stringify(data);
-                  var left=data.length%20;
-                  var totalpage=(data.length-left)/20+1;
-                  var length=0;
-                  if((totalpage==1)&&(left>0)){
-                  length=left;
-                  console.log(length);
-                  }else{
-                  length=20;
-                  console.log(length);
-                  }
-                  for(var i=0;i<length;i++){
-                  var item=data[i];
-                  $("#items-in-type").append("<tr>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Code"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span>Edit</button></td>");
-                  $("#items-in-type").append("</tr>");
-                  }
-                  $(function(){
-                  $("#pagination").pagination({
-                  items: data.length,
-                  itemsOnPage: 20,
-                  cssStyle: 'light-theme'
-                  });
-                  });
-                  $(document).ready(function(){
-                  $(window).bind('hashchange',function(e){
-                  var anchor=JSON.stringify(document.location.hash);
-                  var temp1=anchor.replace('"','');
-                  var temp2=temp1.replace('"','');
-                  var pagenumberstring=temp2.replace('#page-','');
-                  var pagenumber=parseInt(pagenumberstring);
-                  if((pagenumber==totalpage)&&(left>0)){
-                  $(".item-info").remove();
-                  var bottom=(pagenumber-1)*20;
-                  var top=left+bottom;
-                  for(var i=bottom;i<top;i++){
-                  var item=data[i];
-                  $("#items-in-type").append("<tr>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Code"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span>Edit</button></td>");
-                  $("#items-in-type").append("</tr>");
-                  }
-                  }else{
-                  $(".item-info").remove();
-                  var bottom=(pagenumber-1)*20;
-                  var top=pagenumber*20;
-                  for(var i=bottom;i<top;i++){
-                  var item=data[i];
-                  $("#items-in-type").append("<tr>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Code"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Name"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid From"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'>"+item["Product Valid To"]+"</td>");
-                  $("#items-in-type").append("<td class='item-info'><button class='btn btn-primary btn-xs' style='height:25px;'><span class='glyphicon glyphicon-pencil' style='width:60px;'></span>Edit</button></td>");
-                  $("#items-in-type").append("</tr>");
-                  }
-                  }
-                  });
-                  });
-                  $("#products-list").show();
-                  }
-                  });
-                  });
-              #products-list.container(style='display: none; width: 1000px;')
-                .row
-                  .col-md-12(style='width: 1000px;')
-                    h4 Items
-                    table#mytable.table.table-bordred.table-striped
-                      thead
-                        th Product Code
-                        th Product Name
-                        th Product Valid From
-                        th Product Valid To
-                        th Edit
-                      tbody#items-in-type
-                    .clearfix
-                    #pagination
-
-
+      .content-area.section
+        .section-canvas
+          #background-image.row.row--background-image(style='height: 360px;')
+            .m-banner-search(style='margin-top:140px;')
+              .module-canvas
+                .field.f-search
+                  input#search-criteria.search-box(type='text', name='s_Keywords', value='', placeholder='Search for a role ...')
+                .field.f-submit.desktop
+                  button#search-products-button(style='width:166px; height:58px; background-color:#00a200;') Search
+                .field.f-filter-1
+                  select#s_Region.filterSelect1(name='s_Region')
+                    option#1 Search by name
+                    option#2(selected='selected') Search by code
+                .field.f-filter-2
+                  select#s_Category.filterSelect1(name='s_Category')
+                    option#1(selected='selected') Product
+                    option#2 Product Group
+                    option#3 Product Class
+                    option#4 Product Family
+                    option#5 VAT Code
+                    option#6 Product Brand
+                    option#7 Product Sub Brand
+                    option#8 Product Price Tier
+                    option#9 Any
+        .section-canvas
+          .container-row
+            #filters.module.m-job-filter.structural
+              .module-header
+                h3 Filter Results
+              .module-canvas
+                #job-detail-filter.job-detail-filter.sub-section
+                  
+                    fieldset.filter-criteria
+                      .field.f-search-criteria
+                        label(for='filter-search-criteria') Keywords
+                        input#filter-search-criteria(type='text', name='s_Keywords', value='', placeholder='Job Keywords')
+                      .filter.inactive
+                        label(for='s_ContractType') Product Type
+                        select#s_ContractType.filterSelect(name='s_ContractType')
+                          option(value='9', selected='selected') - Choose - 
+                          option(value='1') Product
+                          option(value='2') Product Group
+                          option(value='3') Product Class
+                          option(value='4') Product Family
+                          option(value='5') VAT Code
+                          option(value='6') Product Brand
+                          option(value='7') Product Sub Brand
+                          option(value='8') Product Price Tier
+                    fieldset.filter-submit
+                      .action
+                        button.update-filters(style='background-color:#00a200;') Update Results
+                        button.clear-filters Clear Search
+                    input#jobsearch-pagesize(type='hidden', name='pageSize')
+                  form#filter-form-surface(action='/umbraco/surface/JobFilter/UpdateFilters')
+                    input#surface_s_ContractType(type='hidden', name='s_ContractType')
+                    input#surface_s_WorkingHours(type='hidden', name='s_WorkingHours')
+                    input#surface_s_Region(type='hidden', name='s_Region')
+                    input#surface_s_Category(type='hidden', name='s_Category')
+            #results.module.m-job-search-results.structural
+              #search-result-list.module-canvas
+                #search-result-list.job-results-list
 
 block content

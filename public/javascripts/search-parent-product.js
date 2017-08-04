@@ -17,27 +17,34 @@ $(function(){
 				if(data.length>0){
 					$(".item-in-list").remove();
 					for(var i=0;i<data.length;i++){
-						$("#search-result").append("<li class='item-in-list'><a>"+(data[i])["Product Name"]+"</a></li>");
+						$("#search-result").append("<li id='"+i+"' class='item-in-list'><a id='"+i+"'>"+(data[i])["Product Name"]+"</a></li>");
 					}
 				}else{
 					$(".item-in-list").remove();
 					$("#search-result").append("<li class='item-in-list'><a>No Results</a></li>");
 				}
 				//$("#search-result").append();
+				$("span#search").toggle();
+				
+				$("#dropdown").on("click", function(e){
+                  e.preventDefault();
+                  if($(this).hasClass("open")) {
+                    $(this).removeClass("open");
+                    $(this).children("ul").slideUp("fast");
+		            name=$(e.target).text();
+		            //console.log(name);
+		            id=(data[e.target.id])["Product Id"];
+		            //console.log(id);
+		            $("#input-Parent-Product-Name").val(name);
+                  }else{
+                    $(this).addClass("open");
+                    $(this).children("ul").slideDown("fast");
+                  }    
+                });
 			}
 		});
 		
 	});
 	
-	$("#dropdown").on("click", function(e){
-        e.preventDefault();
-        if($(this).hasClass("open")) {
-           $(this).removeClass("open");
-           $(this).children("ul").slideUp("fast");
-		   var name=$(e.target).text();
-        } else {
-           $(this).addClass("open");
-           $(this).children("ul").slideDown("fast");
-        }    
-});
+	
 });
