@@ -261,31 +261,6 @@ app.post('/searchproduct', function(req, res){
 			});
 		}
 	});
-	/*
-	var request=new sql.Request(connection);
-	request.query(drop_view,function(err,result){
-		if(err){
-			console.log("Error while querying database :- " + err);
-		}else{
-			console.log("drop temp");
-		}
-	});
-	request.query(create_view,function(err,result){
-		if(err){
-			console.log("Error while querying database :- " + err);
-		}else{
-			console.log("create temp");
-		}
-	});
-	request.query(query,function(err,result){
-		if(err){
-			console.log("Error while querying database :- " + err);
-		}else{
-			console.log("query");
-			res.send(result);
-		}
-	});
-	*/
 });
 
 app.post('/updatesearchresult',function(req,res){
@@ -330,6 +305,47 @@ app.post('/add-new-attribute',function(req,res){
 	});
 	
 	//res.send(query);
+});
+
+app.post('/executequery',function(req,res){
+	var query=req.body.message;
+	console.log(query);
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log(result);
+			res.send(result);
+		}
+	});
+});
+
+app.post('/executemultiupdatequery',function(req,res){
+	var queryarr=req.body.message;
+	var request=new sql.Request(connection);
+	request.query(queryarr[0],function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("queryarr[0]");
+			request.query(queryarr[1],function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					console.log("queryarr[1]");
+					request.query(queryarr[2],function(err,result){
+						if(err){
+							console.log("Error while querying database :- " + err);
+						}else{
+							console.log("queryarr[2]");
+							res.send("success");
+						}
+					});
+				}
+			});
+		}
+	});
 });
 
 // catch 404 and forward to error handler

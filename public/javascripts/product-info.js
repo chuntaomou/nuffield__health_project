@@ -26,6 +26,9 @@ var name="foo";
 var id=0;
 //////////////////////////////////////////////////////////////
 var temp=null;
+var tempdata=null;
+var temptotalpage=0;
+var templeft=0;
 var url=window.location.hash;
 url=url.replace("#product-id:","");
 console.log(url);
@@ -38,6 +41,7 @@ $.ajax({
 	contentType: 'application/json',
 	url: 'http://localhost:3000/productinfoid',
 	success: function(data){
+		tempdata=data;
 		//console.log("success");
 		console.log(JSON.stringify(data));
 		
@@ -84,6 +88,35 @@ $.ajax({
 		$("#Record-Termination-Datetime").append((data[0])["Record Termination Datetime"]);
 		$("#Product-Turn-Around-Time-Days").append((data[0])["Product Turn Around Time Days"]);
 		$("#Record-Copy-Creation-Datetime").append((data[0])["Record Copy Creation Datetime"]);
+		
+		//load assoication-info
+		var left=data.length%3;
+		if(left==0){
+			var totalpage=data.length/3;
+			temptotalpage=totalpage;
+		}else{
+			var totalpage=data.length/3+1;
+			temptotalpage=totalpage;
+		}
+		var length=0;
+		if((totalpage==1)&&(left>0)){
+			length=left;
+			templeft=left;
+		}else{
+			length=3;
+			templeft=left;
+		}
+		for(var i=0;i<length;i++){
+			$("#association-list").append("<div class='col-sm-4'><div class='panel panel-default text-center'><div class='panel-heading'><h1>Association</h1></div><div class='panel-body'><input id='"+(data[i])["Parent Association:Association Id"]+"' class='original-child-product-id'></input><input id='"+(data[i])["Parent Association:Association Id"]+"' class='search-result-product-id'></input><p id='"+(data[i])["Parent Association:Association Id"]+"' class='association-type-id'>"+(data[i])["Parent Association:Association Type Id"]+"</p><label><strong>Association Type Name</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='association-id'>"+(data[i])["Parent Association:Association Type Name"]+"</p><label><strong>Parent Product</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='parent-product-name'>"+(data[i])["Parent Association:Parent Product Name"]+"</p><label><strong>Child Product</strong></label><div id='Child-Product-Name-"+(data[i])["Parent Association:Association Id"]+"'><p id='"+(data[i])["Parent Association:Association Id"]+"' class='child-product-name'>"+(data[i])["Parent Association:Child Product Name"]+"</p><!-- --><input id='"+(data[i])["Parent Association:Association Id"]+"' class='search-child-product' style='width:120px; display:none;' placeholder='Search term...'></input><!-- --><button id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-default search-association-child-product-button' style='min-width:35px; display:none;'><span id='"+(data[i])["Parent Association:Association Id"]+"' class='glyphicon glyphicon-search'></span></button><div id='"+(data[i])["Parent Association:Association Id"]+"' class='dropdown association' style='display:none;'><button id='menu1' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>results<span class='caret'></span></button><ul id='"+(data[i])["Parent Association:Association Id"]+"' class='dropdown-menu' style='height: 200px; overflow-y:scroll; width: 240px;' role='menu' aria-labelledby='menu1'></ul></div></div><label for='association-date-from-"+(data[i])["Parent Association:Association Id"]+"'><strong>Association Valid From</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='product-association-valid-from'>"+(data[i])["Parent Association:Product Association Valid From"]+"</p><label for='association-date-to-"+(data[i])["Parent Association:Association Id"]+"'><strong>Association Valid To</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='product-association-valid-to'>"+(data[0])["Parent Association:Product Association Valid To"]+"</p></div><div class='panel-footer'><button id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-lg edit-association-info'>Edit</button><!-- --><button id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-lg cancel-association-info'>Cancel</button><!-- --><button id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-lg update-association-info'>Update</button></div></div></div>");
+		    $("input#"+(data[i])["Parent Association:Association Id"]+".search-result-product-id").val((data[i])["Parent Association:Child Product Id"]);
+			$("input#"+(data[i])["Parent Association:Association Id"]+".original-child-product-id").val((data[i])["Parent Association:Child Product Id"]);
+		}
+		
+		$("#association-pagination").pagination({
+		  items: data.length,
+		  itemsOnPage: 3,
+		  cssStyle: 'light-theme'
+        });
 		
 		//load attribute-info
 		temp=data;
@@ -1078,6 +1111,164 @@ $.ajax({
 			    });
 			}
 		});
+		
+		//trigger edit-association-info button
+		$("button.edit-association-info").click(function(e){
+			var str=$("#"+e.target.id+".product-association-valid-from").text();
+			$("#"+e.target.id+".product-association-valid-from").replaceWith('<input style="width:100%;" class="form-control" id="association-date-from-'+e.target.id+'" type="text" placeholder="" title="format : "/><div id="association-date-from-'+e.target.id+'"></div>');
+			$("#association-date-from-"+e.target.id).datepicker({theme:'green'});
+			$("#association-date-from-"+e.target.id).val(str);
+			
+			str=$("#"+e.target.id+".product-association-valid-to").text();
+			$("#"+e.target.id+".product-association-valid-to").replaceWith('<input style="width:100%;" class="form-control" id="association-date-to-'+e.target.id+'" type="text" placeholder="" title="format : "/><div id="association-date-to-'+e.target.id+'"></div>');
+			$("#association-date-to-"+e.target.id).datepicker({theme:'green'});
+			$("#association-date-to-"+e.target.id).val(str);
+			
+			str=$("#"+e.target.id+".child-product-name").text();
+			//$("#Child-Product-Name-"+e.target.id).empty();
+			$("#"+e.target.id+".child-product-name").replaceWith('<input id="input-child-product-name-'+e.target.id+'" style="width: 50%;"></input>');
+			$("#Child-Product-Name-"+e.target.id).append('<!-- --><input id="'+e.target.id+'" class="search-child-product" style="width:120px;" placeholder="Search term..."></input>');
+			$("#input-child-product-name-"+e.target.id).val(str);
+			$("input#"+e.target.id+".search-child-product").toggle();
+			$("button#"+e.target.id+".search-association-child-product-button").toggle();
+	    });
+		
+		//trigger search-button
+		$(".search-association-child-product-button").click(function(e){
+			var data={};
+			if($("p#"+e.target.id+".association-type-id").text()==7){
+				var query="select * from [product].[Product] where [Product Type Id]=1 and [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}else if($("p#"+e.target.id+".association-type-id").text()==3){
+				var query="select * from [product].[Product] where [Product Type Id]=1 and [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}else if($("p#"+e.target.id+".association-type-id").text()==4){
+				var query="select * from [product].[Product] where [Product Type Id]=2 and [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}else if($("p#"+e.target.id+".association-type-id").text()==5){
+				var query="select * from [product].[Product] where [Product Type Id]=3 and [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}else if($("p#"+e.target.id+".association-type-id").text()==6){
+				var query="select * from [product].[Product] where [Product Type Id]=6 and [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}else if($("p#"+e.target.id+".association-type-id").text()==9){
+				var query="select * from [product].[Product] where [Product Type Id]=1 and [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}else{
+				var query="select * from [product].[Product] where [Product Name] like '%"+$("input#"+e.target.id+".search-child-product").val()+"%'";
+			}
+			data.title="search child product for association";
+			data.message=query;
+			$.ajax({
+				type:'POST',
+				data:JSON.stringify(data),
+				contentType:'application/json',
+				url:'http://localhost:3000/executequery',
+				success:function(data){
+					console.log(JSON.stringify(data));
+					$("ul#"+e.target.id+".dropdown-menu").empty();
+					for(var i=0;i<data.length;i++){
+						$("ul#"+e.target.id+".dropdown-menu").append('<li role="presentation"><a class="search-result-item" role="menuitem" tabindex="-1" id="'+e.target.id+'" value="'+(data[i])["Product Id"]+'">'+(data[i])["Product Name"]+'</a></li>');
+					}
+					if(!$("#"+e.target.id+".dropdown").is(':visible')){
+						$("#"+e.target.id+".dropdown").toggle();
+					}
+					
+					$("a.search-result-item").click(function(e){
+						str=$(e.target).text();
+						$("input#input-child-product-name-"+e.target.id).val(str);
+						$("input#"+e.target.id+".search-result-product-id").val($(e.target).attr("value"));
+					});
+				}
+			});
+		});
+		
+		//trigger update-association-info button
+		$("button.update-association-info").click(function(e){
+			var arr_from=($("input#association-date-from-"+e.target.id).val()).split('/');
+			var arr_to=($("input#association-date-to-"+e.target.id).val()).split('/');
+			
+			if(arr_from.length==1){
+				var time_from=arr_from[0];
+			}else{
+				if(arr_from[0].length==1){
+				  var prefix="0";
+				  arr_from[0]=prefix+arr_from[0];
+			    }
+			    if(arr_from[1].length==1){
+				  var prefix="0";
+				  arr_from[1]=prefix+arr_from[1];
+			    }
+			    var prefix="20";
+			    arr_from[2]=prefix+arr_from[2];
+			    var time_from=arr_from[2]+"-"+arr_from[0]+"-"+arr_from[1]+"T00:00:00.000Z";
+			}
+			
+			if(arr_to.length==1){
+				var time_to=arr_to[0];
+			}else{
+				if(arr_to[0].length==1){
+				  var prefix="0";
+				  arr_to[0]=prefix+arr_to[0];
+			    }
+			    if(arr_to[1].length==1){
+				  var prefix="0";
+				  arr_to[1]=prefix+arr_to[1];
+			    }
+			    var prefix="20";
+			    arr_to[2]=prefix+arr_to[2];
+			    var time_to=arr_to[2]+"-"+arr_to[0]+"-"+arr_to[1]+"T00:00:00.000Z";
+			}
+			
+			var data={};
+			var arr=[];
+			data.title="update query";
+			var query1="update [product].[Product Association] set [Child Product Id]="+$("input#"+e.target.id+".search-result-product-id").val()+",[Product Association Valid From]='"+time_from+"',[Product Association Valid To]='"+time_to+"' where [Product Association Id]="+e.target.id;
+			var query2="update [product].[Product] set [Parent Product Id]="+url+" where [Product Id]="+$("input#"+e.target.id+".search-result-product-id").val();
+			var query3="update [product].[Product] set [Parent Product Id]=null where [Product Id]="+$("input#"+e.target.id+".original-child-product-id").val();
+			arr.push(query1);
+			arr.push(query2);
+			arr.push(query3);
+			data.message=arr;
+			
+			$.ajax({
+				type:'POST',
+				data:JSON.stringify(data),
+				contentType:'application/json',
+				url:'http://localhost:3000/executemultiupdatequery',
+				success:function(data){
+					console.log(data);
+				}
+			});
+		});
+		
+		//trigger cancel-association-info button
+		$("button.cancel-association-info").click(function(e){
+			console.log("cancel");
+		});
 	}
 });
+
+
+
+$(window).bind('hashchange',function(e){
+		var anchor=JSON.stringify(document.location.hash);
+        var temp1=anchor.replace('"','');
+        var temp2=temp1.replace('"','');
+        var pagenumberstring=temp2.replace('#page-','');
+        var pagenumber=parseInt(pagenumberstring);
+		console.log(temptotalpage);
+		console.log(pagenumber);
+
+		if(((pagenumber+1)>temptotalpage)&&(templeft>0)){
+			$("#association-list").empty();
+			var bottom=(pagenumber-1)*3;
+            var top=templeft+bottom;
+			for(var i=bottom;i<top;i++){
+				$("#association-list").append("<div class='col-sm-4'><div class='panel panel-default text-center'><div class='panel-heading'><h1>Association</h1></div><div class='panel-body'><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='association-type-id'>"+(tempdata[i])["Parent Association:Association Type Id"]+"</p><label><strong>Association Type Name</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='association-id'>"+(tempdata[i])["Parent Association:Association Type Name"]+"</p><label><strong>Parent Product</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='parent-product-name'>"+(tempdata[i])["Parent Association:Parent Product Name"]+"</p><label><strong>Child Product</strong></label><div id='Child-Product-Name-"+(tempdata[i])["Parent Association:Association Id"]+"'><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='child-product-name'>"+(tempdata[i])["Parent Association:Child Product Name"]+"</p><!-- --><span id='"+(tempdata[i])["Parent Association:Association Id"]+"' style='display:none;'><input id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='search-child-product' style='width:120px;' placeholder='Search term...'></input><!-- --><button class='btn btn-default search-association-child-product-button' style='min-width:35px;'><span class='glyphicon glyphicon-search'></span></button></span></div><label><strong>Association Valid From</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='product-association-valid-from'>"+(tempdata[i])["Parent Association:Product Association Valid From"]+"</p><label><strong>Association Valid To</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='product-association-valid-to'>"+(tempdata[i])["Parent Association:Product Association Valid To"]+"</p></div><div class='panel-footer'><button id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='btn btn-lg edit-association-info'>Edit</button></div></div></div>");
+	        }
+		}else{
+			$("#association-list").empty();
+			var bottom=(pagenumber-1)*3;
+            var top=pagenumber*3;
+			for(var i=bottom;i<top;i++){
+				$("#association-list").append("<div class='col-sm-4'><div class='panel panel-default text-center'><div class='panel-heading'><h1>Association</h1></div><div class='panel-body'><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='association-type-id'>"+(tempdata[i])["Parent Association:Association Type Id"]+"</p><label><strong>Association Type Name</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='association-id'>"+(tempdata[i])["Parent Association:Association Type Name"]+"</p><label><strong>Parent Product</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='parent-product-name'>"+(tempdata[i])["Parent Association:Parent Product Name"]+"</p><label><strong>Child Product</strong></label><div id='Child-Product-Name-"+(tempdata[i])["Parent Association:Association Id"]+"'><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='child-product-name'>"+(tempdata[i])["Parent Association:Child Product Name"]+"</p><!-- --><span id='"+(tempdata[i])["Parent Association:Association Id"]+"' style='display:none;'><input id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='search-child-product' style='width:120px;' placeholder='Search term...'></input><!-- --><button class='btn btn-default search-association-child-product-button' style='min-width:35px;'><span class='glyphicon glyphicon-search'></span></button></span></div><label><strong>Association Valid From</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='product-association-valid-from'>"+(tempdata[i])["Parent Association:Product Association Valid From"]+"</p><label><strong>Association Valid To</strong></label><p id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='product-association-valid-to'>"+(tempdata[i])["Parent Association:Product Association Valid To"]+"</p></div><div class='panel-footer'><button id='"+(tempdata[i])["Parent Association:Association Id"]+"' class='btn btn-lg edit-association-info'>Edit</button></div></div></div>");
+			}
+		}
+});
+
 

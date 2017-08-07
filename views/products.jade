@@ -7,7 +7,9 @@ html(lang='en')
     link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
     link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
     link(href='stylesheets/style.css', type='text/css', rel='stylesheet')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(href='stylesheets/products.css', type='text/css', rel='stylesheet')
+    link(type='text/css', rel='stylesheet', href='stylesheets/simplePagination.css')
     style(type='text/css').
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/c8/a0/5cc8fc1541d7a7626ae2c2ebedb6/battle-ropes-largest.jpg); }
       @media (max-width: 1200px) {
@@ -19,9 +21,13 @@ html(lang='en')
       @media (max-width: 480px) {
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/15/7d/43882e0b4eeb8571b45ef5e2f35d/battle-ropes-small.jpg); }
       }
+      span.glyphicon {
+      font-size: 40px;
+      }
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='javascripts/products.js')
-  body.page-our-locations.navlevel-3.doctype-locationslandingpage
+    script(src='javascripts/jquery.simplePagination.js')
+  body.page-our-locations.navlevel-3.doctype-locationslandingpage(style='background-color: #f1f1f1;')
     // Skip links - Accessibility
     ul.skip-links.visuallyhidden
       li
@@ -41,7 +47,7 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     span.nav__logo
                       img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
                     // <![endif]
@@ -56,9 +62,9 @@ html(lang='en')
             .m-banner-search(style='margin-top:140px;')
               .module-canvas
                 .field.f-search
-                  input#search-criteria.search-box(type='text', name='s_Keywords', value='', placeholder='Search for a role ...')
+                  input#search-criteria.search-box(type='text', name='s_Keywords', value='', placeholder='Search for a product ...')
                 .field.f-submit.desktop
-                  button#search-products-button(style='width:166px; height:58px; background-color:#00a200;') Search
+                  button#search-products-button(style='width:166px; height:58px; background-color:#00a200; font-size:20px; color:#fff;') Search
                 .field.f-filter-1
                   select#s_Region.filterSelect1(name='s_Region')
                     option#1 Search by name
@@ -75,41 +81,91 @@ html(lang='en')
                     option#8 Product Price Tier
                     option#9 Any
         .section-canvas
-          .container-row
+          .module.m-role-list
+            ul.container-row
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#4.item-canvas.product-type
+                  #4.item-inner-canvas
+                    h2#4.title(style='font-size:2.0rem;') Product Family
+                    #4.icon-container
+                      #4.icon
+                        span#4.glyphicon.glyphicon-th
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#2.item-canvas.product-type
+                  #2.item-inner-canvas
+                    h2#2.title(style='font-size:2.0rem;') Product Group
+                    #2.icon-container
+                      #2.icon
+                        span#2.glyphicon.glyphicon-th-large
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#3.item-canvas.product-type
+                  #3.item-inner-canvas
+                    h2#3.title(style='font-size:2.0rem;') Product Class
+                    #3.icon-container
+                      #3.icon
+                        span#3.glyphicon.glyphicon-th-list
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#6.item-canvas.product-type
+                  #6.item-inner-canvas
+                    h2#6.title(style='font-size:2.0rem;') Product Brand
+                    #6.icon-container
+                      #6.icon
+                        span#6.glyphicon.glyphicon-tag
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#7.item-canvas.product-type
+                  #7.item-inner-canvas
+                    h2#7.title(style='font-size:2.0rem;') Product Sub Brand
+                    #7.icon-container
+                      #7.icon
+                        span#7.glyphicon.glyphicon-tags
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#5.item-canvas.product-type
+                  #5.item-inner-canvas
+                    h2#5.title(style='font-size:2.0rem;') VAT Code
+                    #5.icon-container
+                      #5.icon
+                        span#5.glyphicon.glyphicon-barcode
+        .section-canvas
+          #show-search-result.container-row(style='display:none;')
             #filters.module.m-job-filter.structural
               .module-header
                 h3 Filter Results
               .module-canvas
                 #job-detail-filter.job-detail-filter.sub-section
-                  
-                    fieldset.filter-criteria
-                      .field.f-search-criteria
-                        label(for='filter-search-criteria') Keywords
-                        input#filter-search-criteria(type='text', name='s_Keywords', value='', placeholder='Job Keywords')
-                      .filter.inactive
-                        label(for='s_ContractType') Product Type
-                        select#s_ContractType.filterSelect(name='s_ContractType')
-                          option(value='9', selected='selected') - Choose - 
-                          option(value='1') Product
-                          option(value='2') Product Group
-                          option(value='3') Product Class
-                          option(value='4') Product Family
-                          option(value='5') VAT Code
-                          option(value='6') Product Brand
-                          option(value='7') Product Sub Brand
-                          option(value='8') Product Price Tier
-                    fieldset.filter-submit
-                      .action
-                        button.update-filters(style='background-color:#00a200;') Update Results
-                        button.clear-filters Clear Search
-                    input#jobsearch-pagesize(type='hidden', name='pageSize')
-                  form#filter-form-surface(action='/umbraco/surface/JobFilter/UpdateFilters')
-                    input#surface_s_ContractType(type='hidden', name='s_ContractType')
-                    input#surface_s_WorkingHours(type='hidden', name='s_WorkingHours')
-                    input#surface_s_Region(type='hidden', name='s_Region')
-                    input#surface_s_Category(type='hidden', name='s_Category')
+                  fieldset.filter-criteria
+                    .field.f-search-criteria
+                      label(for='filter-search-criteria') Keywords
+                      input#filter-search-criteria(type='text', name='s_Keywords', value='', placeholder='Job Keywords')
+                    .filter.inactive
+                      label(for='s_ContractType') Product Type
+                      select#s_ContractType.filterSelect(name='s_ContractType')
+                        option(value='9', selected='selected') - Choose - 
+                        option(value='1') Product
+                        option(value='2') Product Group
+                        option(value='3') Product Class
+                        option(value='4') Product Family
+                        option(value='5') VAT Code
+                        option(value='6') Product Brand
+                        option(value='7') Product Sub Brand
+                        option(value='8') Product Price Tier
+                  fieldset.filter-submit
+                    .action
+                      button.update-filters(style='background-color:#00a200; color:#fff;') Update Results
+                      button.clear-filters(style='color:#fff;') Clear Search
+                  input#jobsearch-pagesize(type='hidden', name='pageSize')
+                form#filter-form-surface(action='/umbraco/surface/JobFilter/UpdateFilters')
+                  input#surface_s_ContractType(type='hidden', name='s_ContractType')
+                  input#surface_s_WorkingHours(type='hidden', name='s_WorkingHours')
+                  input#surface_s_Region(type='hidden', name='s_Region')
+                  input#surface_s_Category(type='hidden', name='s_Category')
             #results.module.m-job-search-results.structural
-              #search-result-list.module-canvas
+              .module-canvas
                 #search-result-list.job-results-list
+                #pagination
+
+
+
+
+
 
 block content

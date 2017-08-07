@@ -14,9 +14,11 @@ html(lang='en')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(href='stylesheets/search-parent-product.css', rel='stylesheet')
     link(href='stylesheets/datepicker.css', rel='stylesheet')
+    link(href='stylesheets/simplePagination.css', rel='stylesheet')
     link(href='stylesheets/product-info.css', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    script(src='javascripts/jquery.simplePagination.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js')
     script(type='text/javascript', src='javascripts/product-info.js')
@@ -24,6 +26,7 @@ html(lang='en')
     script(src='javascripts/datepicker.js')
     script(src='javascripts/locales/en.js')
     script(src='javascripts/text.js')
+    script(src='javascripts/association.js')
     style(type='text/css').
       html {
       background-color: #fefefe;
@@ -150,7 +153,7 @@ html(lang='en')
       height: 100%;
       padding: 12px 15px;
       position: relative;
-      width: 75%;
+      width: 100%;
       }
       .card-media-body-top {
       display: block;
@@ -206,431 +209,218 @@ html(lang='en')
       color: #41C1F2;
       text-decoration: none;
       }
-  body(style='min-width:1200px;')
-    // Modal
-    #myModal.modal.fade(role='dialog')
-      .modal-dialog
-        // Modal content
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal') ×
-            h4.modal-title Add Attribute
-          .modal-body
-            .row
-              .col
-                #accordion(role='tablist', aria-multiselectable='true')
-                  .card
-                    #headingTwo.card-header(role='tab')
-                      h5.mb-0
-                        a.collapsed(style='font-size: 20px;', data-toggle='collapse', href='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo') Consultations
-                    #collapseTwo.collapse(role='tabpanel', aria-labelledby='headingTwo')
-                      .card-block
-                        .row
-                          .cd-md-6
-                            label(style='font-weight:bold;') Attribute Type
-                            .dropdown
-                              button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
-                                | Attribute Type
-                                span.caret
-                              ul.dropdown-menu
-                                li
-                                  a#1.attribute-type-name VAT Percentage
-                                li
-                                  a#2.attribute-type-name Product Codes
-                                li
-                                  a#3.attribute-type-name VITA ID
-                                li
-                                  a#4.attribute-type-name External Product IDs
-                                li
-                                  a#5.attribute-type-name PIMS Pathology ID
-                                li
-                                  a#6.attribute-type-name Winpath Pathology Code
-                                li
-                                  a#7.attribute-type-name Barcode
-                                li
-                                  a#8.attribute-type-name Weight(g)
-                              input#Attribute-Type-Name(style='width: 40%; margin-left:50px;')
-                          .cd-md-6
-                            label(style='font-weight:bold;') Value
-                            br
-                            input#Attribute-Value(style='width: 50%;')
-                  .card
-                    #headingThree.card-header(role='tab')
-                      h5.mb-0
-                        a.collapsed(style='font-size:20px;', data-toggle='collapse', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree') Traitements
-                    #collapseThree.collapse(role='tabpanel')
-                      .card-block
-                        label(style='font-weight:bold;', for='attr-date-from') Product Attribute Valid From
-                        br
-                        input#attr-date-from.form-control(style='width:100%;', type='text', placeholder='', title='format : ')
-                        br
-                        #attr-date-from-inline
-                        br
-                        label(style='font-weight:bold;', for='attr-date-to') Product Attribute Valid To
-                        br
-                        input#attr-date-to.form-control(style='width:100%;', type='text', placeholder='', title='format : ')
-                        br
-                        #attr-date-to-inline
-                        script.
-                          $('#attr-date-from').datepicker({theme:'green'});
-                          $('#attr-date-to').datepicker({theme:'green'});
-          .modal-footer
-            button#add-new-attribute.btn.btn-danger Add
-            button.btn.btn-default(type='button', data-dismiss='modal') Close
-    // #cache key:primaryNavigation status:cached expires:3257s
-    #nav.nav(role='navigation')
-      .row.row--green.row--inverse.row--no-padding.row--overflow
-        .layout-container.nav__layout-container
-          .layout.layout--12
-            .layout__column
-              .nav__upper
-                a.nav__logo-wrapper(href='https://www.nuffieldhealth.com/')
-                  //
-                    if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
-                  //if gte IE 9
-                    | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
-                  span.nav__logo
-                    img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
-                  // <![endif]
-                ul.nav__list
-                  li.nav__item
-                    a#0000015a-4134-d80d-a55e-55fe90040000.nav__link(href='https://www.nuffieldhealth.com/services') Products
-                  li.nav__item
-                    a#0000014c-bd40-d7d2-a1ff-ff71639f0000.nav__link(href='https://www.nuffieldhealth.com/health-topics') Locations
-                  li.nav__item
-                    a#0000014c-e658-dfca-ab5d-eedfa2090000.nav__link(href='https://www.nuffieldhealth.com/hospitals') Payment records
-                  li.nav__item
-                    a#0000014c-faaa-d922-a7ed-fbef5a7f0000.nav__link(href='https://www.nuffieldhealth.com/gyms') sample
-                  li.nav__item
-                    a#0000014c-faaa-d922-a7ed-fbef9a1b0000.nav__link(href='https://www.nuffieldhealth.com/physiotherapy') sample
-                  li.nav__item
-                    a#0000014c-faab-d922-a7ed-fbef138c0000.nav__link(href='https://www.nuffieldhealth.com/health-assessments') sample
-                  li.nav__item
-                    a#0000014c-faab-d922-a7ed-fbef6f910000.nav__link(href='http://www.nuffieldhealthcareers.com') Quick links
-    .container
-      .row
-        .card-media(style='height: 680px;')
-          // media container
-          .card-media-object-container
-            .card-media-object(style='background-image: url(https://s9.postimg.org/y0sfm95gv/prince_f.jpg);')
-          // body container
-          .card-media-body
-            .card-media-body-top
-              .card-media-body-top-icons.u-float-right
-                button.btn.btn-primary.edit-general-info edit
-                // 
-                button.btn.btn-default.update-general-info(style='background-color:green; color:#fff; display:none;') update
-                // 
-                button.btn.btn-danger.cancel-general-info(style='display:none;') cancel
-            span.card-media-body-heading
-              h2 general-info
+      .panel {
+      border: 1px solid #00a200;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+      }
+      .panel:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+      }
+      .panel-footer .btn:hover {
+      border: 1px solid #00a200;
+      background-color: #fff !important;
+      color: #f4511e;
+      }
+      .panel-heading {
+      color: #fff !important;
+      background-color: #00a200 !important;
+      padding: 25px;
+      border-bottom: 1px solid transparent;
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      }
+      .panel-footer {
+      background-color: white !important;
+      }
+      .panel-footer h3 {
+      font-size: 32px;
+      }
+      .panel-footer h4 {
+      color: #aaa;
+      font-size: 14px;
+      }
+      .panel-footer .btn {
+      margin-top: 15px;
+      margin-right:5px;
+      background-color: #00a200;
+      color: #fff;
+      }
+  body(style='background-color:#f1f1f1;')
+    div(style='min-width:1170px;')
+      // Modal
+      #myModal.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal') ×
+              h4.modal-title Add Attribute
+            .modal-body
               .row
-                .col-md-6
-                  label(style='font-weight:bold;') Product Name
-                  p#Product-Name.info-field
-                  label(style='font-weight:bold;') Product Description
-                  p#Product-Description.info-field
-                  label(style='font-weight:bold;') Product Code
-                  p#Product-Code.info-field
-                  label(style='font-weight:bold;') Product External Code
-                  p#Product-External-Code.info-field
-                  label(style='font-weight:bold;') Product External Id
-                  p#Product-External-Id.info-field
-                .col-md-6
-                  label(style='font-weight:bold;') Parent Product Name
-                  .row
-                    .col-md-6
-                      p#Parent-Product-Name.info-field(style='width:69%;')
-                      button#view-tree-menu.btn.btn-default(style='display:none;') view
-                    .col-md-6.input-group
-                      span#search-parent-product-form(style='display:none;')
-                        input#search-input-parent-product.form-control(type='text', style='min-width: 100px; width: 20%;', name='x', placeholder='Search term...')
-                        button#search-parent-product-button.btn.btn-default(style='min-width:35px;', type='button')
-                          span.glyphicon.glyphicon-search
-                      span#search(style='display:none;')
-                        #dropdown.ddmenu
-                          | Results
-                          ul#search-result
-                  label(style='font-weight:bold;') Product Label
-                  p#Product-Label.info-field
-                  label(style='font-weight:bold;') Product Notes
-                  p#Product-Notes.info-field
-                  label(style='font-weight:bold;') Product Type Name
-                  p#Product-Type-Name.info-field
-                  label(style='font-weight:bold;', for='date-from') Product Valid From
-                  p#Product-Valid-From.info-field
-                  label(style='font-weight:bold;', for='date-to') Product Valid To
-                  p#Product-Valid-To.info-field
-                  label(style='font-weight:bold;') Record Termination Datetime
-                  p#Record-Termination-Datetime.info-field
-                  label(style='font-weight:bold;') Record Creation Datetime
-                  p#Record-Creation-Datetime.info-field
-                  label(style='font-weight:bold;') Record Copy Creation Datetime
-                  p#Record-Copy-Creation-Datetime.info-field
-                  label(style='font-weight:bold;') Product Turn Around Time Days
-                  p#Product-Turn-Around-Time-Days.info-field
-            .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-              span.card-media-body-supporting-bottom-text.subtle #General-info
-      .row(style='margin-left:45px;')
-        .col-md-6
-          #9.card-media(style='height: 325px; display:none;')
-            // media container
-            .card-media-object-container
-              .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-            // body container
+                .col
+                  #accordion(role='tablist', aria-multiselectable='true')
+                    .card
+                      #headingTwo.card-header(role='tab')
+                        h5.mb-0
+                          a.collapsed(style='font-size: 20px;', data-toggle='collapse', href='#collapseTwo', aria-expanded='false', aria-controls='collapseTwo') Consultations
+                      #collapseTwo.collapse(role='tabpanel', aria-labelledby='headingTwo')
+                        .card-block
+                          .row
+                            .cd-md-6
+                              label(style='font-weight:bold;') Attribute Type
+                              .dropdown
+                                button.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown')
+                                  | Attribute Type
+                                  span.caret
+                                ul.dropdown-menu
+                                  li
+                                    a#1.attribute-type-name VAT Percentage
+                                  li
+                                    a#2.attribute-type-name Product Codes
+                                  li
+                                    a#3.attribute-type-name VITA ID
+                                  li
+                                    a#4.attribute-type-name External Product IDs
+                                  li
+                                    a#5.attribute-type-name PIMS Pathology ID
+                                  li
+                                    a#6.attribute-type-name Winpath Pathology Code
+                                  li
+                                    a#7.attribute-type-name Barcode
+                                  li
+                                    a#8.attribute-type-name Weight(g)
+                                input#Attribute-Type-Name(style='width: 40%; margin-left:50px;')
+                            .cd-md-6
+                              label(style='font-weight:bold;') Value
+                              br
+                              input#Attribute-Value(style='width: 50%;')
+                    .card
+                      #headingThree.card-header(role='tab')
+                        h5.mb-0
+                          a.collapsed(style='font-size:20px;', data-toggle='collapse', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree') Traitements
+                      #collapseThree.collapse(role='tabpanel')
+                        .card-block
+                          label(style='font-weight:bold;', for='attr-date-from') Product Attribute Valid From
+                          br
+                          input#attr-date-from.form-control(style='width:100%;', type='text', placeholder='', title='format : ')
+                          br
+                          #attr-date-from-inline
+                          br
+                          label(style='font-weight:bold;', for='attr-date-to') Product Attribute Valid To
+                          br
+                          input#attr-date-to.form-control(style='width:100%;', type='text', placeholder='', title='format : ')
+                          br
+                          #attr-date-to-inline
+                          script.
+                            $('#attr-date-from').datepicker({theme:'green'});
+                            $('#attr-date-to').datepicker({theme:'green'});
+            .modal-footer
+              button#add-new-attribute.btn.btn-danger Add
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
+      // #cache key:primaryNavigation status:cached expires:3257s
+      #nav.nav(role='navigation')
+        .row.row--green.row--inverse.row--no-padding.row--overflow
+          .layout-container.nav__layout-container
+            .layout.layout--12
+              .layout__column
+                .nav__upper
+                  a.nav__logo-wrapper(href='https://www.nuffieldhealth.com/')
+                    //
+                      if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
+                    //if gte IE 9
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                    span.nav__logo
+                      img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
+                    // <![endif]
+                  ul.nav__list
+                    li.nav__item
+                      a#0000015a-4134-d80d-a55e-55fe90040000.nav__link(href='https://www.nuffieldhealth.com/services') Products
+                    li.nav__item
+                      a#0000014c-bd40-d7d2-a1ff-ff71639f0000.nav__link(href='https://www.nuffieldhealth.com/health-topics') Locations
+                    li.nav__item
+                      a#0000014c-e658-dfca-ab5d-eedfa2090000.nav__link(href='https://www.nuffieldhealth.com/hospitals') Payment records
+                    li.nav__item
+                      a#0000014c-faaa-d922-a7ed-fbef5a7f0000.nav__link(href='https://www.nuffieldhealth.com/gyms') sample
+                    li.nav__item
+                      a#0000014c-faaa-d922-a7ed-fbef9a1b0000.nav__link(href='https://www.nuffieldhealth.com/physiotherapy') sample
+                    li.nav__item
+                      a#0000014c-faab-d922-a7ed-fbef138c0000.nav__link(href='https://www.nuffieldhealth.com/health-assessments') sample
+                    li.nav__item
+                      a#0000014c-faab-d922-a7ed-fbef6f910000.nav__link(href='http://www.nuffieldhealthcareers.com') Quick links
+      .container
+        .row
+          .card-media(style='height: auto;')
             .card-media-body
               .card-media-body-top
                 .card-media-body-top-icons.u-float-right
-                  button#9.btn.btn-danger.add-attribute-info(type='button', data-toggle='modal', data-target='#myModal') add
+                  button.btn.btn-primary.edit-general-info edit
                   // 
-                  button#9.btn.btn-primary.edit-attribute-info edit
+                  button.btn.btn-default.update-general-info(style='background-color:green; color:#fff; display:none;') update
                   // 
-                  button#9.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                  // 
-                  button#9.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
+                  button.btn.btn-danger.cancel-general-info(style='display:none;') cancel
               span.card-media-body-heading
-                h3 attribute
-                .row(style='margin-left: 45px;')
-                  p.info-field there is no attribute
+                h2 general-info
+                .row
+                  .col-md-4
+                    label(style='font-weight:bold;') Product Name
+                    p#Product-Name.info-field
+                    label(style='font-weight:bold;') Product Description
+                    p#Product-Description.info-field
+                    label(style='font-weight:bold;') Product Code
+                    p#Product-Code.info-field
+                    label(style='font-weight:bold;') Product External Code
+                    p#Product-External-Code.info-field
+                    label(style='font-weight:bold;') Product External Id
+                    p#Product-External-Id.info-field
+                  .col-md-4
+                    label(style='font-weight:bold;') Parent Product Name
+                    .row
+                      .col-md-6
+                        p#Parent-Product-Name.info-field(style='width:69%;')
+                        button#view-tree-menu.btn.btn-default(style='display:none;') view
+                      .col-md-6.input-group
+                        span#search-parent-product-form(style='display:none;')
+                          input#search-input-parent-product.form-control(type='text', style='min-width: 100px; width: 20%;', name='x', placeholder='Search term...')
+                          button#search-parent-product-button.btn.btn-default(style='min-width:35px;', type='button')
+                            span.glyphicon.glyphicon-search
+                        span#search(style='display:none;')
+                          #dropdown.ddmenu
+                            | Results
+                            ul#search-result
+                    label(style='font-weight:bold;') Product Label
+                    p#Product-Label.info-field
+                    label(style='font-weight:bold;') Product Notes
+                    p#Product-Notes.info-field
+                    label(style='font-weight:bold;') Product Type Name
+                    p#Product-Type-Name.info-field
+                    label(style='font-weight:bold;') Product Turn Around Time Days
+                    p#Product-Turn-Around-Time-Days.info-field
+                  .col-md-4
+                    label(style='font-weight:bold;', for='date-from') Product Valid From
+                    p#Product-Valid-From.info-field
+                    label(style='font-weight:bold;', for='date-to') Product Valid To
+                    p#Product-Valid-To.info-field
+                    label(style='font-weight:bold;') Record Termination Datetime
+                    p#Record-Termination-Datetime.info-field
+                    label(style='font-weight:bold;') Record Creation Datetime
+                    p#Record-Creation-Datetime.info-field
+                    label(style='font-weight:bold;') Record Copy Creation Datetime
+                    p#Record-Copy-Creation-Datetime.info-field
               .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-                span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-      .row(style='margin-left:45px;')
-        .col-md-6
-          #1.card-media(style='height: 325px; display:none;')
-            // media container
-            .card-media-object-container
-              .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-            // body container
+                span.card-media-body-supporting-bottom-text.subtle #General-info
+        .row(style='margin-top:20px;')
+          .card-media(style='height: auto;')
             .card-media-body
               .card-media-body-top
                 .card-media-body-top-icons.u-float-right
-                  button#1.btn.btn-danger.add-attribute-info(type='button', data-toggle='modal', data-target='#myModal') add
-                  // 
-                  button#1.btn.btn-primary.edit-attribute-info edit
-                  // 
-                  button#1.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                  // 
-                  button#1.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
+                  button.btn.btn-danger.add-association-info add
               span.card-media-body-heading
-                h3 attribute
-                .row(style='margin-left: 45px;')
-                  label(style='font-weight:bold;') Attribute Type Name
-                  p#Product-Attribute-Type-Name1.info-field
-                  label(style='font-weight:bold;') Attribute Value
-                  p#Product-Value-Text1.info-field
-                  label(style='font-weight:bold;', for='date1-from') Attribute Valid From
-                  p#Product-Attribute-Valid-From1.info-field
-                  label(style='font-weight:bold;', for='date1-to') Attribute Valid To
-                  p#Product-Attribute-Valid-To1.info-field
+                h2 association-info
+                #attributes.container-fluid
+                  #association-list.row.slideanim
+                  #association-pagination
               .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
                 span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-        .col-md-6
-          #2.card-media(style='height: 325px; display:none;')
-            // media container
-            .card-media-object-container
-              .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-            // body container
-            .card-media-body
-              .card-media-body-top
-                .card-media-body-top-icons.u-float-right
-                  button#2.btn.btn-danger.add-attribute-info(type='button', data-toggle='modal', data-target='#myModal') add
-                  // 
-                  button#2.btn.btn-primary.edit-attribute-info edit
-                  // 
-                  button#2.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                  // 
-                  button#2.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-              span.card-media-body-heading
-                h3 attribute
-                .row(style='margin-left: 45px;')
-                  label(style='font-weight:bold;') Attribute Type Name
-                  p#Product-Attribute-Type-Name2.info-field
-                  label(style='font-weight:bold;') Attribute Value
-                  p#Product-Value-Text2.info-field
-                  label(style='font-weight:bold;', for='date2-from') Attribute Valid From
-                  p#Product-Attribute-Valid-From2.info-field
-                  label(style='font-weight:bold;', for='date2-to') Attribute Valid To
-                  p#Product-Attribute-Valid-To2.info-field
-              .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-                span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-      .row(style='margin-left:45px;')
-        .col-md-6
-          #3.card-media(style='height: 325px; display:none;')
-            // media container
-            .card-media-object-container
-              .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-            // body container
-            .card-media-body
-              .card-media-body-top
-                .card-media-body-top-icons.u-float-right
-                  button#3.btn.btn-danger.add-attribute-info(data-toggle='modal', data-target='#myModal') add
-                  // 
-                  button#3.btn.btn-primary.edit-attribute-info edit
-                  // 
-                  button#3.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                  // 
-                  button#3.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-              span.card-media-body-heading
-                h3 attribute
-                .row(style='margin-left: 45px;')
-                  label(style='font-weight:bold;') Attribute Type Name
-                  p#Product-Attribute-Type-Name3.info-field
-                  label(style='font-weight:bold;') Attribute Value
-                  p#Product-Value-Text3.info-field
-                  label(style='font-weight:bold;', for='date3-from') Attribute Valid From
-                  p#Product-Attribute-Valid-From3.info-field
-                  label(style='font-weight:bold;', for='date3-to') Attribute Valid To
-                  p#Product-Attribute-Valid-To3.info-field
-              .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-                span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-        .col-md-6
-          #4.card-media(style='height: 325px; display:none;')
-            // media container
-            .card-media-object-container
-              .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-            // body container
-            .card-media-body
-              .card-media-body-top
-                .card-media-body-top-icons.u-float-right
-                  button#4.btn.btn-danger.add-attribute-info(data-toggle='modal', data-target='#myModal') add
-                  // 
-                  button#4.btn.btn-primary.edit-attribute-info edit
-                  // 
-                  button#4.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                  // 
-                  button#4.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-              span.card-media-body-heading
-                h3 attribute
-                .row(style='margin-left: 45px;')
-                  label(style='font-weight:bold;') Attribute Type Name
-                  p#Product-Attribute-Type-Name4.info-field
-                  label(style='font-weight:bold;') Attribute Value
-                  p#Product-Value-Text4.info-field
-                  label(style='font-weight:bold;', for='date4-from') Attribute Valid From
-                  p#Product-Attribute-Valid-From4.info-field
-                  label(style='font-weight:bold;', for='date4-to') Attribute Valid To
-                  p#Product-Attribute-Valid-To4.info-field
-              .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-                span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-      .row
-        #5.card-media(style='height: 325px; display:none;')
-          // media container
-          .card-media-object-container
-            .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-          // body container
-          .card-media-body
-            .card-media-body-top
-              .card-media-body-top-icons.u-float-right
-                button#5.btn.btn-danger.add-attribute-info(data-toggle='modal', data-target='#myModal') add
-                // 
-                button#5.btn.btn-primary.edit-attribute-info edit
-                // 
-                button#5.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                // 
-                button#5.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-            span.card-media-body-heading
-              h3 attribute
-              .row(style='margin-left: 45px;')
-                label(style='font-weight:bold;') Attribute Type Name
-                p#Product-Attribute-Type-Name5.info-field
-                label(style='font-weight:bold;') Attribute Value
-                p#Product-Value-Text5.info-field
-                label(style='font-weight:bold;', for='date4-from') Attribute Valid From
-                p#Product-Attribute-Valid-From5.info-field
-                label(style='font-weight:bold;', for='date4-to') Attribute Valid To
-                p#Product-Attribute-Valid-To5.info-field
-            .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-              span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-      .row
-        #6.card-media(style='height: 325px; display:none;')
-          // media container
-          .card-media-object-container
-            .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-          // body container
-          .card-media-body
-            .card-media-body-top
-              .card-media-body-top-icons.u-float-right
-                button#6.btn.btn-danger.add-attribute-info(data-toggle='modal', data-target='#myModal') add
-                // 
-                button#6.btn.btn-primary.edit-attribute-info edit
-                // 
-                button#6.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                // 
-                button#6.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-            span.card-media-body-heading
-              h3 attribute
-              .row(style='margin-left: 45px;')
-                label(style='font-weight:bold;') Attribute Type Name
-                p#Product-Attribute-Type-Name6.info-field
-                label(style='font-weight:bold;') Attribute Value
-                p#Product-Value-Text6.info-field
-                label(style='font-weight:bold;', for='date4-from') Attribute Valid From
-                p#Product-Attribute-Valid-From6.info-field
-                label(style='font-weight:bold;', for='date4-to') Attribute Valid To
-                p#Product-Attribute-Valid-To6.info-field
-            .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-              span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-      .row
-        #7.card-media(style='height: 325px; display:none;')
-          // media container
-          .card-media-object-container
-            .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-          // body container
-          .card-media-body
-            .card-media-body-top
-              .card-media-body-top-icons.u-float-right
-                button#7.btn.btn-danger.add-attribute-info(data-toggle='modal', data-target='#myModal') add
-                // 
-                button#7.btn.btn-primary.edit-attribute-info edit
-                // 
-                button#7.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                // 
-                button#7.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-            span.card-media-body-heading
-              h3 attribute
-              .row(style='margin-left: 45px;')
-                label(style='font-weight:bold;') Attribute Type Name
-                p#Product-Attribute-Type-Name7.info-field
-                label(style='font-weight:bold;') Attribute Value
-                p#Product-Value-Text7.info-field
-                label(style='font-weight:bold;', for='date4-from') Attribute Valid From
-                p#Product-Attribute-Valid-From7.info-field
-                label(style='font-weight:bold;', for='date4-to') Attribute Valid To
-                p#Product-Attribute-Valid-To7.info-field
-            .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-              span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-      .row
-        #8.card-media(style='height: 325px; display:none;')
-          // media container
-          .card-media-object-container
-            .card-media-object(style='background-image: url(https://s16.postimg.org/x8m99xtgl/tyco_f.jpg);')
-          // body container
-          .card-media-body
-            .card-media-body-top
-              .card-media-body-top-icons.u-float-right
-                button#8.btn.btn-danger.add-attribute-info(data-toggle='modal', data-target='#myModal') add
-                // 
-                button#8.btn.btn-primary.edit-attribute-info edit
-                // 
-                button#8.btn.btn-default.update-attribute-info(style='background-color:green; color:#fff; display:none;') update
-                // 
-                button#8.btn.btn-danger.cancel-attribute-info(style='display:none;') cancel
-            span.card-media-body-heading
-              h3 attribute
-              .row(style='margin-left: 45px;')
-                label(style='font-weight:bold;') Attribute Type Name
-                p#Product-Attribute-Type-Name8.info-field
-                label(style='font-weight:bold;') Attribute Value
-                p#Product-Value-Text8.info-field
-                label(style='font-weight:bold;', for='date4-from') Attribute Valid From
-                p#Product-Attribute-Valid-From8.info-field
-                label(style='font-weight:bold;', for='date4-to') Attribute Valid To
-                p#Product-Attribute-Valid-To8.info-field
-            .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-              span.card-media-body-supporting-bottom-text.subtle #Attribute-info
-
-
-
-
-
-block content
