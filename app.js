@@ -157,6 +157,7 @@ app.get('/load-tree-menu',function(req,res){
 });
 
 app.get('/products',function(req,res){
+	/*
 	var query="SELECT TOP (4) * FROM [Product].[product] order by [Record Creation Datetime] desc";
 	var request = new sql.Request(connection);
 	request.query(query,function(err,result){
@@ -168,6 +169,8 @@ app.get('/products',function(req,res){
 			res.render('products', { fourlatestupdate: result });
 		}
 	});
+	*/
+	res.render('products', { title: "sdfa" });
 });
 
 
