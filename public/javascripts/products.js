@@ -29,7 +29,7 @@ $(document).ready(function(){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			url: 'http://localhost:3000/searchproduct',
+			url: 'https://localhost:3000/searchproduct',
 			success: function(data){
 				tempdata=data;
 				console.log(JSON.stringify(data));
@@ -82,7 +82,7 @@ $(document).ready(function(){
 					  type: 'POST',
 					  data: JSON.stringify(data),
 					  contentType: 'application/json',
-					  url: 'http://localhost:3000/updatesearchresult',
+					  url: 'https://localhost:3000/updatesearchresult',
 					  success: function(data){
 						  tempdata=data;
 						  //console.log(data);
@@ -163,7 +163,7 @@ $(document).ready(function(){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			url: 'http://localhost:3000/searchproduct',
+			url: 'https://localhost:3000/searchproduct',
 			success: function(data){
 				tempdata=data;
 				console.log(JSON.stringify(data));
@@ -216,7 +216,7 @@ $(document).ready(function(){
 					  type: 'POST',
 					  data: JSON.stringify(data),
 					  contentType: 'application/json',
-					  url: 'http://localhost:3000/updatesearchresult',
+					  url: 'https://localhost:3000/updatesearchresult',
 					  success: function(data){
 						  tempdata=data;
 						  //console.log(data);

@@ -235,7 +235,7 @@ app.post('/productinfoid',function(req,res){
 	});
 });
 
-app.post('/searchproduct', function(req, res){
+app.post('/searchproduct/', function(req, res){
 	var query=req.body.message;
 	var create_view="create view [temp] as "+query;
 	console.log(create_view);
@@ -266,7 +266,7 @@ app.post('/searchproduct', function(req, res){
 	});
 });
 
-app.post('/updatesearchresult',function(req,res){
+app.post('/updatesearchresult/',function(req,res){
 	var query=req.body.message;
 	
 	var request=new sql.Request(connection);
