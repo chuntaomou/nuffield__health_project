@@ -17,7 +17,7 @@ $(document).ready(function(){
 		  type:'POST',
 		  data:JSON.stringify(data),
 		  contentType:'application/json',
-		  url:'http://localhost:3000/add-new-attribute',
+		  url:'http://localhost:3000/executequery',
 		  success:function(data){
 			console.log(data);
 			location.reload();

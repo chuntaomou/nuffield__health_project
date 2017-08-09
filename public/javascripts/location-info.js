@@ -30,10 +30,10 @@ var tempdata=null;
 var temptotalpage=0;
 var templeft=0;
 var url=window.location.hash;
-url=url.replace("#product-id:","");
+url=url.replace("#location-id:","");
 console.log(url);
 var data={};
-data.title="product id";
+data.title="location id";
 data.message=url;
 $.ajax({
 	type: 'POST',

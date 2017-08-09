@@ -40,6 +40,17 @@ var dbConfig = {
     }
 };
 
+/*
+var dbConfig = {
+    user:  'chuntao',
+    password: '3hunta0Ma0',
+    server: 'aukspsql01dev.database.windows.net',
+    options: {
+      encrypt: true,
+      database: 'DigitalData'
+    }
+};
+*/
 //get connect to sql server and execute query
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
@@ -71,6 +82,10 @@ app.use('/', endpoint);
 //app.use('/insertform',insertform);
 
 app.get('/product-info',function(req, res){
+	res.render('product-info', { title: "sdfa" });
+});
+
+app.get('/location-info',function(req,res){
 	res.render('product-info', { title: "sdfa" });
 });
 
@@ -157,22 +172,12 @@ app.get('/load-tree-menu',function(req,res){
 });
 
 app.get('/products',function(req,res){
-	/*
-	var query="SELECT TOP (4) * FROM [Product].[product] order by [Record Creation Datetime] desc";
-	var request = new sql.Request(connection);
-	request.query(query,function(err,result){
-		if(err){
-			console.log("Error while querying database :- " + err);
-		}else{
-			console.log(result);
-			//res.send(result);
-			res.render('products', { fourlatestupdate: result });
-		}
-	});
-	*/
 	res.render('products', { title: "sdfa" });
 });
 
+app.get('/locations',function(req,res){
+	res.render('locations', { title: "sdfa" });
+});
 
 app.post('/endpoint', function(req, res){
 	console.log('body: ' + JSON.stringify(req.body));
@@ -247,21 +252,52 @@ app.post('/searchproduct', function(req, res){
 			console.log("Error while querying database :- " + err);
 		}else{
 			console.log("drop temp");
-			request.query(create_view,function(err,result){
-				if(err){
-					console.log("Error while querying database :- " + err);
-				}else{
-					console.log("create temp");
-					request.query(query,function(err,result){
-						if(err){
-							console.log("Error while querying database :- " + err);
-						}else{
-							console.log("query");
-							res.send(result);
-						}
-					});
-				}
-			});
+		}
+	});
+	request.query(create_view,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("create temp");
+		}
+	});
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("query");
+			res.send(result);
+		}
+	});
+});
+
+app.post('/searchlocation', function(req, res){
+	var query=req.body.message;
+	var create_view="create view [locationtemp] as "+query;
+	console.log(create_view);
+	var drop_view="drop view [locationtemp]";
+	
+	var request=new sql.Request(connection);
+	request.query(drop_view,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("drop temp");
+		}
+	});
+	request.query(create_view,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("create temp");
+		}
+	});
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("query");
+			res.send(result);
 		}
 	});
 });
@@ -306,8 +342,6 @@ app.post('/add-new-attribute',function(req,res){
 			res.send(result);
 		}
 	});
-	
-	//res.send(query);
 });
 
 app.post('/executequery',function(req,res){

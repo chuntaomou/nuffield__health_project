@@ -15,18 +15,18 @@ html(lang='en')
     link(href='stylesheets/search-parent-product.css', rel='stylesheet')
     link(href='stylesheets/datepicker.css', rel='stylesheet')
     link(href='stylesheets/simplePagination.css', rel='stylesheet')
-    link(href='stylesheets/product-info.css', rel='stylesheet')
+    link(href='stylesheets/location-info.css', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     script(src='javascripts/jquery.simplePagination.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js')
-    script(type='text/javascript', src='javascripts/product-info.js')
+    script(type='text/javascript', src='javascripts/location-info.js')
     script(type='text/javascript', src='javascripts/search-parent-product.js')
     script(src='javascripts/datepicker.js')
     script(src='javascripts/locales/en.js')
-    script(src='javascripts/add-association.js')
-    script(src='javascripts/add-attribute.js')
+    script(src='javascripts/add-location-association.js')
+    script(src='javascripts/add-location-attribute.js')
     style(type='text/css').
       html {
       background-color: #fefefe;
@@ -256,7 +256,7 @@ html(lang='en')
           // Modal content
           .modal-content
             .modal-header
-              button.close(type='button', data-dismiss='modal') Ã—
+              button.close(type='button', data-dismiss='modal') ×
               h4.modal-title Add Association
             .modal-body
               input#modal-product-type-id
@@ -296,7 +296,7 @@ html(lang='en')
           // Modal content
           .modal-content
             .modal-header
-              button.close(type='button', data-dismiss='modal') Ã—
+              button.close(type='button', data-dismiss='modal') ×
               h4.modal-title Add Attribute
             .modal-body
               .row
