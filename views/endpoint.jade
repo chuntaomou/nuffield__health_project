@@ -1,7 +1,14 @@
-
-div
-  h1 {{data}}
-  script.
-    var data=!{JSON.stringify(items)};
-
-block content
+<label>Parent Product Name</label>
+                  <p id="Parent-Product-Name" class="info-field"></p>
+                  <div class="col-md-6 input-group">
+                    <span id="search-parent-product-form" style="display:none;">
+                      <input id="search-input-parent-product" type="text" style="min-width: 100px; width: 20%;" name="x" placeholder="Search term..." class="form-control">
+                      <button id="search-parent-product-button" style="min-width:35px;" type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <span id="search" style="display:none;">
+                      <div id="dropdown" class="ddmenu">Results
+                        <ul id="search-result"></ul>
+                      </div>
+                    </span>
+                  <div> 
+                  <div>

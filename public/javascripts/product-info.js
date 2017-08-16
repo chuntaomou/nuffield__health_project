@@ -1,26 +1,3 @@
-/*
-$(function(){
-	var treemenu=[{
-  label: 'node1',
-  children: [
-    { label: 'child1' },
-    { label: 'child2' }
-  ]
-  },{
-  label: 'node2',
-  children: [{
-    label: 'child3' }
-  ]
-  }];
-$("#tree").tree({
-	data:treemenu
-});
-});
-*/
-//var treemenu = !{data};
-//var treemenu = !{title};
-//console.log(treemenu);
-
 //global variables using for pass search parent product result
 var name="foo";
 var id=0;
@@ -61,6 +38,7 @@ $.ajax({
 			$("ul#modal-association-dropdown").append("<li id='1'><a id='1' value='Product Family Hierarch' class='modal-association-type-item'>Product Family Hierarchy</a></li><li id='2'><a id='2' class='modal-association-type-item' value='Product Brand Hierarchy'>Product Brand Hierarchy</a></li><li id='8'><a id='8' class='modal-association-type-item' value='Product Composition Hierarchy'>Product Composition Hierarchy</a></li><li id='7'><a id='7' class='modal-association-type-item' value='Product to Product Sub Brand'>Product to Product Sub Brand</a></li>");
 		}
 		
+		//load general-info
 		if((data[0])["Product Description"]==null){
 			(data[0])["Product Description"]="No Record";
 		}
@@ -111,7 +89,7 @@ $.ajax({
 			var totalpage=data.length/3;
 			temptotalpage=totalpage;
 		}else{
-			var totalpage=data.length/3+1;
+			var totalpage=(data.length-left)/3+1;
 			temptotalpage=totalpage;
 		}
 		var length=0;
@@ -123,7 +101,7 @@ $.ajax({
 			templeft=left;
 		}
 		if((data[0])["Child Association:Association Id"]!=null){
-		$("#child-association").append("<div class='panel panel-default text-center'><div class='panel-heading'><h1>Association</h1></div><div class='panel-body'><input id='"+(data[0])["Child Association:Association Id"]+"' class='original-parent-product-id'></input><input id='"+(data[0])["Child Association:Association Id"]+"' class='search-child-product-id'></input><p id='"+(data[0])["Child Association:Association Id"]+"' class='association-type-id'>"+(data[0])["Child Association:Association Type Id"]+"</p><label><strong>Association Type Name</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"' class='association-id'>"+(data[0])["Child Association:Association Type Name"]+"</p><label><strong>Parent Product</strong></label><div id='Parent-Product-Name-"+(data[0])["Child Association:Association Id"]+"'><p id='"+(data[0])["Child Association:Association Id"]+"' class='parent-product-name'>"+(data[0])["Child Association:Parent Product Name"]+"</p><!-- --><input id='"+(data[0])["Child Association:Association Id"]+"' class='search-parent-product' style='width:110px; display:none;' placeholder='Search term...'></input><!-- --><button id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-default search-association-parent-product-button' style='min-width:35px; display:none;'><span id='"+(data[0])["Child Association:Association Id"]+"' class='glyphicon glyphicon-search'></span></button><div id='"+(data[0])["Child Association:Association Id"]+"' class='dropdown association' style='display:none;'><button id='menu2' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>results<span class='caret'></span></button><ul id='"+(data[0])["Child Association:Association Id"]+"' class='dropdown-menu' style='height:200px; overflow-y:scroll; width:240px;' role='menu' aria-labelledby='menu2'></ul></div></div><label><strong>Child Product</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"'>"+(data[0])["Child Association:Child Product Name"]+"</p><label for='association-date-from-"+(data[0])["Child Association:Association Id"]+"'><strong>Association Valid From</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"' class='product-association-valid-from'>"+(data[0])["Child Association:Product Association Valid From"]+"</p><label for='association-date-to-"+(data[0])["Child Association:Association Id"]+"'><strong>Association Valid To</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"' class='product-association-valid-to'>"+(data[0])["Child Association:Product Association Valid To"]+"</p></div><div class='panel-footer'><button id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-lg edit-association-info'>Edit</button><!-- --><button style='display:none;' id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-lg cancel-association-info'>Cancel</button><!-- --><button style='display:none;' id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-lg update-association-info'>Update</button></div></div>");
+		$("#child-association").append("<div class='panel panel-default text-center'><div class='panel-heading'><h1>Association</h1></div><div class='panel-body'><input id='"+(data[0])["Child Association:Association Id"]+"' style='display:none;' class='original-parent-product-id'></input><input id='"+(data[0])["Child Association:Association Id"]+"' style='display:none;' class='search-child-product-id'></input><p id='"+(data[0])["Child Association:Association Id"]+"' style='display:none;' class='association-type-id'>"+(data[0])["Child Association:Association Type Id"]+"</p><label><strong>Association Type Name</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"' class='association-id'>"+(data[0])["Child Association:Association Type Name"]+"</p><label><strong>Parent Product</strong></label><div id='Parent-Product-Name-"+(data[0])["Child Association:Association Id"]+"'><p id='"+(data[0])["Child Association:Association Id"]+"' class='parent-product-name'>"+(data[0])["Child Association:Parent Product Name"]+"</p><!-- --><input id='"+(data[0])["Child Association:Association Id"]+"' class='search-parent-product' style='width:110px; display:none;' placeholder='Search term...'></input><!-- --><button id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-default search-association-parent-product-button' style='min-width:35px; display:none;'><span id='"+(data[0])["Child Association:Association Id"]+"' class='glyphicon glyphicon-search'></span></button><div id='"+(data[0])["Child Association:Association Id"]+"' class='dropdown association' style='display:none;'><button id='menu2' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>results<span class='caret'></span></button><ul id='"+(data[0])["Child Association:Association Id"]+"' class='dropdown-menu' style='height:200px; overflow-y:scroll; width:240px;' role='menu' aria-labelledby='menu2'></ul></div></div><label><strong>Child Product</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"'>"+(data[0])["Child Association:Child Product Name"]+"</p><label for='association-date-from-"+(data[0])["Child Association:Association Id"]+"'><strong>Association Valid From</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"' class='product-association-valid-from'>"+(data[0])["Child Association:Product Association Valid From"]+"</p><label for='association-date-to-"+(data[0])["Child Association:Association Id"]+"'><strong>Association Valid To</strong></label><p id='"+(data[0])["Child Association:Association Id"]+"' class='product-association-valid-to'>"+(data[0])["Child Association:Product Association Valid To"]+"</p></div><div class='panel-footer'><button id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-lg edit-association-info'>Edit</button><!-- --><button style='display:none;' id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-lg cancel-association-info'>Cancel</button><!-- --><button style='display:none;' id='"+(data[0])["Child Association:Association Id"]+"' class='btn btn-lg update-association-info'>Update</button></div></div>");
 		$("input#"+(data[0])["Child Association:Association Id"]+".search-child-product-id").val((data[0])["Child Association:Parent Product Id"]);
 	    $("input#"+(data[0])["Child Association:Association Id"]+".original-parent-product-id").val((data[0])["Child Association:Parent Product Id"]);
 		}
@@ -156,23 +134,23 @@ $.ajax({
 		$(".edit-general-info").click(function(e){
 			id=(data[0])["Parent Product Id"];
 			var str=$("#Product-Code").text();
-		    $("#Product-Code").replaceWith('<div><input id="input-Product-Code" style="width: 80%;"></input></div>');
+		    $("#Product-Code").replaceWith('<input id="input-Product-Code" style="width: 80%;"></input>');
 		    $("#input-Product-Code").val(str);
 			
 			str=$("#Product-Name").text();
-			$("#Product-Name").replaceWith('<div><input id="input-Product-Name" style="width: 80%;"></input></div>');
+			$("#Product-Name").replaceWith('<input id="input-Product-Name" style="width: 80%;"></input>');
 			$("#input-Product-Name").val(str);
 			
 			str=$("#Product-Description").text();
-			$("#Product-Description").replaceWith('<div><textarea id="input-Product-Description" rows="10" cols="45"></textarea></div>');
+			$("#Product-Description").replaceWith('<textarea id="input-Product-Description" rows="10" cols="45"></textarea>');
             $("#input-Product-Description").text(str);
 			
 			str=$("#Product-External-Code").text();
-			$("#Product-External-Code").replaceWith('<div><input id="input-Product-External-Code" style="width: 80%;"></input></div>');
+			$("#Product-External-Code").replaceWith('<input id="input-Product-External-Code" style="width: 80%;"></input>');
 		    $("#input-Product-External-Code").val(str);
 			
 			str=$("#Product-External-Id").text();
-			$("#Product-External-Id").replaceWith('<div><input id="input-Product-External-Id" style="width: 80%;"></input></div>');
+			$("#Product-External-Id").replaceWith('<input id="input-Product-External-Id" style="width: 80%;"></input>');
 		    $("#input-Product-External-Id").val(str);
 			
 			str=$("#Parent-Product-Name").text();
@@ -180,24 +158,24 @@ $.ajax({
 		    $("#input-Parent-Product-Name").val(str);
 			
 			str=$("#Product-Label").text();
-			$("#Product-Label").replaceWith('<div><input id="input-Product-Label" style="width: 30%"></input></div>');
+			$("#Product-Label").replaceWith('<input id="input-Product-Label" style="width: 30%"></input>');
 		    $("#input-Product-Label").val(str);
 			
 			str=$("#Product-Notes").text();
-			$("#Product-Notes").replaceWith('<div><input id="input-Product-Notes" style="width: 30%"></input></div>');
+			$("#Product-Notes").replaceWith('<input id="input-Product-Notes" style="width: 30%"></input>');
 		    $("#input-Product-Notes").val(str);
 
 			str=$("#Product-Turn-Around-Time-Days").text();
-			$("#Product-Turn-Around-Time-Days").replaceWith('<div><input id="input-Product-Turn-Around-Time-Days" style="width: 30%"></input></div>');
+			$("#Product-Turn-Around-Time-Days").replaceWith('<input id="input-Product-Turn-Around-Time-Days" style="width: 30%"></input>');
 		    $("#input-Product-Turn-Around-Time-Days").val(str);
 			
 		    str=$("#Product-Valid-From").text();
-			$("#Product-Valid-From").replaceWith('<input class="form-control" id="date-from" type="text" placeholder="" title="format : "/><div id="date-from-inline"></div>');
+			$("#Product-Valid-From").replaceWith('<input class="form-control" id="date-from" type="text" placeholder="" title="format : "/>');
 			$('#date-from').datepicker({theme:'green'});			
 			$("#date-from").val(str);
 			
 			str=$("#Product-Valid-To").text();
-			$("#Product-Valid-To").replaceWith('<input class="form-control" id="date-to" type="text" placeholder="" title="format : "/><div id="date-to-inline"></div>');
+			$("#Product-Valid-To").replaceWith('<input class="form-control" id="date-to" type="text" placeholder="" title="format : "/>');
 			$('#date-to').datepicker({theme:'green'});			
 			$("#date-to").val(str);
 			
@@ -324,25 +302,25 @@ $.ajax({
 			$("#input-Parent-Product-Name").replaceWith('<p id="Parent-Product-Name" class="info-field"></p>');
 			$("#Parent-Product-Name").text(str);
 			
-			//str=$("#date-from").val();
-			str=(data[0])["Product Valid From"];
-			$("#date-from").replaceWith('<p id="Product-Valid-From" class="info-field"></p>');
-			$("#Product-Valid-From").text(str);
-			
-			//str=$("#date-to").val();
-			str=(data[0])["Product Valid To"];
-			$("#date-to").replaceWith('<p id="Product-Valid-To" class="info-field"></p>');
-			$("#Product-Valid-To").text(str);
-			
+			$("#label-of-product-valid-from").remove();
+			$("#label-of-product-valid-to").remove();
 			$("a.datepicker-button.input-group-addon.green").remove();
 			$(".datepicker-calendar.green").remove();
 			
-			$("span#search").toggle();
+			str=(data[0])["Product Valid From"];
+			$("#general-info-col-1").append("<div id='label-of-product-valid-from'><label for='date-from'>Product Valid From</label><p id='Product-Valid-From' class='info-field'></p></div>");
+			$("#Product-Valid-From").text(str);
+			
+			str=(data[0])["Product Valid To"];
+			$("#general-info-col-1").append("<div id='label-of-product-valid-to'><label for='date-to'>Product Valid To</label><p id='Product-Valid-To' class='info-field'></p></div>");
+			$("#Product-Valid-To").text(str);
+			if($("span#search").is(":visible")){
+				$("span#search").toggle();
+			}
 			$("#input-field-view-button").toggle();
 			$(".update-general-info").toggle();
 			$(".edit-general-info").toggle();
 			$(".cancel-general-info").toggle();
-			$("#view-tree-menu").toggle();
 			$("#search-parent-product-form").toggle();
 		});
 ///////////////////////////////////////////////////////////////////////////////////////////////

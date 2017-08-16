@@ -9,7 +9,7 @@ $(document).ready(function(){
   
   $("button#add-new-attribute.btn.btn-danger").click(function(e){
 	  var data={};
-	  var query="insert into [product].[Product Attribute] ([Product Id],[Product Attribute Type Id],[Product Value Text]) values ("+url+","+type_id+",'"+$("input#Attribute-Value").val()+"')";
+	  var query="insert into [product].[Product Attribute] ([Product Id],[Product Attribute Type Id],[Product Value Text],[Product Attribute Valid From],[Product Attribute Valid To]) values ("+url+","+type_id+",'"+$("input#Attribute-Value").val()+"','2010-01-01 00:00:00:000','9999-01-01 00:00:00:000')";
 	  data.title="add-attribute";
 	  data.message=query;
 	  

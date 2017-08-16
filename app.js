@@ -80,13 +80,20 @@ app.use('/', endpoint);
 //app.use('/users', users);
 //app.use('/views',list);
 //app.use('/insertform',insertform);
+app.get('/materials',function(req, res){
+	res.render('materials', { title: "sdfa" });
+});
+
+app.get('/material-info',function(req, res){
+	res.render('material-info', { title: "sdfa" });
+});
 
 app.get('/product-info',function(req, res){
 	res.render('product-info', { title: "sdfa" });
 });
 
 app.get('/location-info',function(req,res){
-	res.render('product-info', { title: "sdfa" });
+	res.render('location-info', { title: "sdfa" });
 });
 
 app.get('/load-tree-menu',function(req,res){
@@ -240,6 +247,67 @@ app.post('/productinfoid',function(req,res){
 	});
 });
 
+app.post('/materialinfoid',function(req,res){
+	var ID=req.body.message;
+	var query="SELECT a.*,c.[Material Type Name],b.[Material Name] as [Parent Material Name],f1.[Material Association Id] as [Parent Association:Association Id],f1.[Material Association Type Id] as [Parent Association:Association Type Id],g1.[Material Association Type Name] as [Parent Association:Association Type Name],f1.[Parent Material Id] as [Parent Association:Parent Material Id],a1.[Material Name] as [Parent Association:Parent Material Name],g1.[Parent Material Type Id] as [Parent Association:Parent Material Type Id],c1.[Material Type Name] as [Parent Association:Parent Material Type Name],f1.[Child Material Id] as [Parent Association:Child Material Id],a2.[Material Name] as [Parent Association:Child Material Name],g1.[Child Material Type Id] as [Parent Association:Child Material Type Id],c2.[Material Type Name] as [Parent Association:Child Material Type Name],f1.[Material Association Valid From] as [Parent Association:Material Association Valid From],f1.[Material Association Valid To] as [Parent Association:Material Association Valid To],f2.[Material Association Id] as [Child Association:Association Id],f2.[Material Association Type Id] as [Child Association:Association Type Id],g2.[Material Association Type Name] as [Child Association:Association Type Name],f2.[Parent Material Id] as [Child Association:Parent Material Id],a3.[Material Name] as [Child Association:Parent Material Name],g2.[Parent Material Type Id] as [Child Association:Parent Material Type Id],c3.[Material Type Name] as [Child Association:Parent Material Type Name],f2.[Child Material Id] as [Child Association:Child Material Id],a4.[Material Name] as [Child Association:Child Material Name],g2.[Child Material Type Id] as [Child Association:Child Material Type Id],c4.[Material Type Name] as [Child Association:Child Material Type Name],f2.[Material Association Valid From] as [Child Association:Material Association Valid From],f2.[Material Association Valid To] as [Child Association:Material Association Valid To] FROM [material].[Material] as a LEFT JOIN [material].[Material] as b ON a.[Parent Material Id]=b.[Material Id] LEFT JOIN [material].[Material Type] as c ON a.[Material Type Id]=c.[Material Type Id] LEFT JOIN [material].[Material Association] as f1 ON f1.[Parent Material Id]=a.[Material Id] LEFT JOIN [material].[Material Association] as f2 ON f2.[Child Material Id]=a.[Material Id] LEFT JOIN [material].[Material] as a1 ON a1.[Material Id]=f1.[Parent Material Id] LEFT JOIN [material].[Material] as a2 ON a2.[Material Id]=f1.[Child Material Id] LEFT JOIN [material].[Material] as a3 ON a3.[Material Id]=f2.[Parent Material Id] LEFT JOIN [material].[Material] as a4 ON a4.[Material Id]=f2.[Child Material Id] LEFT JOIN [material].[Material Association Type] as g1 ON g1.[Material Association Type Id]=f1.[Material Association Type Id] LEFT JOIN [material].[Material Association Type] as g2 ON g2.[Material Association Type Id]=f2.[Material Association Type Id] LEFT JOIN [material].[Material Type] as c1 ON c1.[Material Type Id]=g1.[Parent Material Type Id] LEFT JOIN [material].[Material Type] as c2 ON c2.[Material Type Id]=g1.[Child Material Type Id] LEFT JOIN [material].[Material Type] as c3 ON c3.[Material Type Id]=g2.[Parent Material Type Id] LEFT JOIN [material].[Material Type] as c4 ON c4.[Material Type Id]=g2.[Child Material Type Id] where a.[Material Id]="+ID;
+    
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :-"+err);
+		}else{
+			console.log(result);
+			res.send(result);
+		}
+	});
+});
+
+app.post('/locationinfoid',function(req,res){
+	var ID=req.body.message;
+	var query="SELECT a.*,c.[Location Type Name],b.[Location Name] as [Parent Location Name],f1.[Location Association Id] as [Parent Association:Association Id],f1.[Location Association Type Id] as [Parent Association:Association Type Id],g1.[Location Association Type Name] as [Parent Association:Association Type Name],f1.[Parent Location Id] as [Parent Association:Parent Product Id],a1.[Location Name] as [Parent Association:Parent Location Name],g1.[Parent Location Type Id] as [Parent Association:Parent Location Type Id],c1.[Location Type Name] as [Parent Association:Parent Location Type Name],f1.[Child Location Id] as [Parent Association:Child Location Id],a2.[Location Name] as [Parent Association:Child Location Name],g1.[Child Location Type Id] as [Parent Association:Child Location Type Id],c2.[Location Type Name] as [Parent Association:Child Location Type Name],f1.[Location Association Valid From] as [Parent Association:Location Association Valid From],f1.[Location Association Valid To] as [Parent Association:Location Association Valid To],f2.[Location Association Id] as [Child Association:Association Id],f2.[Location Association Type Id] as [Child Association:Association Type Id],g2.[Location Association Type Name] as [Child Association:Association Type Name],f2.[Parent Location Id] as [Child Association:Parent Location Id],a3.[Location Name] as [Child Association:Parent Location Name],g2.[Parent Location Type Id] as [Child Association:Parent Location Type Id],c3.[Location Type Name] as [Child Association:Parent Location Type Name],f2.[Child Location Id] as [Child Association:Child Location Id],a4.[Location Name] as [Child Association:Child Location Name],g2.[Child Location Type Id] as [Child Association:Child Location Type Id],c4.[Location Type Name] as [Child Association:Child Location Type Name],f2.[Location Association Valid From] as [Child Association:Location Association Valid From],f2.[Location Association Valid To] as [Child Association:Location Association Valid To] FROM [location].[Location] as a LEFT JOIN [location].[Location] as b ON a.[Parent Location Id]=b.[Location Id] LEFT JOIN [location].[Location Type] as c ON a.[Location Type Id]=c.[Location Type Id] LEFT JOIN [location].[Location Association] as f1 ON f1.[Parent Location Id]=a.[Location Id] LEFT JOIN [location].[Location Association] as f2 ON f2.[Child Location Id]=a.[Location Id] LEFT JOIN [location].[Location] as a1 ON a1.[Location Id]=f1.[Parent Location Id] LEFT JOIN [location].[Location] as a2 ON a2.[Location Id]=f1.[Child Location Id] LEFT JOIN [location].[Location] as a3 ON a3.[Location Id]=f2.[Parent Location Id] LEFT JOIN [location].[Location] as a4 ON a4.[Location Id]=f2.[Child Location Id] LEFT JOIN [location].[Location Association Type] as g1 ON g1.[Location Association Type Id]=f1.[Location Association Type Id] LEFT JOIN [location].[Location Association Type] as g2 ON g2.[Location Association Type Id]=f2.[Location Association Type Id] LEFT JOIN [location].[Location Type] as c1 ON c1.[Location Type Id]=g1.[Parent Location Type Id] LEFT JOIN [location].[Location Type] as c2 ON c2.[Location Type Id]=g1.[Child Location Type Id] LEFT JOIN [location].[Location Type] as c3 ON c3.[Location Type Id]=g2.[Parent Location Type Id] LEFT JOIN [location].[Location Type] as c4 ON c4.[Location Type Id]=g2.[Child Location Type Id] where a.[Location Id]="+ID;
+    
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :-"+err);
+		}else{
+			console.log(result);
+			res.send(result);
+		}
+	});
+});
+
+app.post('/searchmaterial', function(req, res){
+	var query=req.body.message;
+	var create_view="create view [materialtemp] as "+query;
+	console.log(create_view);
+	var drop_view="drop view [materialtemp]";
+	
+	var request=new sql.Request(connection);
+	request.query(drop_view,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("drop temp");
+		}
+	});
+	request.query(create_view,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("create temp");
+		}
+	});
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log("query");
+			res.send(result);
+		}
+	});
+});
+
 app.post('/searchproduct', function(req, res){
 	var query=req.body.message;
 	var create_view="create view [temp] as "+query;
@@ -330,6 +398,34 @@ app.post('/search-parent-product',function(req, res){
 	});
 });
 
+app.post('/search-parent-location',function(req, res){
+	var query="SELECT [Location Name], [Location Id] FROM [location].[Location] WHERE [Location Name] LIKE '%"+req.body.message+"%'";
+	
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log(result);
+			res.send(result);
+		}
+	});
+});
+
+app.post('/search-parent-material',function(req, res){
+	var query="SELECT [Material Name], [Material Id] FROM [material].[Material] WHERE [Material Name] LIKE '%"+req.body.message+"%'";
+	
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			console.log(result);
+			res.send(result);
+		}
+	});
+});
+
 app.post('/add-new-attribute',function(req,res){
 	var query=req.body.message;
     console.log(query);
@@ -346,7 +442,7 @@ app.post('/add-new-attribute',function(req,res){
 
 app.post('/executequery',function(req,res){
 	var query=req.body.message;
-	console.log(query);
+	console.log("here:  "+query);
 	var request=new sql.Request(connection);
 	request.query(query,function(err,result){
 		if(err){

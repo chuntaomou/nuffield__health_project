@@ -15,17 +15,16 @@ html(lang='en')
     link(href='stylesheets/search-parent-product.css', rel='stylesheet')
     link(href='stylesheets/datepicker.css', rel='stylesheet')
     link(href='stylesheets/simplePagination.css', rel='stylesheet')
-    link(href='stylesheets/location-info.css', rel='stylesheet')
+    link(href='stylesheets/material-info.css', rel='stylesheet')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     script(src='javascripts/jquery.simplePagination.js')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
-    script(type='text/javascript', src='javascripts/location-info.js')
-    script(type='text/javascript', src='javascripts/search-parent-location.js')
+    script(type='text/javascript', src='javascripts/material-info.js')
+    script(type='text/javascript', src='javascripts/search-parent-material.js')
     script(src='javascripts/datepicker.js')
     script(src='javascripts/locales/en.js')
-    script(src='javascripts/add-location-association.js')
-    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDE7w_rtqbat1VAQ8ReZJbdy87w0bEFJWU')
+    script(src='javascripts/add-material-association.js')
     style(type='text/css').
       html {
       background-color: #fefefe;
@@ -258,9 +257,9 @@ html(lang='en')
               button.close(type='button', data-dismiss='modal') ×
               h4.modal-title Add Association
             .modal-body
-              input#modal-location-type-id
+              input#modal-material-type-id
               input#modal-association-type-id
-              input#modal-association-child-location-id
+              input#modal-association-child-material-id
               .dropdown
                 label
                   strong Association Type:
@@ -273,11 +272,11 @@ html(lang='en')
                 ul#modal-association-dropdown.dropdown-menu(style='margin-left:380px;')
               .row
                 label
-                  strong Child Location Name:
+                  strong Child Material Name:
                 // 
-                input#association-child-location-name(style='margin-left: 21px;')
+                input#association-child-material-name(style='margin-left: 21px;')
                 // 
-                input#association-search(style='width:120px; margin-left:15px;', placeholder='search locations...')
+                input#association-search(style='width:120px; margin-left:15px;', placeholder='search materials...')
                 // 
                 button#association-search-button.btn.btn-default
                   span.glyphicon.glyphicon-search
@@ -326,43 +325,41 @@ html(lang='en')
                 h2 general-info
                 .row
                   .col-md-4
-                    label(style='font-weight:bold;') Location Name
-                    p#Location-Name.info-field
-                    label(style='font-weight:bold;') Location Description
-                    p#Location-Description.info-field
-                    label(style='font-weight:bold;') Location Code
-                    p#Location-Code.info-field
-                    label(style='font-weight:bold;') Location External Code
-                    p#Location-External-Code.info-field
-                    label(style='font-weight:bold;') Location External Id
-                    p#Location-External-Id.info-field
+                    label(style='font-weight:bold;') Material Name
+                    p#Material-Name.info-field
+                    label(style='font-weight:bold;') Material Description
+                    p#Material-Description.info-field
+                    label(style='font-weight:bold;') Material Code
+                    p#Material-Code.info-field
+                    label(style='font-weight:bold;') Material External Code
+                    p#Material-External-Code.info-field
+                    label(style='font-weight:bold;') Material External Id
+                    p#Material-External-Id.info-field
                   .col-md-4
-                    label(style='font-weight:bold;') Parent Location Name
+                    label(style='font-weight:bold;') Parent Material Name
                     .row
                       .col-md-6
-                        p#Parent-Location-Name.info-field(style='width:69%;')
+                        p#Parent-Material-Name.info-field(style='width:69%;')
                       .col-md-6.input-group
-                        span#search-parent-location-form(style='display:none;')
-                          input#search-input-parent-location.form-control(type='text', style='min-width: 100px; width: 20%;', name='x', placeholder='Search term...')
-                          button#search-parent-location-button.btn.btn-default(style='min-width:35px;', type='button')
+                        span#search-parent-material-form(style='display:none;')
+                          input#search-input-parent-material.form-control(type='text', style='min-width: 100px; width: 20%;', name='x', placeholder='Search term...')
+                          button#search-parent-material-button.btn.btn-default(style='min-width:35px;', type='button')
                             span.glyphicon.glyphicon-search
                         span#search(style='display:none;')
                           #dropdown.ddmenu
                             | Results
                             ul#search-result
-                    label(style='font-weight:bold;') Location Label
-                    p#Location-Label.info-field
-                    label(style='font-weight:bold;') Location Notes
-                    p#Location-Notes.info-field
-                    label(style='font-weight:bold;') Location Type Name
-                    p#Location-Type-Name.info-field
-                    label(style='font-weight:bold;') Location Postcode
-                    p#Location-Postcode.info-field
+                    label(style='font-weight:bold;') Material Label
+                    p#Material-Label.info-field
+                    label(style='font-weight:bold;') Material Notes
+                    p#Material-Notes.info-field
+                    label(style='font-weight:bold;') Material Type Name
+                    p#Material-Type-Name.info-field
                   .col-md-4
-                    label(style='font-weight:bold;', for='date-from') Location Valid From
-                    p#Location-Valid-From.info-field
-                    label(style='font-weight:bold;', for='date-to') Location Valid To
-                    p#Location-Valid-To.info-field
+                    label(style='font-weight:bold;', for='date-from') Material Valid From
+                    p#Material-Valid-From.info-field
+                    label(style='font-weight:bold;', for='date-to') Material Valid To
+                    p#Material-Valid-To.info-field
                     label(style='font-weight:bold;') Record Termination Datetime
                     p#Record-Termination-Datetime.info-field
                     label(style='font-weight:bold;') Record Creation Datetime
@@ -387,25 +384,6 @@ html(lang='en')
                     #association-pagination
               .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
                 span.card-media-body-supporting-bottom-text.subtle #Association-info
-        .row(style='margin-top:20px;')
-          .card-media(style='height: auto;')
-            .card-media-body
-              .card-media-body-top
-                .card-media-body-top-icons.u-float-right
-                  button.btn.btn-primary.edit-google-map edit
-                  // 
-                  button.btn.btn-default.update-google-map(style='background-color:green; color:#fff; display:none;') update
-                  // 
-                  button.btn.btn-danger.cancel-google-map(style='display:none;') cancel
-              span.card-media-body-heading
-                h2 Google-map
-                #google-map-input-group.input-group(style='display:none;')
-                  input#input-postcode(placeholder='input a new postcode', style='margin-left:120px;')
-                  button#search-postcode.btn.btn-default
-                    span.glyphicon.glyphicon-search
-                #map.container-fluid(style='background-color:yellow; width:1200px; height:800px;')
-              .card-media-body-supporting-bottom.card-media-body-supporting-bottom-reveal
-                span.card-media-body-supporting-bottom-text.subtle #Google-map
       #nav.nav(role='navigation')
         .row.row--green.row--inverse.row--no-padding.row--overflow
           .layout-container.nav__layout-container

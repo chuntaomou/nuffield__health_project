@@ -2,6 +2,7 @@ $(document).ready(function(){
 	var tempdata=null;
 	var temptotalpage=0;
 	var templeft=0;
+	var templength=0;
 	$("#search-locations-button").click(function(e){
 		var search_by=$('#s_Region option:selected').attr("id");
 		var search_type=$("#s_Category option:selected").attr("id");
@@ -42,9 +43,11 @@ $(document).ready(function(){
 				var length=0;
 				if((totalpage==1)&&(left>0)){
 					length=left;
+					templength=length;
                     console.log(length);
 				}else{
 					length=10;
+					templength=length;
                     console.log(length);
 				}
 				
@@ -95,9 +98,11 @@ $(document).ready(function(){
 				          var length=0;
 				          if((totalpage==1)&&(left>0)){
 					         length=left;
+							 templength=length;
                              console.log(length);
 				          }else{
 					         length=10;
+							 templength=length;
                              console.log(length);
 				          }
 				
@@ -259,5 +264,60 @@ $(document).ready(function(){
 	            });
 			}
 		});
+	});
+	
+	function initmap(){
+      var map=new google.maps.Map(document.getElementById('search-result-list'),{
+        zoom: 6,
+        center: {lat: -34.397, lng: 150.644}
+      });
+        var geocoder = new google.maps.Geocoder();
+        geocodeAddress(geocoder, map);
+    }
+	
+	function geocodeAddress(geocoder, resultsMap){
+	  var address=[];
+	  for(var i=0;i<tempdata.length;i++){
+		  if((tempdata[i])["Location Postcode"]!=null){
+			  address.push((tempdata[i])["Location Postcode"]);
+		  }
+	  }
+      console.log(address.length);
+	  if(address.length!=0){
+		  console.log("not empty");
+		  for(var i=0;i<10;i++){
+            geocoder.geocode({'address': address[i]}, function(results, status) {
+            if (status === 'OK') {
+              resultsMap.setCenter(results[0].geometry.location);
+              var marker = new google.maps.Marker({
+                map: resultsMap,
+                position: results[0].geometry.location
+              });
+            } else {
+              //alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
+         }
+	  }else{
+		  var map=new google.maps.Map(document.getElementById('search-result-list'),{
+            zoom: 12,
+            center: {lat: -34.397, lng: 150.644}
+          });
+	  }
+      
+    }
+	
+	$("#map-view").click(function(e){
+		console.log("click");
+		$("#search-result-list").empty();
+		initmap();
+	});
+	
+	$("#list-view").click(function(e){
+		console.log("click");
+		$("#search-result-list").empty();
+		for(var i=0;i<templength;i++){
+			$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(tempdata[i])["Location Name"]+"</h3><p class='info'><span>Location Id: "+(tempdata[i])["Location Id"]+"</span><span class='seperator'>|</span><span>Location Code: "+(tempdata[i])["Location Code"]+"</span><span class='seperator'>|</span><span>Loaction Label: "+(tempdata[i])["Location Label"]+"</span></p><div class='action'><a href='/location-info#location-id:"+(tempdata[i])["Location Id"]+"' class='button forward go'>View more details</a></div></div>");
+		}
 	});
 });

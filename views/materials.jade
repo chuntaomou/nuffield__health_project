@@ -8,7 +8,7 @@ html(lang='en')
     link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
     link(href='stylesheets/style.css', type='text/css', rel='stylesheet')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
-    link(href='stylesheets/locations.css', type='text/css', rel='stylesheet')
+    link(href='stylesheets/products.css', type='text/css', rel='stylesheet')
     link(type='text/css', rel='stylesheet', href='stylesheets/simplePagination.css')
     style(type='text/css').
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/c8/a0/5cc8fc1541d7a7626ae2c2ebedb6/battle-ropes-largest.jpg); }
@@ -25,9 +25,8 @@ html(lang='en')
       font-size: 40px;
       }
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
-    script(src='javascripts/locations.js')
+    script(src='javascripts/materials.js')
     script(src='javascripts/jquery.simplePagination.js')
-    script(async='', defer='', src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDE7w_rtqbat1VAQ8ReZJbdy87w0bEFJWU')
   body.page-our-locations.navlevel-3.doctype-locationslandingpage(style='background-color: #f1f1f1;')
     // Skip links - Accessibility
     ul.skip-links.visuallyhidden
@@ -65,67 +64,70 @@ html(lang='en')
             .m-banner-search(style='margin-top:140px;')
               .module-canvas
                 .field.f-search
-                  input#search-criteria.search-box(type='text', name='s_Keywords', value='', placeholder='Search for a location ...')
+                  input#search-criteria.search-box(type='text', name='s_Keywords', value='', placeholder='Search for a material ...')
                 .field.f-submit.desktop
-                  button#search-locations-button(style='width:166px; height:58px; background-color:#00a200; font-size:20px; color:#fff;') Search
+                  button#search-materials-button(style='width:166px; height:58px; background-color:#00a200; font-size:20px; color:#fff;') Search
                 .field.f-filter-1
                   select#s_Region.filterSelect1(name='s_Region')
-                    option#1 Search by location name
-                    option#2(selected='selected') Search by location code
+                    option#1 Search by name
+                    option#2(selected='selected') Search by code
                 .field.f-filter-2
                   select#s_Category.filterSelect1(name='s_Category')
-                    option#1(selected='selected') Fitness and Wellbeing Centre
-                    option#2 Cluster
-                    option#3 Region
-                    option#4 Sales Channel
-                    option#5 Hospital
-                    option#6 Site
-                    option#9 Any
+                    option#1(selected='selected') Material
+                    option#2 Material Type
+                    option#3 Function Class
+                    option#4 Function Group
+                    option#5 Function
+                    option#6 Category
+                    option#7 Catalogue Item
+                    option#8 Clinical or Non Clinical
+                    option#9 Procurement Specialty
+                    option#10 Any
         .section-canvas
           .module.m-role-list
             ul.container-row
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#1.item-canvas.product-type
                   #1.item-inner-canvas
-                    h2#1.title(style='font-size:2.0rem;') Fitness Centre
+                    h2#1.title(style='font-size:2.0rem;') Material
                     #1.icon-container
                       #1.icon
-                        span#1.glyphicon.glyphicon-heart
+                        span#1.glyphicon.glyphicon-th
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#2.item-canvas.product-type
                   #2.item-inner-canvas
-                    h2#2.title(style='font-size:2.0rem;') Cluster
+                    h2#2.title(style='font-size:2.0rem;') Product Type
                     #2.icon-container
                       #2.icon
                         span#2.glyphicon.glyphicon-th-large
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#3.item-canvas.product-type
                   #3.item-inner-canvas
-                    h2#3.title(style='font-size:2.0rem;') Region
+                    h2#3.title(style='font-size:2.0rem;') Function Class
                     #3.icon-container
                       #3.icon
                         span#3.glyphicon.glyphicon-th-list
               li.item.other.box(style='min-width:190px; min-height:150px;')
-                a#6.item-canvas.product-type
-                  #6.item-inner-canvas
-                    h2#6.title(style='font-size:2.0rem;') Site
-                    #6.icon-container
-                      #6.icon
-                        span#6.glyphicon.glyphicon-blackboard
-              li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#4.item-canvas.product-type
                   #4.item-inner-canvas
-                    h2#4.title(style='font-size:2.0rem;') Sales Channel
+                    h2#4.title(style='font-size:2.0rem;') Function Group
                     #4.icon-container
                       #4.icon
-                        span#4.glyphicon.glyphicon-random
+                        span#4.glyphicon.glyphicon-tag
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#5.item-canvas.product-type
                   #5.item-inner-canvas
-                    h2#5.title(style='font-size:2.0rem;') Hospital
+                    h2#5.title(style='font-size:2.0rem;') Function
                     #5.icon-container
                       #5.icon
-                        span#5.glyphicon.glyphicon-plus-sign
+                        span#5.glyphicon.glyphicon-tags
+              li.item.other.box(style='min-width:190px; min-height:150px;')
+                a#6.item-canvas.product-type
+                  #6.item-inner-canvas
+                    h2#6.title(style='font-size:2.0rem;') Category
+                    #6.icon-container
+                      #6.icon
+                        span#6.glyphicon.glyphicon-barcode
         .section-canvas
           #show-search-result.container-row(style='display:none;')
             #filters.module.m-job-filter.structural
@@ -136,20 +138,23 @@ html(lang='en')
                   fieldset.filter-criteria
                     .field.f-search-criteria
                       label(for='filter-search-criteria') Keywords
-                      input#filter-search-criteria(type='text', name='s_Keywords', value='', placeholder='Job Keywords')
+                      input#filter-search-criteria(type='text', name='s_Keywords', value='', placeholder='Material Keywords')
                     .filter.inactive
                       label(for='s_ContractType') Product Type
                       select#s_ContractType.filterSelect(name='s_ContractType')
-                        option(value='9', selected='selected') - Choose - 
-                        option(value='1') Fitness and Wellbeing Centre
-                        option(value='2') Cluster
-                        option(value='3') Region
-                        option(value='4') Sales Channel
-                        option(value='5') Hospital
-                        option(value='6') Site
+                        option(value='10', selected='selected') - Choose - 
+                        option(value='1') Material
+                        option(value='2') Material Type
+                        option(value='3') Function Class
+                        option(value='4') Function Group
+                        option(value='5') Function
+                        option(value='6') Category
+                        option(value='7') Catalogue Item
+                        option(value='8') Clinical or Non Clinical
+                        option(value='9') Procurement Specialty
                   fieldset.filter-submit
                     .action
-                      button.update-filters(style='background-color:#00a200; color:#fff; margin-bottom: 10px;') Update Results
+                      button.update-filters(style='background-color:#00a200; color:#fff;') Update Results
                       button.clear-filters(style='color:#fff;') Clear Search
                   input#jobsearch-pagesize(type='hidden', name='pageSize')
                 form#filter-form-surface(action='/umbraco/surface/JobFilter/UpdateFilters')
@@ -159,10 +164,7 @@ html(lang='en')
                   input#surface_s_Category(type='hidden', name='s_Category')
             #results.module.m-job-search-results.structural
               .module-canvas
-                button#list-view(style='color:#fff; background-color:#00a200; font-size:16px; font-weight:bold;') LIST VIEW
-                // 
-                button#map-view(style='margin-left:10px; color:#fff; background-color:#00a200; font-size:16px; font-weight:bold;') MAP VIEW
-                #search-result-list.job-results-list(style='min-width:860px; min-height:900px;')
+                #search-result-list.job-results-list
                 #pagination
       #nav.nav(role='navigation')
         .row.row--green.row--inverse.row--no-padding.row--overflow
@@ -171,3 +173,8 @@ html(lang='en')
               .layout__column
                 .nav__upper(style='height:70.78px;')
                   a.nav__logo-wrapper(href='https://www.nuffieldhealth.com/')
+                    //
+                      if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
+                    //if gte IE 9
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                    // <![endif]
