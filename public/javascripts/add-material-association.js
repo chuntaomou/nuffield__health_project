@@ -23,7 +23,7 @@ $(document).ready(function(e){
 			type:'POST',
 		    data:JSON.stringify(data),
 			contentType:'application/json',
-			url:'https://localhost:55555/executequery',
+			url:'/executequery',
 			success:function(data){
 				console.log(data);
 				$("ul#modal-association-search-dropdown").empty();
@@ -56,7 +56,7 @@ $(document).ready(function(e){
 			type:'POST',
 		    data:JSON.stringify(data),
 			contentType:'application/json',
-			url:'https://localhost:55555/executequery',
+			url:'/executequery',
 			success:function(data){
 				console.log("success");
 				location.reload();

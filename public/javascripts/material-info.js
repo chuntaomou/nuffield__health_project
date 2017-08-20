@@ -17,7 +17,7 @@ $.ajax({
 	type: 'POST',
 	data: JSON.stringify(data),
 	contentType: 'application/json',
-	url: 'https://localhost:55555/materialinfoid',
+	url: '/materialinfoid',
 	success: function(data){
 		tempdata=data;
 		var materialtypeid=(data[0])["Material Type Id"];
@@ -225,7 +225,7 @@ $.ajax({
 				   type:'POST',
 				   data:JSON.stringify(data),
 				   contentType:'application/json',
-				   url:'https://localhost:55555/executequery',
+				   url:'/executequery',
 				   success:function(data){
 					  console.log(data);
 					  location.reload();
@@ -386,7 +386,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'https://localhost:55555/executequery',
+				url:'/executequery',
 				success:function(data){
 					$("ul#"+e.target.id+".dropdown-menu").empty();
 					for(var i=0;i<data.length;i++){
@@ -421,7 +421,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'https://localhost:55555/executequery',
+				url:'/executequery',
 				success:function(data){
 					console.log(JSON.stringify(data));
 					$("ul#"+e.target.id+".dropdown-menu").empty();
@@ -487,7 +487,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'https://localhost:55555/executequery',
+				url:'/executequery',
 				success:function(data){
 					console.log(data);
 					location.reload();
@@ -548,7 +548,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'https://localhost:55555/executemultiupdatequery',
+				url:'/executemultiupdatequery',
 				success:function(data){
 					console.log(data);
 					location.reload();

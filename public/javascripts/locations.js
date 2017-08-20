@@ -30,7 +30,7 @@ $(document).ready(function(){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			url: 'https://localhost:55555/searchlocation',
+			url: '/searchlocation',
 			success: function(data){
 				tempdata=data;
 				console.log(JSON.stringify(data));
@@ -85,7 +85,7 @@ $(document).ready(function(){
 					  type: 'POST',
 					  data: JSON.stringify(data),
 					  contentType: 'application/json',
-					  url: 'https://localhost:55555/executequery',
+					  url: '/executequery',
 					  success: function(data){
 						  tempdata=data;
 						  //console.log(data);
@@ -168,7 +168,7 @@ $(document).ready(function(){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			url: 'https://localhost:55555/searchlocation',
+			url: '/searchlocation',
 			success: function(data){
 				tempdata=data;
 				console.log(JSON.stringify(data));
@@ -221,7 +221,7 @@ $(document).ready(function(){
 					  type: 'POST',
 					  data: JSON.stringify(data),
 					  contentType: 'application/json',
-					  url: 'https://localhost:55555/executequery',
+					  url: '/executequery',
 					  success: function(data){
 						  tempdata=data;
 						  //console.log(data);
