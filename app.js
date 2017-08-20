@@ -1,5 +1,5 @@
-var fs=require('fs');
-var https=require('https');
+//var fs=require('fs');
+//var https=require('https');
 //////////////////////////////////////////
 var express = require('express');
 var path = require('path');
@@ -9,14 +9,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var sql = require('mssql');
-
+/*
 var index = require('./routes/index');
 var users = require('./routes/users');
 var list = require('./routes/list');
 var products = require('./routes/products');
 var endpoint = require('./routes/endpoint');
 var productinfo = require('./routes/product-info');
-
+*/
 var upload = multer();
 var app = express();
 
@@ -76,20 +76,32 @@ var executeQuery=function(query,res){
 }
 
 //app.use('/',connection);
-app.use('/', index);
+//app.use('/', index);
 //app.use('/', products);
-app.use('/', endpoint);
+//app.use('/', endpoint);
 //app.use('/',productinfo);
 //app.use('/users', users);
 //app.use('/views',list);
 //app.use('/insertform',insertform);
-
+/*
 https.createServer({
 	key: fs.readFileSync('ssl/key.pem'),
 	ca: fs.readFileSync('ssl/csr.pem'),
 	cert: fs.readFileSync('ssl/cert.pem')
 	//passphrase: 'mmcctt'
 },app).listen(55555);
+*/
+/*
+https.createServer({
+	key: fs.readFileSync('ssl/key.pem'),
+	ca: fs.readFileSync('ssl/csr.pem'),
+	cert: fs.readFileSync('ssl/cert.pem')
+	//passphrase: 'mmcctt'
+},app).listen(55555);
+*/
+app.get('/',function(req,res){
+	res.render('nuffieldhealth',{title:"sdfa"});
+});
 
 app.get('/materials',function(req, res){
 	res.render('materials', { title: "sdfa" });
