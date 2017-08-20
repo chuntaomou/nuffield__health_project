@@ -16,7 +16,7 @@ $.ajax({
 	type: 'POST',
 	data: JSON.stringify(data),
 	contentType: 'application/json',
-	url: 'http://localhost:3000/productinfoid',
+	url: 'https://localhost:55555/productinfoid',
 	success: function(data){
 		tempdata=data;
 		//console.log("success");
@@ -245,7 +245,7 @@ $.ajax({
 				   type:'POST',
 				   data:JSON.stringify(data),
 				   contentType:'application/json',
-				   url:'http://localhost:3000/update-general-info',
+				   url:'https://localhost:55555/update-general-info',
 				   success:function(data){
 					  console.log(data);
 					  location.reload();
@@ -258,6 +258,7 @@ $.ajax({
 		
 		//triger cancel button
 		$("button.cancel-general-info").click(function(e){
+			/*
 			var str=(data[0])["Product Code"];
 			$("#input-Product-Code").replaceWith('<p id="Product-Code" class="info-field"></p>');
 			$("#Product-Code").text(str);
@@ -322,6 +323,8 @@ $.ajax({
 			$(".edit-general-info").toggle();
 			$(".cancel-general-info").toggle();
 			$("#search-parent-product-form").toggle();
+			*/
+			location.reload();
 		});
 ///////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -399,7 +402,7 @@ $.ajax({
 			  type:'POST',
 			  data:JSON.stringify(data),
 			  contentType:'application/json',
-			  url:'http://localhost:3000/executequery',
+			  url:'https://localhost:55555/executequery',
 			  success:function(data){
 				console.log(data);
 			    location.reload();
@@ -478,7 +481,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'http://localhost:3000/executequery',
+				url:'https://localhost:55555/executequery',
 				success:function(data){
 					$("ul#"+e.target.id+".dropdown-menu").empty();
 					for(var i=0;i<data.length;i++){
@@ -521,7 +524,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'http://localhost:3000/executequery',
+				url:'https://localhost:55555/executequery',
 				success:function(data){
 					console.log(JSON.stringify(data));
 					$("ul#"+e.target.id+".dropdown-menu").empty();
@@ -587,7 +590,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'http://localhost:3000/executequery',
+				url:'https://localhost:55555/executequery',
 				success:function(data){
 					console.log(data);
 					location.reload();
@@ -647,7 +650,7 @@ $.ajax({
 				type:'POST',
 				data:JSON.stringify(data),
 				contentType:'application/json',
-				url:'http://localhost:3000/executemultiupdatequery',
+				url:'https://localhost:55555/executemultiupdatequery',
 				success:function(data){
 					console.log(data);
 					location.reload();

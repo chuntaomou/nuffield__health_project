@@ -1,3 +1,6 @@
+var fs=require('fs');
+var https=require('https');
+//////////////////////////////////////////
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -80,6 +83,14 @@ app.use('/', endpoint);
 //app.use('/users', users);
 //app.use('/views',list);
 //app.use('/insertform',insertform);
+
+https.createServer({
+	key: fs.readFileSync('ssl/key.pem'),
+	ca: fs.readFileSync('ssl/csr.pem'),
+	cert: fs.readFileSync('ssl/cert.pem')
+	//passphrase: 'mmcctt'
+},app).listen(55555);
+
 app.get('/materials',function(req, res){
 	res.render('materials', { title: "sdfa" });
 });

@@ -11,7 +11,7 @@ $(function(){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			url: 'http://localhost:3000/search-parent-product',
+			url: 'https://localhost:55555/search-parent-product',
 			success: function(data){
 				console.log(JSON.stringify(data));
 				if(data.length>0){
