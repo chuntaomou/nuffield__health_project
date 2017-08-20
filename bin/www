@@ -13,19 +13,30 @@ var https = require('https');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '55555');
-app.set('port', port);
+//var port = normalizePort(process.env.PORT || '55555');
+//app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTPS server.
  */
+ /*
 var server=https.createServer({
 	key: fs.readFileSync('ssl/key.pem'),
 	ca: fs.readFileSync('ssl/csr.pem'),
 	cert: fs.readFileSync('ssl/cert.pem')
 	//passphrase: 'mmcctt'
 },app);
+*/
+/*
+var server=https.createServer({
+	key: fs.readFileSync('ssls/key.pem'),
+	//ca: fs.readFileSync('ssl/csr.pem'),
+	cert: fs.readFileSync('ssls/cert.pem')
+	//passphrase: 'mmcctt'
+},app);
+*/
 //var server = http.createServer(app);
+var server = https.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
