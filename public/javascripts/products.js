@@ -3,6 +3,7 @@ $(document).ready(function(){
 	var temptotalpage=0;
 	var templeft=0;
 	$("#search-products-button").click(function(e){
+		console.log("click");
 		var search_by=$('#s_Region option:selected').attr("id");
 		var search_type=$("#s_Category option:selected").attr("id");
 		var search_text=$("input#search-criteria").val();
@@ -29,7 +30,6 @@ $(document).ready(function(){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			//url: 'https://localhost:55555/searchproduct',
 			url: '/searchproduct',
 			success: function(data){
 				tempdata=data;
