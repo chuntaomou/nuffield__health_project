@@ -459,6 +459,69 @@ app.post('/executequery',function(req,res){
 	});
 });
 
+app.post('/addproduct',function(req,res){
+	var query=req.body.message;
+	var name=req.body.title;
+	console.log("here:  "+query);
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			var findnew="select [Product Id] from [product].[Product] where [Product Name]='"+name+"'";
+			request.query(findnew,function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					res.send(result);
+				}
+			});
+		}
+	});
+});
+
+app.post('/addmaterial',function(req,res){
+	var query=req.body.message;
+	var name=req.body.title;
+	console.log("here:  "+query);
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			var findnew="select [Material Id] from [material].[Material] where [Material Name]='"+name+"'";
+			request.query(findnew,function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					res.send(result);
+				}
+			});
+		}
+	});
+});
+
+app.post('/addlocation',function(req,res){
+	var query=req.body.message;
+	var name=req.body.title;
+	console.log("here:  "+query);
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			var findnew="select [Location Id] from [location].[Location] where [Location Name]='"+name+"'";
+			request.query(findnew,function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					res.send(result);
+				}
+			});
+		}
+	});
+});
+
 app.post('/executemultiupdatequery',function(req,res){
 	var queryarr=req.body.message;
 	var request=new sql.Request(connection);

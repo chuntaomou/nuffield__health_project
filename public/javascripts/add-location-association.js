@@ -34,6 +34,7 @@ $(document).ready(function(e){
 				$("a.modal-association-search-item").click(function(e){
 		            $("input#modal-association-child-location-id").val(e.target.id);
 					$("input#association-child-location-name").val($(e.target).text());
+					$("input#association-search").val($(e.target).text());
 	            });
 			}
 		});

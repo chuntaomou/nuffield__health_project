@@ -10,6 +10,7 @@ html(lang='en')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
     link(href='stylesheets/products.css', type='text/css', rel='stylesheet')
     link(type='text/css', rel='stylesheet', href='stylesheets/simplePagination.css')
+    link(type='text/css', rel='stylesheet', href='stylesheets/datepicker.css')
     style(type='text/css').
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/c8/a0/5cc8fc1541d7a7626ae2c2ebedb6/battle-ropes-largest.jpg); }
       @media (max-width: 1200px) {
@@ -21,12 +22,15 @@ html(lang='en')
       @media (max-width: 480px) {
       #background-image { background-image: url(https://www.nuffieldhealth.com/local/15/7d/43882e0b4eeb8571b45ef5e2f35d/battle-ropes-small.jpg); }
       }
-      span.glyphicon {
-      font-size: 40px;
-      }
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     script(src='javascripts/materials.js')
+    script(src='javascripts/add-material.js')
     script(src='javascripts/jquery.simplePagination.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.2/js/mdb.min.js')
+    script(src='javascripts/datepicker.js')
+    script(src='javascripts/locales/en.js')
   body.page-our-locations.navlevel-3.doctype-locationslandingpage(style='background-color: #f1f1f1;')
     // Skip links - Accessibility
     ul.skip-links.visuallyhidden
@@ -36,7 +40,92 @@ html(lang='en')
         a(href='#navigation-primary') Main site navigation
       li
         a(href='#footer') Share links and site information
-    #top.container(style="min-width:1700px;")
+    #top.container(style='min-width:1700px;')
+      // Modal for association
+      #addmaterialModal.modal.fade(role='dialog')
+        .modal-dialog
+          // Modal content
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal') ×
+              h4.modal-title Add Material
+            .modal-body
+              input#modal-material-type-id(style='display:none;')
+              input#modal-association-type-id(style='display:none;')
+              input#modal-association-child-product-id(style='display:none;')
+              .dropdown(style='background-color:#fff;')
+                label(style='min-width:100px;')
+                  strong Material Type:
+                // 
+                input#material-type-name(style='margin-left: 40px; max-height:34px;')
+                // 
+                button.btn.btn-default.dropdown-toggle(data-toggle='dropdown', style='margin-left: 0px;')
+                  | View
+                  span.caret
+                ul#modal-material-dropdown.dropdown-menu(style='margin-left:380px; width:200px; height:390px;')
+                  li
+                    a#1.material-type-name Material
+                  li
+                    a#2.material-type-name Material Type
+                  li
+                    a#3.material-type-name Function Class
+                  li
+                    a#4.material-type-name Function Group
+                  li
+                    a#5.material-type-name Function
+                  li
+                    a#6.material-type-name Category
+                  li
+                    a#7.material-type-name Catalogue Item
+                  li
+                    a#8.material-type-name Clinical or Non Clinical
+                  li
+                    a#9.material-type-name Procurement Specialty
+              .row
+                label(style='min-width:100px;')
+                  strong Material Name:
+                // 
+                input#material-name(style='margin-left: 40px; max-height:34px; margin-top:4px;')
+              .row
+                label(style='min-width:100px;')
+                  strong Material Code:
+                // 
+                input#material-code(style='margin-left: 40px; max-height:34px; margin-top:4px;')
+              .row
+                label(style='min-width:100px;')
+                  strong Material Label:
+                // 
+                input#material-label(style='margin-left: 40px; max-height:34px; margin-top:4px;')
+              .row(style='margin-top:20px;')
+                label(style='min-width:158px;')
+                  strong Material External Code:
+                // 
+                input#material-external-code(style='margin-left: 40px; max-height:34px; margin-top:4px;')
+              .row
+                label(style='min-width:158px;')
+                  strong Material External Id:
+                // 
+                input#material-external-id(style='margin-left: 40px; max-height:34px; margin-top:4px;')
+              .row
+                label(style='min-width:158px;')
+                  strong Material Description:
+                // 
+                textarea#material-description(rols='10', cols='45', style='margin-left: 40px; margin-top:4px;')
+              .row(style='margin-top:20px;')
+                label(style='font-weight:bold;', for='material-date-from') Material Attribute Valid From
+                br
+                input#material-date-from.form-control(style='width:100%;', type='text', placeholder='', title='format : ')
+                br
+                label(style='font-weight:bold;', for='material-date-to') Material Attribute Valid To
+                br
+                input#material-date-to.form-control(style='width:100%;', type='text', placeholder='', title='format : ')
+                br
+                script.
+                  $('#material-date-from').datepicker({theme:'green'});
+                  $('#material-date-to').datepicker({theme:'green'});
+            .modal-footer
+              button#add-new-material.btn.btn-danger Add
+              button.btn.btn-default(type='button', data-dismiss='modal') Close
       #nav.nav(role='navigation')
         .row.row--green.row--inverse.row--no-padding.row--overflow
           .layout-container.nav__layout-container
@@ -47,7 +136,7 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     span.nav__logo
                       img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
                     // <![endif]
@@ -58,6 +147,15 @@ html(lang='en')
                       a#0000014c-bd40-d7d2-a1ff-ff71639f0000.nav__link(href='/locations') Locations
                     li.nav__item
                       a#0000014c-bd40-d7d2-a1ff-ff71639f0000.nav__link(href='/materials') Materials
+      nav.navbar.navbar-inverse(style='margin-bottom:0px;')
+        .container-fluid
+          ul.nav.navbar-nav
+            li(style='padding-left:300px;')
+              a(href='/') Home
+            li.active
+              a Material
+            li(style='margin-left:800px;')
+              a(data-toggle='modal', data-target='#addmaterialModal') Add material
       .content-area.section
         .section-canvas
           #background-image.row.row--background-image(style='height: 360px;')
@@ -92,42 +190,42 @@ html(lang='en')
                     h2#1.title(style='font-size:2.0rem;') Material
                     #1.icon-container
                       #1.icon
-                        span#1.glyphicon.glyphicon-th
+                        span#1.glyphicon.glyphicon-th(style='font-size: 40px;')
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#2.item-canvas.product-type
                   #2.item-inner-canvas
                     h2#2.title(style='font-size:2.0rem;') Product Type
                     #2.icon-container
                       #2.icon
-                        span#2.glyphicon.glyphicon-th-large
+                        span#2.glyphicon.glyphicon-th-large(style='font-size: 40px;')
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#3.item-canvas.product-type
                   #3.item-inner-canvas
                     h2#3.title(style='font-size:2.0rem;') Function Class
                     #3.icon-container
                       #3.icon
-                        span#3.glyphicon.glyphicon-th-list
+                        span#3.glyphicon.glyphicon-th-list(style='font-size: 40px;')
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#4.item-canvas.product-type
                   #4.item-inner-canvas
                     h2#4.title(style='font-size:2.0rem;') Function Group
                     #4.icon-container
                       #4.icon
-                        span#4.glyphicon.glyphicon-tag
+                        span#4.glyphicon.glyphicon-tag(style='font-size: 40px;')
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#5.item-canvas.product-type
                   #5.item-inner-canvas
                     h2#5.title(style='font-size:2.0rem;') Function
                     #5.icon-container
                       #5.icon
-                        span#5.glyphicon.glyphicon-tags
+                        span#5.glyphicon.glyphicon-tags(style='font-size: 40px;')
               li.item.other.box(style='min-width:190px; min-height:150px;')
                 a#6.item-canvas.product-type
                   #6.item-inner-canvas
                     h2#6.title(style='font-size:2.0rem;') Category
                     #6.icon-container
                       #6.icon
-                        span#6.glyphicon.glyphicon-barcode
+                        span#6.glyphicon.glyphicon-barcode(style='font-size: 40px;')
         .section-canvas
           #show-search-result.container-row(style='display:none;')
             #filters.module.m-job-filter.structural
@@ -176,5 +274,5 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     // <![endif]

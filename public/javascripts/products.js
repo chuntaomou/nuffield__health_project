@@ -2,6 +2,11 @@ $(document).ready(function(){
 	var tempdata=null;
 	var temptotalpage=0;
 	var templeft=0;
+	var d = new Date();
+    var curyear=d.getFullYear();
+    var curmonth = d.getMonth()+1;
+    var curday = d.getDate();
+    console.log(curyear);
 	$("#search-products-button").click(function(e){
 		console.log("click");
 		var search_by=$('#s_Region option:selected').attr("id");
@@ -50,7 +55,38 @@ $(document).ready(function(){
 				}
 				
 				for(var i=0;i<length;i++){
-					$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+					$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span><span id='"+(data[i])["Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+					var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 				}
 				
 				$("#pagination").pagination({
@@ -103,7 +139,38 @@ $(document).ready(function(){
 				          }
 				
 				          for(var i=0;i<length;i++){
-					         $("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+					         $("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span><span id='"+(data[i])["Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+							 var date_from=((data[i])["Product Valid From"]).split("T");
+					         var d_from=date_from[0].split("-");
+					         var year_from=d_from[0];
+					         var month_from=d_from[1];
+					         var day_from=d_from[2];
+					
+					         var date_to=((data[i])["Product Valid To"]).split("T");
+					         var d_to=date_to[0].split("-");
+					         var year_to=d_to[0];
+					         var month_to=d_to[1];
+					         var day_to=d_to[2];
+					
+					         if((curyear<year_from)||(curyear>year_to)){
+						        $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+				           	 }else if(curyear==year_from){
+						        if(curmonth<month_from){
+							    $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						     }else if(curmonth==month_from){
+							    if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							   }
+						     }
+					         }else if(curyear==year_to){
+						       if(curmonth>month_to){
+							   $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						     }else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 				          }
 				
 						  $("#pagination").pagination({
@@ -138,10 +205,72 @@ $(document).ready(function(){
 							       $("#"+e.target.id+".job.result").toggle();
 							       for(var i=0;i<data.length;i++){
 								     if((data[i])["Parent Product Id"]==e.target.id){
-									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span><span id='"+(data[i])["Child Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+									   var date_from=((data[i])["Product Valid From"]).split("T");
+					                   var d_from=date_from[0].split("-");
+					                   var year_from=d_from[0];
+					                   var month_from=d_from[1];
+					                   var day_from=d_from[2];
+					
+					                   var date_to=((data[i])["Product Valid To"]).split("T");
+					                   var d_to=date_to[0].split("-");
+					                   var year_to=d_to[0];
+					                   var month_to=d_to[1];
+					                   var day_to=d_to[2];
+					
+					                   if((curyear<year_from)||(curyear>year_to)){
+						               $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					                   }else if(curyear==year_from){
+						               if(curmonth<month_from){
+							           $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						               }else if(curmonth==month_from){
+							           if(curday<day_from){
+								       $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							                }
+						                }
+					                    }else if(curyear==year_to){
+						                  if(curmonth>month_to){
+							            $("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						           }else if(curmonth==month_to){
+						          	if(curday>day_to){
+						          		$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					          		}
+					             	}
+				                      	}
 								     }else{
-									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
-								     }
+									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span><span id='"+(data[i])["Parent Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+								     var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
+									 }
 							        }
 						          }
 					            }
@@ -172,9 +301,71 @@ $(document).ready(function(){
 							   $("#"+e.target.id+".job.result").toggle();
 							   for(var i=0;i<data.length;i++){
 								   if((data[i])["Parent Product Id"]==e.target.id){
-									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span><span id='"+(data[i])["Child Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+								       var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 								   }else{
-									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+									   $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span><span id='"+(data[i])["Parent Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+								   var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 								   }
 							   }
 						   }
@@ -202,14 +393,76 @@ $(document).ready(function(){
 			var bottom=(pagenumber-1)*10;
             var top=templeft+bottom;
 			for(var i=bottom;i<top;i++){
-				$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(tempdata[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(tempdata[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(tempdata[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(tempdata[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(tempdata[i])["Product Id"]+"' class='see-association'>See related products</a></span></p><div class='action'><a href='/product-info#product-id:"+(tempdata[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(tempdata[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+				$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(tempdata[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(tempdata[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(tempdata[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(tempdata[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(tempdata[i])["Product Id"]+"' class='see-association'>See related products</a></span><span id='"+(tempdata[i])["Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(tempdata[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(tempdata[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+			    var date_from=((tempdata[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((tempdata[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 			}
 		}else{
 			$("#search-result-list").empty();
 			var bottom=(pagenumber-1)*10;
             var top=pagenumber*10;
 			for(var i=bottom;i<top;i++){
-				$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(tempdata[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(tempdata[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(tempdata[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(tempdata[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(tempdata[i])["Product Id"]+"' class='see-association'>See related products</a></span></p><div class='action'><a href='/product-info#product-id:"+(tempdata[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(tempdata[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+				$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(tempdata[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(tempdata[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(tempdata[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(tempdata[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(tempdata[i])["Product Id"]+"' class='see-association'>See related products</a></span><span id='"+(tempdata[i])["Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(tempdata[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(tempdata[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+			    var date_from=((tempdata[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((tempdata[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(tempdata[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 			}
 		}
 		
@@ -234,9 +487,71 @@ $(document).ready(function(){
 					$("#"+e.target.id+".job.result").toggle();
 				    for(var i=0;i<data.length;i++){
 					   if((data[i])["Parent Product Id"]==e.target.id){
-					      $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
-					   }else{
-						  $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+					      $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span><span id='"+(data[i])["Child Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+					 var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
+					 }else{
+						  $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span><span id='"+(data[i])["Parent Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+					      var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 					   }
 					}
 				 }
@@ -277,7 +592,38 @@ $(document).ready(function(){
 				}
 				
 				for(var i=0;i<length;i++){
-					$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+					$("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span><span id='"+(data[i])["Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+				    var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
 				}
 				
 				$("#pagination").pagination({
@@ -312,10 +658,72 @@ $(document).ready(function(){
 					     $("#"+e.target.id+".job.result").toggle();
 				         for(var i=0;i<data.length;i++){
 					     if((data[i])["Parent Product Id"]==e.target.id){
-					       $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
-					     }else{
-						   $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
-					      }
+					       $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span><span id='"+(data[i])["Child Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+					       var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
+						 }else{
+						   $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span><span id='"+(data[i])["Parent Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}					     
+						 }
 					     }
 				       }
 			         }
@@ -361,8 +769,39 @@ $(document).ready(function(){
 				          }
 				
 				          for(var i=0;i<length;i++){
-					         $("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
-				          }
+					         $("#search-result-list").append("<div class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px;'><h3 class='title'>"+(data[i])["Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Product Id"]+"</span><span class='seperator'>|</span><span>Product Code: "+(data[i])["Product Code"]+"</span><span class='seperator'>|</span><span>Product Label: "+(data[i])["Product Label"]+"</span><span class='seperator'>|</span><span><a id='"+(data[i])["Product Id"]+"' class='see-association'>See related products</a></span><span id='"+(data[i])["Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Product Id"]+"' class='button forward go'>View more details</a></div></div><div id='"+(data[i])["Product Id"]+"' class='job result' style='border-bottom: 1px solid #e0dfe0; padding-left: 40px; padding-top: 30px; padding-bottom:30px; display:none;'></div>");
+				             var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
+						  }
 				
 						  $("#pagination").pagination({
 					        items: data.length,
@@ -396,10 +835,72 @@ $(document).ready(function(){
 					              $("#"+e.target.id+".job.result").toggle();
 				                  for(var i=0;i<data.length;i++){
 					                if((data[i])["Parent Product Id"]==e.target.id){
-					                  $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
-					                }else{
-						              $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
-					                }
+					                  $("#"+e.target.id+".job.result").append("<h3 class='title'>Child Product of "+(data[i])["Parent Product Name"]+": "+(data[i])["Child Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Child Product Id"]+"</span><span id='"+(data[i])["Child Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Child Product Id"]+"' class='button forward go'>View more details</a></div>");
+					                var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
+									}else{
+						              $("#"+e.target.id+".job.result").append("<h3 class='title'>Parent Product of "+(data[i])["Child Product Name"]+": "+(data[i])["Parent Product Name"]+"</h3><p class='info'><span>Product Id: "+(data[i])["Parent Product Id"]+"</span><span id='"+(data[i])["Parent Product Id"]+"' class='if-valid' style='background-color:#e73e1b; color:#fff; display:none;'>out of date</span></p><div class='action'><a href='/product-info#product-id:"+(data[i])["Parent Product Id"]+"' class='button forward go'>View more details</a></div>");
+					                var date_from=((data[i])["Product Valid From"]).split("T");
+					var d_from=date_from[0].split("-");
+					var year_from=d_from[0];
+					var month_from=d_from[1];
+					var day_from=d_from[2];
+					
+					var date_to=((data[i])["Product Valid To"]).split("T");
+					var d_to=date_to[0].split("-");
+					var year_to=d_to[0];
+					var month_to=d_to[1];
+					var day_to=d_to[2];
+					
+					if((curyear<year_from)||(curyear>year_to)){
+						$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+					}else if(curyear==year_from){
+						if(curmonth<month_from){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_from){
+							if(curday<day_from){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}else if(curyear==year_to){
+						if(curmonth>month_to){
+							$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+						}else if(curmonth==month_to){
+							if(curday>day_to){
+								$("span#"+(data[i])["Product Id"]+".if-valid").toggle();
+							}
+						}
+					}
+									}
 					              }
 				                }
 			                  }
