@@ -12,6 +12,11 @@ html(lang='en')
     link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
     link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
     link(rel='stylesheet', type='text/css', href='stylesheets/application.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    link(href='https://fonts.googleapis.com/css?family=Lato', rel='stylesheet', type='text/css')
+    link(href='https://fonts.googleapis.com/css?family=Montserrat', rel='stylesheet', type='text/css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
     style.
       .home-hero {
       background-image: url(https://www.nuffieldhealth.com/local/0d/a5/16bfa49745008adcdc518c285441/pay-for-yourself-at-nuffield-health.jpg);
@@ -19,6 +24,24 @@ html(lang='en')
       @media (max-width: 600px) {
       .home-hero {
       background-image: url(https://www.nuffieldhealth.com/local/e9/9b/d222c03742ea96411ce7b565cf06/spimage-homepage.png);
+      }
+      }
+      .home-location{
+      background-image: url(https://www.nuffieldhealth.com/local/0d/3f/7201d39d4e3e91750f84f0d7c8a1/hompage-promo-ropes.jpg);
+      min-height:500px;
+      }
+      @media (max-width: 600px) {
+      .home-location {
+      background-image: url(https://www.nuffieldhealth.com/local/5f/58/2fbdbb8b42f38a0341c0e9a717a2/homepage-promo-mob-q3-ropes.jpg);
+      }
+      }
+      .home-material{
+      background-image: url(https://www.nuffieldhealth.com/local/10/c2/e331ab93467696ba8f447acf342c/see-a-physio-within-48-hours.jpg);
+      min-height:500px;
+      }
+      @media (max-width: 600px) {
+      .home-material {
+      background-image: url(https://www.nuffieldhealth.com/local/31/0c/d18fb882464b858894f47b188414/see-a-physio-within-48-hours.jpg);
       }
       }
     script(src='https://cdn.optimizely.com/js/6076240549.js')
@@ -64,6 +87,9 @@ html(lang='en')
         .layout--0-12-0 .layout__column {
         width: 100%;
         }
+        a{
+        color:#fff;
+        }
       // #cache key:primaryNavigation status:cached expires:3257s
       #nav.nav(role='navigation')
         .row.row--green.row--inverse.row--no-padding.row--overflow
@@ -75,7 +101,7 @@ html(lang='en')
                     //
                       if lt IE 9img.nav__logo(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.png', alt='Nuffield Health')
                     //if gte IE 9
-                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
+                      | if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| if gte IE 9| [if gte IE 9]
                     span.nav__logo
                       img.nav__logo-text(src='https://www.nuffieldhealth.com/assets/dist/images/logo_inverse.svg', alt='Nuffield Health')
                     // <![endif]
@@ -87,26 +113,139 @@ html(lang='en')
                     li.nav__item
                       a#0000014c-e658-dfca-ab5d-eedfa2090000.nav__link(href='/materials') Materials
       #main(tabindex='0')
-        .row.row--inverse.row--no-padding
-          .home-hero
-            .layout-container
-              .layout.layout--0-10-0
-                .layout__column.layout__column--1
-                  .home-hero__copy.home-hero__copy--promo
-                    h1.home-hero__heading Products.
-                    .page
-                      .section
-                        .layoutArea
-                          .column
-                            .column
-                              .column
-                                p
-                                  | Nuffield Health sells beautiful products, you can find many health related items here.
-                                  | help you have a fit, wonderful life.
-                                p explore this website for more information
-                                p
-                                  br
-                    a.button(href='/products') View
+        #myCarousel.carousel.slide(data-ride='carousel')
+          // Indicators
+          ol.carousel-indicators
+            li.active(data-target='#myCarousel', data-slide-to='0')
+            li(data-target='#myCarousel', data-slide-to='1')
+            li(data-target='#myCarousel', data-slide-to='2')
+          // Wrapper for slides
+          .carousel-inner(role='listbox')
+            .item.active
+              .row.row--inverse.row--no-padding
+                .home-location
+                  .layout-container
+                    .layout.layout--0-10-0
+                      .layout__column.layout__column--1
+                        .home-hero__copy.home-hero__copy--promo
+                          h1.home-hero__heading Products.
+                          .page
+                            .section
+                              .layoutArea
+                                .column
+                                  .column
+                                    .column
+                                      p
+                                        | Nuffield Health sells beautiful products, you can find many health related items here.
+                                        | help you have a fit, wonderful life.
+                                      p explore this website for more information
+                                      p
+                                        br
+                          a.button(href='/locations') View
+            .item
+              .row.row--inverse.row--no-padding
+                .home-hero
+                  .layout-container
+                    .layout.layout--0-10-0
+                      .layout__column.layout__column--1
+                        .home-hero__copy.home-hero__copy--promo
+                          h1.home-hero__heading Products.
+                          .page
+                            .section
+                              .layoutArea
+                                .column
+                                  .column
+                                    .column
+                                      p
+                                        | Nuffield Health sells beautiful products, you can find many health related items here.
+                                        | help you have a fit, wonderful life.
+                                      p explore this website for more information
+                                      p
+                                        br
+                          a.button(href='/products') View
+            .item
+              .row.row--inverse.row--no-padding
+                .home-material
+                  .layout-container
+                    .layout.layout--0-10-0
+                      .layout__column.layout__column--1
+                        .home-hero__copy.home-hero__copy--promo
+                          h1.home-hero__heading Products.
+                          .page
+                            .section
+                              .layoutArea
+                                .column
+                                  .column
+                                    .column
+                                      p
+                                        | Nuffield Health sells beautiful products, you can find many health related items here.
+                                        | help you have a fit, wonderful life.
+                                      p explore this website for more information
+                                      p
+                                        br
+                          a.button(href='/materials') View
+          // Left and right controls
+          a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+            span.glyphicon.glyphicon-chevron-left(aria-hidden='true')
+            span.sr-only Previous
+          a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+            span.glyphicon.glyphicon-chevron-right(aria-hidden='true')
+            span.sr-only Next
+        script.
+          $(document).ready(function(){
+          // Initialize Tooltip
+          $('[data-toggle="tooltip"]').tooltip();
+          // Add smooth scrolling to all links in navbar + footer link
+          $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
+          // Make sure this.hash has a value before overriding default behavior
+          if (this.hash !== "") {
+          // Prevent default anchor click behavior
+          event.preventDefault();
+          // Store hash
+          var hash = this.hash;
+          // Using jQuery's animate() method to add smooth page scroll
+          // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+          $('html, body').animate({
+          scrollTop: $(hash).offset().top
+          }, 900, function(){
+          // Add hash (#) to URL when done scrolling (default click behavior)
+          window.location.hash = hash;
+          });
+          } // End if
+          });
+          })
+      .row.row--limestone.row--extra-padding
+        .layout-container
+          .layout.layout--0-10-0
+            .layout__column.layout__column--1
+              .summary.summary--light.summary--charcoal
+                h2.summary__heading
+                  | Quick Links
+                p
+                  | We combine our hospitals, health clinics, fitness and wellbeing gyms, diagnostic units and a wide range of treatments into one complete health and wellbeing service.
+      .row.row--inverse.row--no-padding
+        .home-promos
+          a.home-promos__promo(style='width:639px; background-image:url(https://www.nuffieldhealth.com/local/9e/02/6873a4db4853865b246ea762e43c/hospotals.jpg);', href='/products')
+            span.home-promos__link
+              span Products
+            .home-promos__copy
+              span.home-promos__heading Products
+              .home-promos__body
+                | You an find products here
+          a.home-promos__promo(style='width:639px; background-image: url(https://www.nuffieldhealth.com/local/88/19/acc8655a4172914ac1a7be7dde8c/physio.jpg);', href='/locations')
+            span.home-promos__link
+              span Locations
+            .home-promos__copy
+              span.home-promos__heading Locations
+              .home-promos__body
+                | You an find locations here
+          a.home-promos__promo(style='width:639px; background-image: url(https://www.nuffieldhealth.com/local/fd/d5/f103bc85436182d2d37636554257/cbt-lower-slot-2.jpg);', href='/materials')
+            span.home-promos__link
+              span Material
+            .home-promos__copy
+              span.home-promos__heading Materials
+              .home-promos__body
+                | You an find materials here
       .row.row--charcoal.row--inverse.row--no-padding
       #nav.nav(role='navigation')
         .row.row--green.row--inverse.row--no-padding.row--overflow
