@@ -89,6 +89,10 @@ app.get('/materials',function(req, res){
 	res.render('materials', { title: "sdfa" });
 });
 
+app.get('/login',function(req, res){
+	res.render('login',{ title: "sdfa"});
+});
+
 app.get('/material-info',function(req, res){
 	res.render('material-info', { title: "sdfa" });
 });
@@ -207,6 +211,29 @@ app.post('/endpoint', function(req, res){
 	});
 });
 
+app.post('/login',function(req,res){
+	console.log('post: '+JSON.stringify(req.body));
+	var username=req.body.username;
+	var password=req.body.password;
+	var query="select Password from dbo.Admin where Username='"+username+"'";
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+		    if(result.length==0){
+				res.send("fail");
+			}else{
+				if(result[0].Password==password){
+					res.send("success");
+				}else{
+					res.send("fail");
+				}
+			}
+		}
+	});
+});
+
 app.post('/update-general-info',function(req,res){
 	console.log('post: '+JSON.stringify(req.body));
 	var query=req.body.message;
@@ -217,6 +244,20 @@ app.post('/update-general-info',function(req,res){
 		}else{
 			console.log(result);
 			res.send(result);
+		}
+	});
+	//res.send(query);
+});
+
+app.post('/update-general-info-multi',function(req,res){
+	console.log('post: '+JSON.stringify(req.body));
+	var query=req.body.message;
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			query="select * from "
 		}
 	});
 	//res.send(query);

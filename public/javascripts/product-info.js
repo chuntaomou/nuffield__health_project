@@ -88,7 +88,7 @@ $.ajax({
 		$("#Product-Valid-To").append(time[0]);
 	    //$("#Record-Creation-Datetime").append(((data[0])["Record Creation Datetime"])[0]);
 		$("#Record-Termination-Datetime").append((data[0])["Record Termination Datetime"]);
-		$("#Product-Turn-Around-Time-Days").append("2017-09-15");
+		$("#Product-Turn-Around-Time-Days").append((data[0])["Product Turn Around Time Days"]);
 		$("#Record-Copy-Creation-Datetime").append("2017-09-15");
 		
 		//load assoication-info
@@ -113,13 +113,7 @@ $.ajax({
 		$("input#"+(data[0])["Child Association:Association Id"]+".search-child-product-id").val((data[0])["Child Association:Parent Product Id"]);
 	    $("input#"+(data[0])["Child Association:Association Id"]+".original-parent-product-id").val((data[0])["Child Association:Parent Product Id"]);
 		}
-		/*
-		$("a.parent-product-name").click(function(e){
-			console.log("/product-info#product-id:"+$(e.target).attr('value'));
-			window.location.href ="/product-info#product-id:"+$(e.target).attr('value');
-			location.reload();
-		});
-		*/
+		
 		if((data[0])["Parent Association:Association Id"]!=null){
 		for(var i=0;i<length;i++){
 			$("#association-list").append("<div class='col-sm-4'><div class='panel panel-default text-center'><div class='panel-heading'><h1>Association</h1></div><div class='panel-body'><input id='"+(data[i])["Parent Association:Association Id"]+"' class='original-child-product-id' style='display:none;'></input><input id='"+(data[i])["Parent Association:Association Id"]+"' class='search-result-product-id' style='display:none;'></input><p id='"+(data[i])["Parent Association:Association Id"]+"' class='association-type-id' style='display:none;'>"+(data[i])["Parent Association:Association Type Id"]+"</p><label><strong>Association Type Name</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='association-id'>"+(data[i])["Parent Association:Association Type Name"]+"</p><label><strong>Parent Product</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='parent-product-name'>"+(data[i])["Parent Association:Parent Product Name"]+"</p><label><strong>Child Product</strong></label><div id='Child-Product-Name-"+(data[i])["Parent Association:Association Id"]+"'><a value='"+(data[i])["Parent Association:Child Product Id"]+"' id='"+(data[i])["Parent Association:Association Id"]+"' class='child-product-name'>"+(data[i])["Parent Association:Child Product Name"]+"</a><!-- --><input id='"+(data[i])["Parent Association:Association Id"]+"' class='search-child-product' style='width:110px; display:none;' placeholder='Search term...'></input><!-- --><button id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-default search-association-child-product-button' style='min-width:35px; display:none;'><span id='"+(data[i])["Parent Association:Association Id"]+"' class='glyphicon glyphicon-search'></span></button><div id='"+(data[i])["Parent Association:Association Id"]+"' class='dropdown association' style='display:none;'><button id='menu1' class='btn btn-default dropdown-toggle' data-toggle='dropdown'>results<span class='caret'></span></button><ul id='"+(data[i])["Parent Association:Association Id"]+"' class='dropdown-menu' style='height: 200px; overflow-y:scroll; width: 240px;' role='menu' aria-labelledby='menu1'></ul></div></div><label for='association-date-from-"+(data[i])["Parent Association:Association Id"]+"'><strong>Association Valid From</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='product-association-valid-from'>"+removetime((data[0])["Parent Association:Product Association Valid From"])+"</p><label for='association-date-to-"+(data[i])["Parent Association:Association Id"]+"'><strong>Association Valid To</strong></label><p id='"+(data[i])["Parent Association:Association Id"]+"' class='product-association-valid-to'>"+removetime((data[0])["Parent Association:Product Association Valid To"])+"</p></div><div class='panel-footer'><button id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-lg edit-parent-association-info'>Edit</button><!-- --><button style='display:none;' id='"+(data[i])["Parent Association:Association Id"]+"' value="+i+" class='btn btn-lg cancel-parent-association-info'>Cancel</button><!-- --><button style='display:none;' id='"+(data[i])["Parent Association:Association Id"]+"' class='btn btn-lg update-parent-association-info'>Update</button></div></div></div>");
@@ -257,19 +251,33 @@ $.ajax({
 			if($.isNumeric($("#input-Product-Turn-Around-Time-Days").val())){
 				var query="UPDATE [product].[Product] SET [Parent Product Id]="+id+",[Product Name]='"+$("#input-Product-Name").val()+"',[Product Description]='"+$("#input-Product-Description").val()+"',[Product Code]='"+$("#input-Product-Code").val()+"',[Product External Code]='"+$("#input-Product-External-Code").val()+"',[Product External Id]='"+$("#input-Product-External-Id").val()+"',[Product Label]='"+$("#input-Product-Label").val()+"',[Product Notes]='"+$("#input-Product-Notes").val()+"',[Product Turn Around Time Days]='"+$("#input-Product-Turn-Around-Time-Days").val()+"',[Product Valid From]='"+time_from+"',[Product Valid To]='"+time_to+"' WHERE [Product Id]="+url;
 			    console.log(query);
-				var data={};
-			    data.title="update query";
-			    data.message=query;
-			    $.ajax({
-				   type:'POST',
-				   data:JSON.stringify(data),
-				   contentType:'application/json',
-				   url:'/update-general-info',
-				   success:function(data){
-					  console.log(data);
-					  location.reload();
-				    }
-			    });
+				var postdata={};
+				if((id!=0)&&(id!=(data[0])["Parent Product Id"])){
+					postdata.title=id;
+					postdata.message=query;
+					$.ajax({
+						type:'POST',
+						data:JSON.stringify(postdata),
+						contentType:'application/json',
+						url:'/update-general-info',
+						success:function(data){
+							location.reload();
+						}
+					});
+				}else{
+					postdata.title="update query";
+			        postdata.message=query;
+			        $.ajax({
+				       type:'POST',
+				       data:JSON.stringify(postdata),
+				       contentType:'application/json',
+				       url:'/update-general-info',
+				       success:function(data){
+					      console.log(data);
+					      location.reload();
+				       }
+			        });
+				}
 			}else{
 				alert("input for turn around time days should be inter!");
 			}
@@ -277,72 +285,6 @@ $.ajax({
 		
 		//triger cancel button
 		$("button.cancel-general-info").click(function(e){
-			/*
-			var str=(data[0])["Product Code"];
-			$("#input-Product-Code").replaceWith('<p id="Product-Code" class="info-field"></p>');
-			$("#Product-Code").text(str);
-			
-			//str=$("#input-Product-Name").val();
-			str=(data[0])["Product Name"];
-			$("#input-Product-Name").replaceWith('<p id="Product-Name" class="info-field"></p>');
-			$("#Product-Name").text(str);
-			
-			//str=$("#input-Product-Description").val();
-			str=(data[0])["Product Description"];
-			$("#input-Product-Description").replaceWith('<p id="Product-Description" class="info-field"></p>');
-			$("#Product-Description").text(str);
-			
-			//str=$("#input-Product-Turn-Around-Time-Days").val();
-			str=(data[0])["Product Turn Around Time Days"];
-			$("#input-Product-Turn-Around-Time-Days").replaceWith('<p id="Product-Turn-Around-Time-Days" class="info-field"></p>');
-			$("#Product-Turn-Around-Time-Days").text(str);
-			
-			//str=$("#input-Product-Label").val();
-			str=(data[0])["Product Label"];
-			$("#input-Product-Label").replaceWith('<p id="Product-Label" class="info-field"></p>');
-			$("#Product-Label").text(str);
-			
-			//str=$("#input-Product-Notes").val();
-			str=(data[0])["Product Notes"];
-			$("#input-Product-Notes").replaceWith('<p id="Product-Notes" class="info-field"></p>');
-			$("#Product-Notes").text(str);
-			
-			//str=$("#input-Product-External-Code").val();
-			str=(data[0])["Product External Code"];
-			$("#input-Product-External-Code").replaceWith('<p id="Product-External-Code" class="info-field"></p>');
-			$("#Product-External-Code").text(str);
-			
-			//str=$("#input-Product-External-Id").val();
-			str=(data[0])["Product External Id"];
-			$("#input-Product-External-Id").replaceWith('<p id="Product-External-Id" class="info-field"></p>');
-			$("#Product-External-Id").text(str);
-			
-			//str=$("#input-Parent-Product-Name").val();
-			str=(data[0])["Parent Product Name"];
-			$("#input-Parent-Product-Name").replaceWith('<p id="Parent-Product-Name" class="info-field"></p>');
-			$("#Parent-Product-Name").text(str);
-			
-			$("#label-of-product-valid-from").remove();
-			$("#label-of-product-valid-to").remove();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			
-			str=(data[0])["Product Valid From"];
-			$("#general-info-col-1").append("<div id='label-of-product-valid-from'><label for='date-from'>Product Valid From</label><p id='Product-Valid-From' class='info-field'></p></div>");
-			$("#Product-Valid-From").text(str);
-			
-			str=(data[0])["Product Valid To"];
-			$("#general-info-col-1").append("<div id='label-of-product-valid-to'><label for='date-to'>Product Valid To</label><p id='Product-Valid-To' class='info-field'></p></div>");
-			$("#Product-Valid-To").text(str);
-			if($("span#search").is(":visible")){
-				$("span#search").toggle();
-			}
-			$("#input-field-view-button").toggle();
-			$(".update-general-info").toggle();
-			$(".edit-general-info").toggle();
-			$(".cancel-general-info").toggle();
-			$("#search-parent-product-form").toggle();
-			*/
 			location.reload();
 		});
 ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -679,44 +621,10 @@ $.ajax({
 		
 		//trigger cancel-parent-association-info button
 		$("button.cancel-parent-association-info").click(function(e){
-			/*
-			console.log(e.target.id);
-			var value=$(e.target).attr('value');
-			$("input#association-date-to-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='product-association-valid-to'></p>");
-			$("#"+e.target.id+".product-association-valid-to").text((data[value])["Parent Association:Product Association Valid To"]);
-			$("input#association-date-from-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='product-association-valid-from'>"+(data[value])["Parent Association:Product Association Valid From"]+"</p>");
-			$("input#input-child-product-name-"+e.target.id).replaceWith("<p id='"+e.target.id+"' class='child-product-name'>"+(data[value])["Parent Association:Child Product Name"]+"</p>");
-			$("input#"+e.target.id+".search-child-product").toggle();
-			$("button#"+e.target.id+".search-association-child-product-button").toggle();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			if($("#"+e.target.id+".dropdown").is(':visible')){
-				$("#"+e.target.id+".dropdown").toggle();
-			}
-			$("button#"+e.target.id+".edit-parent-association-info").toggle();
-			$("button#"+e.target.id+".update-parent-association-info").toggle();
-			$("button#"+e.target.id+".cancel-parent-association-info").toggle();
-			*/
 			location.reload();
 		});
 		
 		$("button.cancel-association-info").click(function(e){
-			/*
-			console.log(e.target.id);
-			$("input#association-date-to-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='product-association-valid-to'>"+(data[0])["Child Association:Product Association Valid To"]+"</p>");
-			$("input#association-date-from-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='product-association-valid-from'>"+(data[0])["Child Association:Product Association Valid From"]+"</p>");
-			$("input#input-parent-product-name-"+e.target.id).replaceWith("<p id='"+e.target.id+"' class='parent-product-name'>"+(data[0])["Child Association:Parent Product Name"]+"</p>");
-			$("input#"+e.target.id+".search-parent-product").toggle();
-			$("button#"+e.target.id+".search-association-parent-product-button").toggle();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			if($("#"+e.target.id+".dropdown").is(':visible')){
-				$("#"+e.target.id+".dropdown").toggle();
-			}
-			$("button#"+e.target.id+".edit-association-info").toggle();
-			$("button#"+e.target.id+".update-association-info").toggle();
-			$("button#"+e.target.id+".cancel-association-info").toggle();
-			*/
 			location.reload();
 		});
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
