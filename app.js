@@ -249,7 +249,7 @@ app.post('/update-general-info',function(req,res){
 	//res.send(query);
 });
 
-app.post('/update-general-info-multi',function(req,res){
+app.post('/update-general-info-updateass',function(req,res){
 	console.log('post: '+JSON.stringify(req.body));
 	var query=req.body.message;
 	var request=new sql.Request(connection);
@@ -257,7 +257,7 @@ app.post('/update-general-info-multi',function(req,res){
 		if(err){
 			console.log("Error while querying database :- " + err);
 		}else{
-			query="select * from "
+			query="select * from [product].[Product Association]"
 		}
 	});
 	//res.send(query);
