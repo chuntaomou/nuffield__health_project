@@ -132,7 +132,7 @@ $.ajax({
 			$("#input-Material-Name").val(str);
 			
 			str=$("#Material-Description").text();
-			$("#Material-Description").replaceWith('<div><textarea id="input-Material-Description" rows="10" cols="45"></textarea></div>');
+			$("#Material-Description").replaceWith('<div><textarea id="input-Material-Description" rows="10" cols="31"></textarea></div>');
             $("#input-Material-Description").text(str);
 			
 			str=$("#Material-External-Code").text();

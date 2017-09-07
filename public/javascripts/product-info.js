@@ -86,7 +86,6 @@ $.ajax({
 		$("#Product-Valid-From").append(time[0]);
 		time=((data[0])["Product Valid To"]).split('T');
 		$("#Product-Valid-To").append(time[0]);
-	    //$("#Record-Creation-Datetime").append(((data[0])["Record Creation Datetime"])[0]);
 		$("#Record-Termination-Datetime").append((data[0])["Record Termination Datetime"]);
 		$("#Product-Turn-Around-Time-Days").append((data[0])["Product Turn Around Time Days"]);
 		$("#Record-Copy-Creation-Datetime").append("2017-09-15");
@@ -155,7 +154,7 @@ $.ajax({
 			$("#input-Product-Name").val(str);
 			
 			str=$("#Product-Description").text();
-			$("#Product-Description").replaceWith('<textarea id="input-Product-Description" rows="10" cols="45"></textarea>');
+			$("#Product-Description").replaceWith('<textarea id="input-Product-Description" rows="10" cols="31"></textarea>');
             $("#input-Product-Description").text(str);
 			
 			str=$("#Product-External-Code").text();

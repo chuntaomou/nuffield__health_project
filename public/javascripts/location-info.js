@@ -130,7 +130,7 @@ $.ajax({
 			$("#input-Location-Name").val(str);
 			
 			str=$("#Location-Description").text();
-			$("#Location-Description").replaceWith('<div><textarea id="input-Location-Description" rows="10" cols="45"></textarea></div>');
+			$("#Location-Description").replaceWith('<div><textarea id="input-Location-Description" rows="10" cols="31"></textarea></div>');
             $("#input-Location-Description").text(str);
 			
 			str=$("#Location-External-Code").text();
