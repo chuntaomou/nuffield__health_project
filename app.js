@@ -257,7 +257,34 @@ app.post('/update-general-info-updateass',function(req,res){
 		if(err){
 			console.log("Error while querying database :- " + err);
 		}else{
-			query="select * from [product].[Product Association]"
+			query="select * from [product].[Product Association] where [Child Product Id]="+req.body.title2;
+			request.query(query,function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					if(result.length!=0){
+						var query="update [product].[Product Association] set [Parent Product Id]="+req.body.title1+" where [Product Association Id]="+(result[0])["Product Association Id"];
+						console.log(query);
+						request.query(query,function(err,result){
+							if(err){
+								console.log("Error while querying database :- " + err);
+							}else{
+								res.send("success");
+							}
+						});
+					}else{
+						var query="insert into [product].[Product Association] ([Product Association Type Id],[Product Association Valid From],[Product Association Valid To],[Parent Product Id],[Child Product Id]) values (5,'2010-01-01 00:00:00:000','9999-01-01 00:00:00:000',"+req.body.title1+","+req.body.title2+")";
+						console.log(query);
+						request.query(query,function(err,result){
+							if(err){
+								console.log("Error while querying database :- " + err);
+							}else{
+								res.send("success");
+							}
+						});
+					}
+				}
+			});
 		}
 	});
 	//res.send(query);

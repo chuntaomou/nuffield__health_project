@@ -252,14 +252,16 @@ $.ajax({
 			    console.log(query);
 				var postdata={};
 				if((id!=0)&&(id!=(data[0])["Parent Product Id"])){
-					postdata.title=id;
+					postdata.title1=id;
+					postdata.title2=url;
 					postdata.message=query;
 					$.ajax({
 						type:'POST',
 						data:JSON.stringify(postdata),
 						contentType:'application/json',
-						url:'/update-general-info',
+						url:'/update-general-info-updateass',
 						success:function(data){
+							console.log("data");
 							location.reload();
 						}
 					});
