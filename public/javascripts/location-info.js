@@ -57,6 +57,9 @@ $.ajax({
 		if((data[0])["Record Copy Creation Datetime"]==null){
 			(data[0])["Record Copy Creation Datetime"]="No Record";
 		}
+		if((data[0])["Record Creation Datetime"]==null){
+			(data[0])["Record Creation Datetime"]="No Record";
+		}
 		if((data[0])["Parent Location Name"]==null){
 			(data[0])["Parent Location Name"]="No Record";
 		}
@@ -221,84 +224,39 @@ $.ajax({
 			
 				var query="UPDATE [location].[Location] SET [Parent Location Id]="+id+",[Location Name]='"+$("#input-Location-Name").val()+"',[Location Description]='"+$("#input-Location-Description").val()+"',[Location Code]='"+$("#input-Location-Code").val()+"',[Location External Code]='"+$("#input-Location-External-Code").val()+"',[Location External Id]='"+$("#input-Location-External-Id").val()+"',[Location Label]='"+$("#input-Location-Label").val()+"',[Location Notes]='"+$("#input-Location-Notes").val()+"',[Location Valid From]='"+time_from+"',[Location Valid To]='"+time_to+"' WHERE [Location Id]="+url;
 			    console.log(query);
-				var data={};
-			    data.title="update query";
-			    data.message=query;
-			    $.ajax({
-				   type:'POST',
-				   data:JSON.stringify(data),
-				   contentType:'application/json',
-				   url:'/executequery',
-				   success:function(data){
-					  console.log(data);
-					  location.reload();
-				    }
-			    });
+				var postdata={};
+				if((id!=0)&&(id!=(data[0])["Parent Location Id"])){
+					postdata.title1=id;
+					postdata.title2=url;
+					postdata.message=query;
+					$.ajax({
+						type:'POST',
+						data:JSON.stringify(postdata),
+						contentType:'application/json',
+						url:'/update-general-info-updatelocationass',
+						success:function(data){
+							console.log("data");
+							location.reload();
+						}
+					});
+				}else{
+					postdata.title="update query";
+			        postdata.message=query;
+			        $.ajax({
+				       type:'POST',
+				       data:JSON.stringify(postdata),
+				       contentType:'application/json',
+				       url:'/executequery',
+				       success:function(data){
+					      console.log(data);
+					      location.reload();
+				       }
+			        });
+				}
 		});
 		
 		//triger cancel button
 		$("button.cancel-general-info").click(function(e){
-			/*
-			var str=(data[0])["Location Code"];
-			$("#input-Location-Code").replaceWith('<p id="Location-Code" class="info-field"></p>');
-			$("#Location-Code").text(str);
-			
-			//str=$("#input-Product-Name").val();
-			str=(data[0])["Location Name"];
-			$("#input-Location-Name").replaceWith('<p id="Location-Name" class="info-field"></p>');
-			$("#Location-Name").text(str);
-			
-			//str=$("#input-Product-Description").val();
-			str=(data[0])["Location Description"];
-			$("#input-Location-Description").replaceWith('<p id="Location-Description" class="info-field"></p>');
-			$("#Location-Description").text(str);
-			
-			//str=$("#input-Product-Label").val();
-			str=(data[0])["Location Label"];
-			$("#input-Location-Label").replaceWith('<p id="Location-Label" class="info-field"></p>');
-			$("#Location-Label").text(str);
-			
-			//str=$("#input-Product-Notes").val();
-			str=(data[0])["Location Notes"];
-			$("#input-Location-Notes").replaceWith('<p id="Location-Notes" class="info-field"></p>');
-			$("#Location-Notes").text(str);
-			
-			//str=$("#input-Product-External-Code").val();
-			str=(data[0])["Location External Code"];
-			$("#input-Location-External-Code").replaceWith('<p id="Location-External-Code" class="info-field"></p>');
-			$("#Location-External-Code").text(str);
-			
-			//str=$("#input-Product-External-Id").val();
-			str=(data[0])["Location External Id"];
-			$("#input-Location-External-Id").replaceWith('<p id="Location-External-Id" class="info-field"></p>');
-			$("#Location-External-Id").text(str);
-			
-			//str=$("#input-Parent-Product-Name").val();
-			str=(data[0])["Parent Location Name"];
-			$("#input-Parent-Location-Name").replaceWith('<p id="Parent-Location-Name" class="info-field"></p>');
-			$("#Parent-Location-Name").text(str);
-			
-			//str=$("#date-from").val();
-			str=(data[0])["Location Valid From"];
-			$("#date-from").replaceWith('<p id="Location-Valid-From" class="info-field"></p>');
-			$("#Location-Valid-From").text(str);
-			
-			//str=$("#date-to").val();
-			str=(data[0])["Location Valid To"];
-			$("#date-to").replaceWith('<p id="Location-Valid-To" class="info-field"></p>');
-			$("#Location-Valid-To").text(str);
-			
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			
-			$("span#search").toggle();
-			$("#input-field-view-button").toggle();
-			$(".update-general-info").toggle();
-			$(".edit-general-info").toggle();
-			$(".cancel-general-info").toggle();
-			$("#view-tree-menu").toggle();
-			$("#search-parent-product-form").toggle();
-			*/
 			location.reload();
 		});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -350,44 +308,10 @@ $.ajax({
 		
 		//trigger cancel-parent-association-info button
 		$("button.cancel-parent-association-info").click(function(e){
-			/*
-			console.log(e.target.id);
-			var value=$(e.target).attr('value');
-			$("input#association-date-to-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='location-association-valid-to'></p>");
-			$("#"+e.target.id+".location-association-valid-to").text((data[value])["Parent Association:Location Association Valid To"]);
-			$("input#association-date-from-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='location-association-valid-from'>"+(data[value])["Parent Association:Location Association Valid From"]+"</p>");
-			$("input#input-child-location-name-"+e.target.id).replaceWith("<p id='"+e.target.id+"' class='child-location-name'>"+(data[value])["Parent Association:Child Location Name"]+"</p>");
-			$("input#"+e.target.id+".search-child-location").toggle();
-			$("button#"+e.target.id+".search-association-child-location-button").toggle();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			if($("#"+e.target.id+".dropdown").is(':visible')){
-				$("#"+e.target.id+".dropdown").toggle();
-			}
-			$("button#"+e.target.id+".edit-parent-association-info").toggle();
-			$("button#"+e.target.id+".update-parent-association-info").toggle();
-			$("button#"+e.target.id+".cancel-parent-association-info").toggle();
-			*/
 			location.reload();
 		});
 		
 		$("button.cancel-association-info").click(function(e){
-			/*
-			console.log(e.target.id);
-			$("input#association-date-to-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='location-association-valid-to'>"+(data[0])["Child Association:Location Association Valid To"]+"</p>");
-			$("input#association-date-from-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='location-association-valid-from'>"+(data[0])["Child Association:Location Association Valid From"]+"</p>");
-			$("input#input-parent-location-name-"+e.target.id).replaceWith("<p id='"+e.target.id+"' class='parent-location-name'>"+(data[0])["Child Association:Parent Location Name"]+"</p>");
-			$("input#"+e.target.id+".search-parent-location").toggle();
-			$("button#"+e.target.id+".search-association-parent-location-button").toggle();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			if($("#"+e.target.id+".dropdown").is(':visible')){
-				$("#"+e.target.id+".dropdown").toggle();
-			}
-			$("button#"+e.target.id+".edit-association-info").toggle();
-			$("button#"+e.target.id+".update-association-info").toggle();
-			$("button#"+e.target.id+".cancel-association-info").toggle();
-			*/
 			location.reload();
 		});
 		

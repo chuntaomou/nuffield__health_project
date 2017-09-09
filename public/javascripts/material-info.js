@@ -54,11 +54,14 @@ $.ajax({
 		if((data[0])["Material Notes"]==null){
 			(data[0])["Material Notes"]="No Record";
 		}
-		if((data[0])["Record Termination Datetime"]==null){
-			(data[0])["Record Termination Datetime"]="No Record";
+		if((data[0])["Record Termination Datetime"]==null||(data[0])["Record Termination Datetime"]=="null"){
+			$("#Record-Termination-Datetime").append("No Record");
 		}
-		if((data[0])["Record Copy Creation Datetime"]==null){
-			(data[0])["Record Copy Creation Datetime"]="No Record";
+		if((data[0])["Record Copy Creation Datetime"]==null||(data[0])["Record Copy Creation Datetime"]=="null"){
+			$("#Record-Copy-Creation-Datetime").append("No Record");
+		}
+		if((data[0])["Record Creation Datetime"]==null||(data[0])["Record Creation Datetime"]=="null"){
+			$("#Record-Creation-Datetime").append("No Record");
 		}
 		if((data[0])["Parent Material Name"]==null){
 			(data[0])["Parent Material Name"]="No Record";
@@ -77,9 +80,9 @@ $.ajax({
 		$("#Material-Valid-From").append(time[0]);
 		time=((data[0])["Material Valid To"]).split('T');
 		$("#Material-Valid-To").append(time[0]);
-		$("#Record-Creation-Datetime").append(((data[0])["Record Creation Datetime"])[0]);
-		$("#Record-Termination-Datetime").append((data[0])["Record Termination Datetime"]);
-		$("#Record-Copy-Creation-Datetime").append((data[0])["Record Copy Creation Datetime"]);
+		//$("#Record-Creation-Datetime").append(((data[0])["Record Creation Datetime"])[0]);
+		//$("#Record-Termination-Datetime").append((data[0])["Record Termination Datetime"]);
+		//$("#Record-Copy-Creation-Datetime").append((data[0])["Record Copy Creation Datetime"]);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 		//load material association
 		var left=data.length%3;
@@ -223,75 +226,39 @@ $.ajax({
 			
 				var query="UPDATE [material].[Material] SET [Parent Material Id]="+id+",[Material Name]='"+$("#input-Material-Name").val()+"',[Material Description]='"+$("#input-Material-Description").val()+"',[Material Code]='"+$("#input-Material-Code").val()+"',[Material External Code]='"+$("#input-Material-External-Code").val()+"',[Material External Id]='"+$("#input-Material-External-Id").val()+"',[Material Label]='"+$("#input-Material-Label").val()+"',[Material Notes]='"+$("#input-Material-Notes").val()+"',[Material Valid From]='"+time_from+"',[Material Valid To]='"+time_to+"' WHERE [Material Id]="+url;
 			    console.log(query);
-				var data={};
-			    data.title="update query";
-			    data.message=query;
-			    $.ajax({
-				   type:'POST',
-				   data:JSON.stringify(data),
-				   contentType:'application/json',
-				   url:'/executequery',
-				   success:function(data){
-					  console.log(data);
-					  location.reload();
-				    }
-			    });
+				var postdata={};
+				if((id!=0)&&(id!=(data[0])["Parent Material Id"])){
+					postdata.title1=id;
+					postdata.title2=url;
+					postdata.message=query;
+					$.ajax({
+						type:'POST',
+						data:JSON.stringify(postdata),
+						contentType:'application/json',
+						url:'/update-general-info-updatematerialass',
+						success:function(data){
+							console.log("data");
+							location.reload();
+						}
+					});
+				}else{
+					postdata.title="update query";
+			        postdata.message=query;
+			        $.ajax({
+				       type:'POST',
+				       data:JSON.stringify(postdata),
+				       contentType:'application/json',
+				       url:'/executequery',
+				       success:function(data){
+					      console.log(data);
+					      location.reload();
+				        }
+			        });
+				}
 		});
 		
 		//triger cancel button
 		$("button.cancel-general-info").click(function(e){
-			/*
-			var str=(data[0])["Material Code"];
-			$("#input-Material-Code").replaceWith('<p id="Material-Code" class="info-field"></p>');
-			$("#Material-Code").text(str);
-			
-			str=(data[0])["Material Name"];
-			$("#input-Material-Name").replaceWith('<p id="Material-Name" class="info-field"></p>');
-			$("#Material-Name").text(str);
-			
-			str=(data[0])["Material Description"];
-			$("#input-Material-Description").replaceWith('<p id="Material-Description" class="info-field"></p>');
-			$("#Material-Description").text(str);
-			
-			str=(data[0])["Material Label"];
-			$("#input-Material-Label").replaceWith('<p id="Material-Label" class="info-field"></p>');
-			$("#Material-Label").text(str);
-			
-			str=(data[0])["Material Notes"];
-			$("#input-Material-Notes").replaceWith('<p id="Material-Notes" class="info-field"></p>');
-			$("#Material-Notes").text(str);
-			
-			str=(data[0])["Material External Code"];
-			$("#input-Material-External-Code").replaceWith('<p id="Material-External-Code" class="info-field"></p>');
-			$("#Material-External-Code").text(str);
-			
-			str=(data[0])["Material External Id"];
-			$("#input-Material-External-Id").replaceWith('<p id="Material-External-Id" class="info-field"></p>');
-			$("#Material-External-Id").text(str);
-			
-			str=(data[0])["Parent Material Name"];
-			$("#input-Parent-Material-Name").replaceWith('<p id="Parent-Material-Name" class="info-field"></p>');
-			$("#Parent-Material-Name").text(str);
-			
-			str=(data[0])["Material Valid From"];
-			$("#date-from").replaceWith('<p id="Material-Valid-From" class="info-field"></p>');
-			$("#Material-Valid-From").text(str);
-			
-			str=(data[0])["Material Valid To"];
-			$("#date-to").replaceWith('<p id="Material-Valid-To" class="info-field"></p>');
-			$("#Material-Valid-To").text(str);
-			
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			
-			$("span#search").toggle();
-			$("#input-field-view-button").toggle();
-			$(".update-general-info").toggle();
-			$(".edit-general-info").toggle();
-			$(".cancel-general-info").toggle();
-			$("#view-tree-menu").toggle();
-			$("#search-parent-material-form").toggle();
-			*/
 			location.reload();
 		});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -343,44 +310,10 @@ $.ajax({
 		
 		//trigger cancel-parent-association-info button
 		$("button.cancel-parent-association-info").click(function(e){
-			/*
-			console.log(e.target.id);
-			var value=$(e.target).attr('value');
-			$("input#association-date-to-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='material-association-valid-to'></p>");
-			$("#"+e.target.id+".material-association-valid-to").text((data[value])["Parent Association:Material Association Valid To"]);
-			$("input#association-date-from-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='material-association-valid-from'>"+(data[value])["Parent Association:Material Association Valid From"]+"</p>");
-			$("input#input-child-material-name-"+e.target.id).replaceWith("<p id='"+e.target.id+"' class='child-material-name'>"+(data[value])["Parent Association:Child Material Name"]+"</p>");
-			$("input#"+e.target.id+".search-child-material").toggle();
-			$("button#"+e.target.id+".search-association-child-material-button").toggle();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			if($("#"+e.target.id+".dropdown").is(':visible')){
-				$("#"+e.target.id+".dropdown").toggle();
-			}
-			$("button#"+e.target.id+".edit-parent-association-info").toggle();
-			$("button#"+e.target.id+".update-parent-association-info").toggle();
-			$("button#"+e.target.id+".cancel-parent-association-info").toggle();
-			*/
 			location.reload();
 		});
 		
 		$("button.cancel-association-info").click(function(e){
-			/*
-			console.log(e.target.id);
-			$("input#association-date-to-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='material-association-valid-to'>"+(data[0])["Child Association:Material Association Valid To"]+"</p>");
-			$("input#association-date-from-"+e.target.id).replaceWith("<p style='margin-left:50px;' id='"+e.target.id+"' class='material-association-valid-from'>"+(data[0])["Child Association:Material Association Valid From"]+"</p>");
-			$("input#input-parent-material-name-"+e.target.id).replaceWith("<p id='"+e.target.id+"' class='parent-material-name'>"+(data[0])["Child Association:Parent Material Name"]+"</p>");
-			$("input#"+e.target.id+".search-parent-material").toggle();
-			$("button#"+e.target.id+".search-association-parent-material-button").toggle();
-			$("a.datepicker-button.input-group-addon.green").remove();
-			$(".datepicker-calendar.green").remove();
-			if($("#"+e.target.id+".dropdown").is(':visible')){
-				$("#"+e.target.id+".dropdown").toggle();
-			}
-			$("button#"+e.target.id+".edit-association-info").toggle();
-			$("button#"+e.target.id+".update-association-info").toggle();
-			$("button#"+e.target.id+".cancel-association-info").toggle();
-			*/
 			location.reload();
 		});
 		

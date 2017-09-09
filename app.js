@@ -249,6 +249,86 @@ app.post('/update-general-info',function(req,res){
 	//res.send(query);
 });
 
+app.post('/update-general-info-updatematerialass',function(req,res){
+	console.log('post: '+JSON.stringify(req.body));
+	var query=req.body.message;
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			query="select * from [material].[Material Association] where [Child Material Id]="+req.body.title2;
+			request.query(query,function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					if(result.length!=0){
+						var query="update [material].[Material Association] set [Parent Material Id]="+req.body.title1+" where [Material Association Id]="+(result[0])["Material Association Id"];
+						console.log(query);
+						request.query(query,function(err,result){
+							if(err){
+								console.log("Error while querying database :- " + err);
+							}else{
+								res.send("success");
+							}
+						});
+					}else{
+						var query="insert into [material].[Material Association] ([Material Association Type Id],[Material Association Valid From],[Material Association Valid To],[Parent Material Id],[Child Material Id]) values (5,'2010-01-01 00:00:00:000','9999-01-01 00:00:00:000',"+req.body.title1+","+req.body.title2+")";
+						console.log(query);
+						request.query(query,function(err,result){
+							if(err){
+								console.log("Error while querying database :- " + err);
+							}else{
+								res.send("success");
+							}
+						});
+					}
+				}
+			});
+		}
+	});
+});
+
+app.post('/update-general-info-updatelocationass',function(req,res){
+	console.log('post: '+JSON.stringify(req.body));
+	var query=req.body.message;
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			query="select * from [location].[Location Association] where [Child Location Id]="+req.body.title2;
+			request.query(query,function(err,result){
+				if(err){
+					console.log("Error while querying database :- " + err);
+				}else{
+					if(result.length!=0){
+						var query="update [location].[Location Association] set [Parent Location Id]="+req.body.title1+" where [Location Association Id]="+(result[0])["Location Association Id"];
+						console.log(query);
+						request.query(query,function(err,result){
+							if(err){
+								console.log("Error while querying database :- " + err);
+							}else{
+								res.send("success");
+							}
+						});
+					}else{
+						var query="insert into [location].[Location Association] ([Location Association Type Id],[Location Association Valid From],[Location Association Valid To],[Parent Location Id],[Child Location Id]) values (5,'2010-01-01 00:00:00:000','9999-01-01 00:00:00:000',"+req.body.title1+","+req.body.title2+")";
+						console.log(query);
+						request.query(query,function(err,result){
+							if(err){
+								console.log("Error while querying database :- " + err);
+							}else{
+								res.send("success");
+							}
+						});
+					}
+				}
+			});
+		}
+	});
+});
+
 app.post('/update-general-info-updateass',function(req,res){
 	console.log('post: '+JSON.stringify(req.body));
 	var query=req.body.message;
