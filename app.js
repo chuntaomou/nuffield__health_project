@@ -71,13 +71,13 @@ var executeQuery=function(query,res){
 			console.log("Error while querying database :- " + err);
 			return res.send(err);
 		}else{
-			res.redirect('/');
+			res.redirect('/login');
 		}
 	});
 }
 
 //app.use('/',connection);
-app.use('/', index);
+//app.use('/home', index);
 //app.use('/', products);
 //app.use('/', endpoint);
 //app.use('/',productinfo);
@@ -89,7 +89,11 @@ app.get('/materials',function(req, res){
 	res.render('materials', { title: "sdfa" });
 });
 
-app.get('/login',function(req, res){
+app.get('/home',function(req, res){
+	res.render('nuffieldhealth', { title: 'Express' });
+});
+
+app.get('/',function(req, res){
 	res.render('login',{ title: "sdfa"});
 });
 
@@ -211,27 +215,32 @@ app.post('/endpoint', function(req, res){
 	});
 });
 
-app.post('/login',function(req,res){
+app.post('/log',function(req,res){
 	console.log('post: '+JSON.stringify(req.body));
 	var username=req.body.username;
 	var password=req.body.password;
 	var query="select Password from dbo.Admin where Username='"+username+"'";
 	var request=new sql.Request(connection);
+	var status=null;
 	request.query(query,function(err,result){
 		if(err){
 			console.log("Error while querying database :- " + err);
 		}else{
 		    if(result.length==0){
-				res.send("fail");
+				console.log("faila");
+				status="fail";
 			}else{
 				if(result[0].Password==password){
-					res.send("success");
+					console.log("success");
+					status="success";
 				}else{
-					res.send("fail");
+					console.log("failb");
+					status="fail";
 				}
 			}
 		}
 	});
+	res.send(status);
 });
 
 app.post('/update-general-info',function(req,res){

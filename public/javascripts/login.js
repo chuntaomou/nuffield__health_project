@@ -2,7 +2,7 @@ $(document).ready(function(e){
 	$('.message a').click(function(){
        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
     });
-	
+/*	
 	$("#login").click(function(e){
 		var data={};
 		data.username=$("input#login-user").val();
@@ -13,17 +13,21 @@ $(document).ready(function(e){
 			type: 'POST',
 			data: JSON.stringify(data),
 			contentType: 'application/json',
-			url: '/login',
+			url: '/log',
 			success: function(data){
+				console.log(data);
+				
 				if(data=="success"){
+					console.log("asdf");
 					location.href = '/';
 				}else{
 					alert("Sorry, wrong username or password");
 				}
+				
 			}
 		});
 	});
-	
+*/	
 	$("#create").click(function(e){
 		var data={};
 		var user=$("input#res-user").val();
@@ -49,5 +53,23 @@ $(document).ready(function(e){
 				});
 			}
 		}
+	});
+	
+	$("#login").click(function(e){
+		var data={};
+		data.username=$("input#login-user").val();
+		data.password=$("input#login-pass").val();
+		console.log(data);
+		
+		$.ajax({
+			type: 'POST',
+			data: JSON.stringify(data),
+			contentType: 'application/json',
+			url: '/log',
+			success: function(data){
+				console.log(data);
+				location.href='/home';
+			}
+		});
 	});
 });
