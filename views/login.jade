@@ -106,18 +106,19 @@ html(lang='en')
   body
     .login-page
       .form
+        .inform(style='color:red;')
         form.register-form
+          p.message
+            | Already registered? 
+            a Sign In
           input#res-user(type='text', placeholder='name')
           input#res-pass(type='password', placeholder='password')
           input#res-repass(type='password', placeholder='confirm password')
-          button#create create
-          p.message
-            | Already registered? 
-            a(href='#') Sign In
+        button#create(style="display:none;") create
         form.login-form
-          input#login-user(type='text', placeholder='username')
-          input#login-pass(type='password', placeholder='password')
-          button#login login
           p.message
             | Not registered? 
-            a(href='#') Create an account
+            a Create an account
+          input#login-user(type='text', placeholder='username')
+          input#login-pass(type='password', placeholder='password')
+        button#login login

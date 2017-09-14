@@ -10,14 +10,7 @@ var bodyParser = require('body-parser');
 var multer = require('multer');
 var sql = require('mssql');
 
-var index = require('./routes/index');
-/*
-var users = require('./routes/users');
-var list = require('./routes/list');
-var products = require('./routes/products');
-var endpoint = require('./routes/endpoint');
-var productinfo = require('./routes/product-info');
-*/
+//var index = require('./routes/index');
 var upload = multer();
 var app = express();
 
@@ -44,17 +37,6 @@ var dbConfig = {
     }
 };
 
-/*
-var dbConfig = {
-    user:  'chuntao',
-    password: '3hunta0Ma0',
-    server: 'aukspsql01dev.database.windows.net',
-    options: {
-      encrypt: true,
-      database: 'DigitalData'
-    }
-};
-*/
 //get connect to sql server and execute query
 var connection = new sql.Connection(dbConfig);
 connection.connect().then(function(){
@@ -75,15 +57,6 @@ var executeQuery=function(query,res){
 		}
 	});
 }
-
-//app.use('/',connection);
-//app.use('/home', index);
-//app.use('/', products);
-//app.use('/', endpoint);
-//app.use('/',productinfo);
-//app.use('/users', users);
-//app.use('/views',list);
-//app.use('/insertform',insertform);
 
 app.get('/materials',function(req, res){
 	res.render('materials', { title: "sdfa" });
@@ -215,32 +188,70 @@ app.post('/endpoint', function(req, res){
 	});
 });
 
+app.post('/res',function(req,res){
+	var test=null;
+	var ifexist=0;
+	console.log('post: '+JSON.stringify(req.body));
+	var query="select Username from dbo.Admin";
+	var request=new sql.Request(connection);
+	request.query(query,function(err,result){
+		if(err){
+			console.log("Error while querying database :- " + err);
+		}else{
+			for(var i=0;i<result.length;i++){
+				console.log((result[i])["Username"]);
+				if(req.body.title==(result[i])["Username"]){
+					ifexist=1;
+				}
+			}
+			if(ifexist==1){
+				test="sameusername";
+				res.send(test);
+			}else{
+				var request=new sql.Request(connection);
+				request.query(req.body.message,function(err,result){
+					if(err){
+						console.log("Error while querying database :- " + err);
+					}else{
+						test="success";
+						res.send(test);
+					}
+				});
+			}
+		}
+	});
+	//console.log(test);
+	//res.send(test);
+});
+
 app.post('/log',function(req,res){
 	console.log('post: '+JSON.stringify(req.body));
 	var username=req.body.username;
-	var password=req.body.password;
+	var password=req.body.pass;
 	var query="select Password from dbo.Admin where Username='"+username+"'";
 	var request=new sql.Request(connection);
-	var status=null;
+	//var status=null;
 	request.query(query,function(err,result){
 		if(err){
 			console.log("Error while querying database :- " + err);
 		}else{
 		    if(result.length==0){
 				console.log("faila");
-				status="fail";
+				res.send("fail");
 			}else{
-				if(result[0].Password==password){
+				console.log((result[0])["Password"]);
+				if((result[0])["Password"]==password){
 					console.log("success");
-					status="success";
+					res.send("success");
 				}else{
 					console.log("failb");
-					status="fail";
+					res.send("fail");
 				}
 			}
+			//res.send(status);
 		}
 	});
-	res.send(status);
+	//res.send(status);
 });
 
 app.post('/update-general-info',function(req,res){
