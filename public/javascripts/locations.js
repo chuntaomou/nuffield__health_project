@@ -294,6 +294,7 @@ $(document).ready(function(){
                 position: results[0].geometry.location
               });
             } else {
+				location.reload();
               //alert('Geocode was not successful for the following reason: ' + status);
             }
           });
